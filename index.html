@@ -614,6 +614,8 @@
     .contact-ok h3 { font-size: clamp(20px, 5vw, 24px); margin: 10px 0 6px; }
     .contact-ok p { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
     .contact-ok .btn { width: auto; }
+    .deliver { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .deliver .btn { width: 100%; justify-content: center; display: flex; }
 
     /* ---- mobile tap hardening ---- */
     .project, .project-link, .btn, .burger, .dr-link, .menu-cta, .info-card { touch-action: manipulation; }
@@ -912,9 +914,13 @@
             <button class="btn" type="submit">Send message</button>
           </form>
           <div class="contact-ok" id="contactOk" style="display:none;">
-            <div class="big">🙌</div>
-            <h3>Message sent — thank you!</h3>
-            <p>I'll get back to you at the email you provided.</p>
+            <div class="big">✨</div>
+            <h3>Your message is ready</h3>
+            <p>Deliver it to Rudra in one tap.</p>
+            <div class="deliver">
+              <a class="btn" id="sendWa" href="https://wa.me/917398644158" target="_blank" rel="noopener noreferrer">Send on WhatsApp</a>
+              <a class="btn btn-ghost" id="sendMail" href="mailto:rudrashekhharmishraa@gmail.com">Send by email</a>
+            </div>
             <button class="btn btn-ghost" type="button" id="coAgain">Send another message</button>
           </div>
         </div>
@@ -1011,15 +1017,21 @@
         })();
       }
 
-      // contact form
+      // contact form -> deliver to WhatsApp (wa.me) or email (mailto)
       var cf = document.getElementById('contactForm');
       var cOk = document.getElementById('contactOk');
       cf.addEventListener('submit', function (e) {
         e.preventDefault();
         if (!cf.checkValidity()) { cf.reportValidity(); return; }
+        var name = cf.name.value.trim();
+        var email = cf.email.value.trim();
+        var msg = cf.msg.value.trim();
+        document.getElementById('sendWa').href = 'https://wa.me/917398644158?text=' + encodeURIComponent('Hello Rudra, I am ' + name + ' (' + email + ').\n\n' + msg);
+        document.getElementById('sendMail').href = 'mailto:rudrashekhharmishraa@gmail.com?subject=' + encodeURIComponent('Portfolio message from ' + name) + '&body=' + encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + msg);
         cf.style.display = 'none';
         cOk.style.display = '';
         cf.reset();
+        cOk.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
       document.getElementById('coAgain').addEventListener('click', function () {
         cOk.style.display = 'none';
