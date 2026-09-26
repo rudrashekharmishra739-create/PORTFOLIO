@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fbfaf7" />
+  <meta name="description" content="The Willow Residence — 4 bedroom home in Greenview. A detailed property listing concept page for NESTORA." />
+  <title>The Willow Residence — NESTORA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fbfaf7;
+      --surface: #ffffff;
+      --surface-2: #f4f2ed;
+      --line: #e6e3dc;
+      --ink: #1d1f24;
+      --muted: #666b74;
+      --accent: #1c6b50;
+      --accent-2: #14503c;
+      --accent-soft: rgba(28, 107, 80, 0.09);
+      --shadow-sm: 0 1px 2px rgba(20, 22, 26, 0.05);
+      --shadow-md: 0 14px 38px rgba(20, 22, 26, 0.09);
+      --radius: 18px;
+      --header-h: 64px;
+      --bar-h: 76px;
+      --font-display: "Fraunces", Georgia, serif;
+      --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: auto; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 15.5px;
+      line-height: 1.6;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: clip;
+    }
+
+    body.menu-open { overflow: hidden; }
+    body.has-bar { padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom)); }
+
+    img { display: block; max-width: 100%; height: auto; }
+
+    a { color: inherit; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+    .skip-link { position: absolute; left: 12px; top: -60px; z-index: 100; background: var(--accent); color: #fff; font-weight: 700; padding: 10px 18px; border-radius: 8px; transition: top 0.2s ease; }
+
+    .skip-link:focus { top: 12px; }
+
+    .wrap { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: clamp(18px, 5vw, 32px); }
+
+    section { position: relative; padding-block: clamp(44px, 8vw, 72px); scroll-margin-top: var(--header-h); }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .kicker::before { content: ""; width: 24px; height: 1.5px; background: var(--accent); }
+
+    h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height: 1.1; letter-spacing: -0.4px; }
+
+    h1 { font-size: clamp(34px, 9vw, 60px); }
+
+    h2 { font-size: clamp(28px, 7.5vw, 44px); margin-bottom: 14px; }
+
+    h3 { font-size: clamp(21px, 5vw, 26px); margin-bottom: 10px; }
+
+    .lead { color: var(--muted); font-size: clamp(15px, 4vw, 17px); max-width: 56ch; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 15px 30px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 15.5px;
+      text-decoration: none;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-accent { background: var(--accent); color: #fff; box-shadow: 0 10px 26px rgba(28, 107, 80, 0.25); }
+    .btn-accent:active { transform: scale(0.97); }
+    .btn-outline { background: var(--surface); color: var(--ink); border-color: var(--line); }
+    .btn-outline:active { border-color: var(--accent); color: var(--accent); }
+    .btn-block { width: 100%; }
+
+    @media (hover: hover) {
+      .btn-accent:hover { background: var(--accent-2); transform: translateY(-1px); }
+      .btn-outline:hover { border-color: var(--ink); }
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 15px;
+      min-height: 42px;
+      line-height: 1.2;
+    }
+
+    .chip.accent { color: var(--accent); background: var(--accent-soft); border-color: rgba(28, 107, 80, 0.25); }
+
+    .svg-ic { flex: none; }
+
+    /* header (shared) */
+    .header { position: sticky; top: 0; z-index: 60; background: rgba(251, 250, 247, 0.88); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+
+    .header-inner { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; white-space: nowrap; min-height: 44px; padding: 4px 0; }
+
+    .logo-mark { width: 30px; height: 30px; flex: none; border-radius: 10px; background: linear-gradient(135deg, #1c6b50, #0f3d2d); display: grid; place-items: center; color: #fff; box-shadow: 0 4px 12px rgba(28, 107, 80, 0.3); }
+
+    .logo-text { font-family: var(--font-display); font-weight: 600; font-size: clamp(18px, 4.6vw, 22px); color: var(--ink); line-height: 1; }
+
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-weight: 600; font-size: 15px; min-height: 44px; }
+
+    .back-link:hover { color: var(--ink); }
+
+    .header-cta { min-height: 44px; padding: 10px 18px; font-size: 14.5px; }
+
+    .burger { width: 46px; height: 46px; display: flex; flex-direction: column; justify-content: center; gap: 5px; padding: 13px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; cursor: pointer; }
+
+    .burger .bar { width: 100%; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
+
+    body.menu-open .burger .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    body.menu-open .burger .bar:nth-child(2) { opacity: 0; }
+    body.menu-open .burger .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .drawer { position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0; z-index: 55; background: rgba(251, 250, 247, 0.98); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); padding: 24px clamp(18px, 5vw, 32px) 32px; transform: translateX(100%); transition: transform 0.3s ease; display: flex; flex-direction: column; overflow-y: auto; }
+
+    body.menu-open .drawer { transform: translateX(0); }
+
+    .drawer a.link { color: var(--ink); text-decoration: none; font-family: var(--font-display); font-weight: 600; font-size: clamp(26px, 7vw, 32px); padding: 14px 0; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
+
+    .drawer a.link::after { content: ""; width: 8px; height: 8px; border-top: 2px solid var(--accent); border-right: 2px solid var(--accent); transform: rotate(45deg); }
+
+    .drawer .cta { margin-top: 28px; }
+
+    /* gallery */
+    .gallery-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+
+    .g-main { position: relative; border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #eeece6, #e0ddd5); border: 1px solid var(--line); }
+
+    .g-main img { width: 100%; height: 100%; object-fit: cover; }
+
+    .g-main { aspect-ratio: 4 / 3; }
+
+    .g-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+
+    .g-thumb { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 14px; border: 2px solid var(--line); cursor: pointer; background: linear-gradient(135deg, #eeece6, #e0ddd5); padding: 0; transition: border-color 0.2s; }
+
+    .g-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    .g-thumb.on { border-color: var(--accent); }
+
+    /* title block */
+    .p-head { display: grid; gap: 10px; }
+
+    .p-head .crumbs { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; color: var(--muted); font-size: 13.5px; margin-bottom: 6px; }
+
+    .p-head .crumbs a { color: var(--muted); text-decoration: none; }
+
+    .p-head .crumbs a:hover { color: var(--accent); }
+
+    .p-head .crumbs .sep { color: #c9c5bc; }
+
+    .p-loc { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 15px; }
+
+    .p-price { font-family: var(--font-display); font-weight: 600; font-size: clamp(34px, 9vw, 52px); letter-spacing: -0.5px; color: var(--accent-2); }
+
+    .p-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+
+    /* spec grid */
+    .specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: clamp(22px, 5vw, 34px) 0; }
+
+    .spec { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px; display: flex; gap: 10px; align-items: flex-start; box-shadow: var(--shadow-sm); min-width: 0; }
+
+    .spec > div { min-width: 0; }
+
+    .spec .ico { width: 40px; height: 40px; flex: none; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; }
+
+    .spec b { display: block; font-weight: 600; font-size: 15.5px; line-height: 1.3; overflow-wrap: anywhere; }
+
+    .spec span { color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+
+    /* two-col layout for body content on desktop */
+    .p-body { display: grid; gap: clamp(24px, 5vw, 40px); }
+
+    .p-panel { display: grid; gap: clamp(22px, 5vw, 32px); }
+
+    .block p { color: var(--muted); }
+
+    .block p + p { margin-top: 12px; }
+
+    .block .lead { margin-top: 8px; }
+
+    .amenities { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+    .amenity { display: flex; gap: 10px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 13px 14px; font-size: 14.5px; font-weight: 500; }
+
+    .amenity svg { flex: none; color: var(--accent); }
+
+    .placeholder { border: 1px dashed var(--line); border-radius: 18px; background: var(--surface-2); min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 24px; color: var(--muted); }
+
+    .placeholder b { color: var(--ink); font-size: 16px; display: block; font-family: var(--font-display); font-weight: 600; }
+
+    .placeholder p { font-size: 13.5px; max-width: 30ch; }
+
+    .floorplan svg { width: 100%; height: auto; display: block; }
+
+    /* agent */
+    .agent-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(20px, 4.5vw, 26px); display: grid; gap: 16px; box-shadow: var(--shadow-sm); }
+
+    .agent-top { display: flex; align-items: center; gap: 14px; }
+
+    .agent-avatar { width: 64px; height: 64px; flex: none; border-radius: 50%; overflow: hidden; border: 2px solid var(--line); background: linear-gradient(135deg, #eeece6, #e0ddd5); }
+
+    .agent-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .agent-role { color: var(--accent); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; }
+
+    .agent-card p { color: var(--muted); font-size: 14.5px; }
+
+    /* viewing form */
+    .viewing { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(20px, 4.5vw, 28px); box-shadow: var(--shadow-sm); }
+
+    .heading { font-family: var(--font-display); font-weight: 600; font-size: clamp(22px, 5.5vw, 28px); margin-bottom: 4px; }
+
+    .form { display: grid; gap: 14px; margin-top: 16px; }
+
+    .form .f2 { display: grid; gap: 14px; }
+
+    .form label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+
+    .form input, .form select, .form textarea {
+      width: 100%; background: var(--bg); border: 1px solid var(--line); border-radius: 12px;
+      padding: 14px 16px; min-height: 52px; color: var(--ink); font-family: var(--font-body); font-size: 15.5px;
+      transition: border-color 0.2s; appearance: none;
+    }
+
+    .form select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23666b74' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 16px center; padding-right: 42px;
+    }
+
+    .form textarea { min-height: 110px; resize: vertical; }
+
+    .form select:focus, .form input:focus, .form textarea:focus { outline: none; border-color: var(--accent); }
+
+    .form-success { display: none; align-items: center; gap: 10px; background: var(--accent-soft); border: 1px solid rgba(28, 107, 80, 0.35); color: var(--accent); border-radius: 14px; padding: 15px 16px; font-size: 14.5px; font-weight: 500; }
+
+    .form-success.show { display: flex; }
+
+    .similar { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 22px; }
+
+    .similar .card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
+
+    .similar .card img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+
+    .similar .card .b { padding: 14px 16px; display: grid; gap: 6px; }
+
+    .similar .card b.prop { font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: -0.3px; }
+
+    .similar .card span { color: var(--muted); font-size: 13px; }
+
+    .similar .card .price { color: var(--accent-2); font-weight: 600; }
+
+    .similar .card a { min-height: 44px; display: inline-flex; align-items: center; color: var(--accent); font-weight: 600; font-size: 14px; text-decoration: none; }
+
+    /* sticky bottom bar (mobile) */
+    .cta-bar {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.95);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid var(--line);
+      padding: 10px clamp(14px, 4vw, 20px) calc(10px + env(safe-area-inset-bottom));
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      transform: translateY(0);
+      transition: transform 0.3s ease;
+    }
+
+    .cta-bar.hidden { transform: translateY(110%); }
+
+    .cta-bar .btn { min-height: 50px; padding: 12px 14px; font-size: 14.5px; }
+
+    @media (min-width: 640px) {
+      .specs { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+      .amenities { grid-template-columns: repeat(3, 1fr); }
+      .overview { grid-template-columns: 1.3fr 1fr; align-items: start; }
+      .form .f2 { grid-template-columns: repeat(2, 1fr); }
+      .similar { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (min-width: 900px) {
+      .cta-bar { display: none; }
+      body.has-bar { padding-bottom: 0; }
+      .p-body { grid-template-columns: 1.15fr 1fr; align-items: start; }
+      .viewing { position: sticky; top: calc(var(--header-h) + 20px); }
+    }
+
+    @media (min-width: 1024px) {
+      .burger { display: none; }
+      .drawer { display: none; }
+      .back-link { display: inline-flex; }
+      .gallery-grid { grid-template-columns: 1.6fr 1fr; }
+      .g-main { aspect-ratio: auto; min-height: 480px; }
+      .g-thumbs { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .g-thumb { aspect-ratio: 16 / 9; }
+    }
+
+    @media (min-width: 640px) and (max-width: 899px) {
+      .cta-bar .btn { min-width: 0; }
+    }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1); transition-delay: calc(var(--d, 0) * 70ms); will-change: opacity, transform; }
+
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+      .cta-bar { transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="header">
+    <div class="wrap header-inner">
+      <a class="logo" href="nestora.html" aria-label="NESTORA home">
+        <span class="logo-mark" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg>
+        </span>
+        <span class="logo-text">NESTORA</span>
+      </a>
+
+      <div class="nav-list" style="display:flex; gap:18px;">
+        <a class="back-link" href="nestora.html">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+          Back to homes
+        </a>
+      </div>
+
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="drawer" id="drawer">
+    <nav class="drawer-nav" aria-label="Mobile navigation">
+      <a class="link" href="nestora.html">All properties</a>
+      <a class="link" href="nestora.html#areas">Areas</a>
+      <a class="link" href="nestora.html#agents">Agents</a>
+      <a class="link" href="nestora.html#inquiry">Contact</a>
+    </nav>
+    <a class="btn btn-accent btn-block cta" href="nestora.html#inquiry">Talk to an Agent</a>
+  </div>
+
+  <main id="main">
+    <section aria-label="The Willow Residence">
+      <div class="wrap">
+        <div class="p-head reveal">
+          <div class="crumbs">
+            <a href="nestora.html">Home</a>
+            <span class="sep">/</span>
+            <a href="nestora.html#properties">Properties</a>
+            <span class="sep">/</span>
+            <a href="nestora.html#areas">Greenview</a>
+            <span class="sep">/</span>
+            <span>The Willow Residence</span>
+          </div>
+          <h1>The Willow Residence</h1>
+          <span class="p-loc">
+            <svg class="svg-ic" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            Greenview, NESTORA City (fictional listing)
+          </span>
+          <span class="p-price">₹6.2 Cr</span>
+          <div class="p-tags">
+            <span class="chip">House</span>
+            <span class="chip accent">For Sale</span>
+            <span class="chip">Fictional listing</span>
+          </div>
+        </div>
+
+        <div class="gallery-grid reveal" style="margin-top:22px;">
+          <div class="g-main">
+            <img id="mainImg" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&h=1050&q=70" alt="The Willow Residence — modern home exterior with a glowing pool at night" fetchpriority="high" width="1400" height="1050" />
+          </div>
+          <div class="g-thumbs" id="thumbs" style="display:grid;">
+            <button type="button" class="g-thumb on" data-img="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&h=1050&q=70" aria-label="Show exterior photo">
+              <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=400&h=300&q=60" alt="" loading="lazy" decoding="async" width="400" height="300" />
+            </button>
+            <button type="button" class="g-thumb" data-img="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&h=1050&q=70" aria-label="Show front facade photo">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&h=300&q=60" alt="" loading="lazy" decoding="async" width="400" height="300" />
+            </button>
+            <button type="button" class="g-thumb" data-img="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&h=1050&q=70" aria-label="Show living room photo">
+              <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=400&h=300&q=60" alt="" loading="lazy" decoding="async" width="400" height="300" />
+            </button>
+            <button type="button" class="g-thumb" data-img="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&h=1050&q=70" aria-label="Show garden photo">
+              <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=400&h=300&q=60" alt="" loading="lazy" decoding="async" width="400" height="300" />
+            </button>
+          </div>
+        </div>
+
+        <div class="specs reveal">
+          <div class="spec">
+            <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M4 20V8l8-5 8 5v12"/><path d="M9 20v-6h6v6"/></svg></span>
+            <div><b>4</b><span>Bedrooms</span></div>
+          </div>
+          <div class="spec">
+            <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12h13M7 12l-5 5h13l-3 3"/><path d="M17 16l3-4"/></svg></span>
+            <div><b>4</b><span>Bathrooms</span></div>
+          </div>
+          <div class="spec">
+            <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.7l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.7l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.3 8.7L12 13l8.7-4.3M12 22V13"/></svg></span>
+            <div><b>2,850</b><span>Sq ft area</span></div>
+          </div>
+          <div class="spec">
+            <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7z"/><path d="M9 12l2 2 4-4"/></svg></span>
+            <div><b>Freehold</b><span>Ownership type</span></div>
+          </div>
+        </div>
+
+        <div class="p-body">
+          <div class="p-panel">
+            <div class="block reveal">
+              <h2>About this home</h2>
+              <p>
+                The Willow Residence is a modern four-bedroom home set on a quiet Greenview lane. Wide openings, a central courtyard and a landscaped garden give it a calm, open feel.
+              </p>
+              <p>
+                This listing is fictional and part of a portfolio concept. No real property exists.
+              </p>
+            </div>
+
+            <div class="block reveal">
+              <h2>Amenities</h2>
+              <div class="amenities">
+                <div class="amenity"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Landscaped garden</div>
+                <div class="amenity"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Private car porch</div>
+                <div class="amenity"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Modular kitchen</div>
+                <div class="amenity"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Master suite with balcony</div>
+                <div class="amenity"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Gym corner</div>
+                <div class="amenity"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>3 parking spaces</div>
+              </div>
+            </div>
+
+            <div class="block reveal">
+              <h2>Floor plan</h2>
+              <div class="placeholder floorplan">
+                <div style="max-width:420px; width:100%;">
+                  <svg viewBox="0 0 400 300" role="img" aria-label="Simple placeholder floor plan of a four bedroom home">
+                    <rect x="4" y="4" width="392" height="292" fill="#ffffff" stroke="#d8d4ca" stroke-width="3" rx="10"/>
+                    <rect x="18" y="18" width="160" height="120" fill="#f4f2ed" stroke="#d8d4ca" stroke-width="2"/>
+                    <text x="98" y="85" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#8a8f98">Living</text>
+                    <rect x="190" y="18" width="120" height="120" fill="#f4f2ed" stroke="#d8d4ca" stroke-width="2"/>
+                    <text x="250" y="85" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#8a8f98">Kitchen</text>
+                    <rect x="18" y="150" width="145" height="120" fill="#f4f2ed" stroke="#d8d4ca" stroke-width="2"/>
+                    <text x="90" y="217" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#8a8f98">Bedroom 1</text>
+                    <rect x="175" y="150" width="145" height="120" fill="#f4f2ed" stroke="#d8d4ca" stroke-width="2"/>
+                    <text x="247" y="217" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#8a8f98">Bedroom 2</text>
+                    <rect x="332" y="18" width="54" height="252" fill="#f4f2ed" stroke="#d8d4ca" stroke-width="2"/>
+                    <text x="359" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#8a8f98">Bath</text>
+                  </svg>
+                </div>
+                <b>Floor plan placeholder</b>
+                <p>A dimensioned floor plan would be attached here in a real listing.</p>
+              </div>
+            </div>
+
+            <div class="block reveal">
+              <h2>Location</h2>
+              <div class="placeholder">
+                <b>Map placeholder</b>
+                <p>An embedded map of the Greenview neighborhood would live here.</p>
+              </div>
+            </div>
+          </div>
+
+          <aside class="p-panel">
+            <div class="agent-card reveal">
+              <div class="agent-top">
+                <span class="agent-avatar">
+                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&h=200&q=70" alt="Portrait of agent Arjun Malhotra" width="200" height="200" />
+                </span>
+                <div>
+                  <h3 style="margin-bottom:0;">Arjun Malhotra</h3>
+                  <span class="agent-role">Property Consultant</span>
+                </div>
+              </div>
+              <p>Listing agent for The Willow Residence. Happy to share photos, schedules and details of the surrounding area.</p>
+              <div class="p-tags">
+                <a class="chip" href="tel:+919876543210">+91 98765 43210</a>
+                <a class="chip accent" href="mailto:arjun@nestora.in">arjun@nestora.in</a>
+              </div>
+            </div>
+
+            <div class="viewing reveal" id="viewing">
+              <div class="heading">Request a Viewing</div>
+              <p class="lead">Pick a rough date and time — Arjun will confirm availability.</p>
+              <form class="form" id="viewForm" novalidate>
+                <div class="f2">
+                  <div>
+                    <label for="vName">Name</label>
+                    <input id="vName" name="name" type="text" placeholder="Your name" required autocomplete="name" />
+                  </div>
+                  <div>
+                    <label for="vContact">Phone / Email</label>
+                    <input id="vContact" name="contact" type="text" placeholder="Phone or email" required autocomplete="tel" />
+                  </div>
+                </div>
+                <div class="f2">
+                  <div>
+                    <label for="vDate">Preferred date</label>
+                    <input id="vDate" name="date" type="date" required />
+                  </div>
+                  <div>
+                    <label for="vTime">Preferred time</label>
+                    <select id="vTime" name="time" required>
+                      <option value="" selected disabled>Select</option>
+                      <option>Morning · 9 am – 12 pm</option>
+                      <option>Afternoon · 12 – 3 pm</option>
+                      <option>Evening · 5 – 8 pm</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label for="vMsg">Message</label>
+                  <textarea id="vMsg" name="message" placeholder="Anything the agent should know (optional)"></textarea>
+                </div>
+                <button class="btn btn-accent" type="submit">Request a Viewing</button>
+                <p class="form-success" id="viewSuccess">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                  Viewing request noted. Arjun would confirm by phone or email in a live build.
+                </p>
+              </form>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="related">
+      <div class="wrap">
+        <h2 class="reveal">Similar homes</h2>
+        <div class="similar">
+          <a class="card reveal" href="nestora-property.html">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&h=440&q=70" alt="Riverside House exterior" loading="lazy" decoding="async" width="700" height="440" />
+            <div class="b">
+              <b class="prop">Riverside House</b>
+              <span>Riverside · 3 bed · 2,100 sq ft</span>
+              <span class="price">₹3.6 Cr</span>
+              <span>View property →</span>
+            </div>
+          </a>
+          <a class="card reveal" href="nestora-property.html">
+            <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=700&h=440&q=70" alt="Oakwood Penthouse interior" loading="lazy" decoding="async" width="700" height="440" />
+            <div class="b">
+              <b class="prop">Oakwood Penthouse</b>
+              <span>Riverside · 4 bed · 2,700 sq ft</span>
+              <span class="price">₹5.4 Cr</span>
+              <span>View property →</span>
+            </div>
+          </a>
+          <a class="card reveal" href="nestora-property.html">
+            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=700&h=440&q=70" alt="The Courtyard Villa exterior" loading="lazy" decoding="async" width="700" height="440" />
+            <div class="b">
+              <b class="prop">The Courtyard Villa</b>
+              <span>West Heights · 5 bed · 3,600 sq ft</span>
+              <span class="price">₹8.5 Cr</span>
+              <span>View property →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="cta-bar" id="ctaBar">
+    <a class="btn btn-outline" href="#viewing">Contact Agent</a>
+    <a class="btn btn-accent" href="#viewing">Request a Viewing</a>
+  </div>
+
+  <script>
+    (function () {
+      var burger = document.getElementById('burger');
+      var drawer = document.getElementById('drawer');
+
+      function setMenu(open) {
+        document.body.classList.toggle('menu-open', open);
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      }
+
+      burger.addEventListener('click', function () {
+        setMenu(!document.body.classList.contains('menu-open'));
+      });
+
+      drawer.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setMenu(false); });
+      });
+
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && document.body.classList.contains('menu-open')) setMenu(false);
+      });
+
+      var mainImg = document.getElementById('mainImg');
+      document.querySelectorAll('.g-thumb').forEach(function (t) {
+        t.addEventListener('click', function () {
+          document.querySelectorAll('.g-thumb').forEach(function (x) { x.classList.remove('on'); });
+          t.classList.add('on');
+          mainImg.src = t.getAttribute('data-img');
+        });
+      });
+
+      var form = document.getElementById('viewForm');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        document.getElementById('viewSuccess').classList.add('show');
+        form.reset();
+      });
+
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduceMotion) {
+        document.body.classList.add('has-bar');
+        var bar = document.getElementById('ctaBar');
+        var lastY = window.scrollY;
+        window.addEventListener('scroll', function () {
+          var y = window.scrollY;
+          if (y > lastY && y > 120) { bar.classList.add('hidden'); }
+          else { bar.classList.remove('hidden'); }
+          lastY = y;
+        }, { passive: true });
+      } else {
+        document.getElementById('ctaBar').classList.add('hidden');
+      }
+
+      var reveals = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+        reveals.forEach(function (el, i) { el.style.setProperty('--d', i % 5); io.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add('in'); });
+      }
+    })();
+  </script>
+</body>
+</html>

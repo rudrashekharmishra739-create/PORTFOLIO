@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#131211" />
+  <meta name="description" content="NOIR &amp; CO. — a premium unisex salon, hair studio &amp; grooming lounge. Fictional concept project by a freelance web designer." />
+  <title>NOIR &amp; CO. — Premium Salon &amp; Grooming Lounge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #131211;
+      --bg2: #1a1816;
+      --bg3: #211e1b;
+      --line: rgba(244, 241, 234, 0.12);
+      --txt: #f4f1ea;
+      --muted: #9e978b;
+      --gold: #c9a35c;
+      --gold-soft: rgba(201, 163, 92, 0.14);
+      --header-h: 64px;
+      --radius: 14px;
+      --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --sans: "Manrope", "Inter", -apple-system, "Segoe UI", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--txt);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: clip;
+      min-height: 100vh;
+      -webkit-tap-highlight-color: rgba(201, 163, 92, 0.18);
+    }
+
+    body.menu-open { overflow: hidden; }
+
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    ::selection { background: rgba(201, 163, 92, 0.3); }
+
+    .wrap {
+      width: 100%;
+      max-width: 1220px;
+      margin-inline: auto;
+      padding-inline: clamp(18px, 5vw, 40px);
+    }
+
+    section[id] { scroll-margin-top: calc(var(--header-h) + 10px); }
+
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: -999px;
+      background: var(--gold);
+      color: #131211;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      z-index: 200;
+      text-decoration: none;
+    }
+    .skip:focus { top: 12px; }
+
+    /* ---------- header ---------- */
+    .hd {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(19, 18, 17, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hd-in {
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(21px, 5.5vw, 25px);
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      white-space: nowrap;
+    }
+    .logo .amp { color: var(--gold); }
+    .logo small { display: block; font-family: var(--sans); font-weight: 600; font-size: 9.5px; letter-spacing: 0.34em; text-transform: uppercase; color: var(--muted); margin-left: 10px; }
+
+    .hd-nav { display: none; }
+    .hd-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .hd-nav a:hover { color: var(--txt); }
+
+    .hd-cta {
+      display: none;
+      min-height: 44px;
+      align-items: center;
+      padding: 0 18px;
+      border: 1px solid var(--gold);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 13.5px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.22s ease, color 0.22s ease;
+    }
+    .hd-cta:hover, .hd-cta:focus-visible { background: var(--gold); color: #131211; }
+
+    .burger {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 46px;
+      height: 46px;
+      margin-right: -8px;
+      padding: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .burger .bar {
+      width: 100%;
+      height: 2px;
+      background: var(--txt);
+      border-radius: 2px;
+      transition: transform 0.28s ease, opacity 0.2s ease;
+    }
+    body.menu-open .burger .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    body.menu-open .burger .bar:nth-child(2) { opacity: 0; }
+    body.menu-open .burger .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ---------- drawer ---------- */
+    .drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: calc(var(--header-h) + 18px) clamp(20px, 6vw, 40px) 36px;
+      transform: translateX(100%);
+      transition: transform 0.33s ease;
+      overflow-y: auto;
+    }
+    body.menu-open .drawer { transform: translateX(0); }
+
+    .drawer nav { display: grid; gap: 2px; }
+    .dr-link {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 15px 0;
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(26px, 7vw, 36px);
+      letter-spacing: 0.01em;
+    }
+    .dr-link small { font-family: var(--sans); font-size: 11.5px; font-weight: 700; letter-spacing: 0.18em; color: var(--gold); }
+    .drawer .btn { margin-top: 26px; width: 100%; }
+
+    /* ---------- buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 15px 26px;
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 14.5px;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.22s ease, color 0.22s ease, transform 0.15s ease, border-color 0.22s ease;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn.gold { background: var(--gold); color: #131211; border: 1px solid var(--gold); }
+    .btn.gold:hover, .btn.gold:focus-visible { background: #d9b87a; border-color: #d9b87a; }
+    .btn.ghost { background: transparent; color: var(--txt); border: 1px solid rgba(244, 241, 234, 0.28); }
+    .btn.ghost:hover, .btn.ghost:focus-visible { border-color: var(--gold); color: var(--gold); }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 13.5px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      color: var(--gold);
+      min-height: 44px;
+    }
+    .text-link .ul { position: relative; }
+    .text-link .ul::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .text-link:hover .ul::after, .text-link:focus-visible .ul::after { transform: scaleX(1); }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 42px;
+      padding: 9px 15px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.2;
+    }
+    .chip.gold { border-color: rgba(201, 163, 92, 0.5); color: var(--gold); }
+
+    /* ---------- shared ---------- */
+    .sec { padding: clamp(60px, 11vw, 110px) 0; }
+    .sec + .sec { border-top: 1px solid var(--line); }
+
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: clamp(26px, 5vw, 44px);
+    }
+    .sec-head .no {
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+    }
+    .sec-head h2 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(26px, 7vw, 46px);
+      letter-spacing: -0.015em;
+      line-height: 1.05;
+    }
+
+    .kick {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .kick b { color: var(--gold); font-weight: 700; }
+
+    .seriff {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-style: italic;
+      letter-spacing: 0;
+    }
+
+    /* ---------- hero ---------- */
+    .hero { padding-top: clamp(42px, 9vw, 96px); }
+
+    .hero h1 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(38px, 11vw, 96px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      max-width: 13ch;
+      margin-top: 18px;
+    }
+    .hero h1 .seriff { display: block; color: var(--gold); font-weight: 600; }
+
+    .hero .lede {
+      margin-top: 22px;
+      max-width: 34rem;
+      font-size: clamp(16px, 4.4vw, 18.5px);
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .trust {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px 4px;
+      margin-top: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .trust i {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      font-style: normal;
+      margin: 0 7px;
+    }
+
+    .hero-media {
+      margin-top: clamp(36px, 8vw, 68px);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg2);
+      aspect-ratio: 4 / 3;
+    }
+    .hero-media img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ---------- services ---------- */
+    .sv-group {
+      margin-bottom: clamp(34px, 6vw, 54px);
+    }
+    .sv-group:last-child { margin-bottom: 0; }
+    .sv-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .sv-head .no {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 600;
+      font-size: 22px;
+      color: var(--gold);
+    }
+    .sv-head h3 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(20px, 5.5vw, 27px);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .sv-head::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+    .sv-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .sv-card {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      min-height: 100%;
+      transition: border-color 0.25s ease, transform 0.2s ease;
+    }
+    .sv-card:hover { border-color: rgba(201, 163, 92, 0.55); transform: translateY(-2px); }
+    .sv-card h4 { font-weight: 700; font-size: 16.5px; }
+    .sv-card p { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+    .sv-card .pr {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-top: 6px;
+    }
+    .sv-card .pr small {
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 11.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-left: 8px;
+    }
+    .sv-card .btn { margin-top: auto; min-height: 46px; padding: 12px 20px; font-size: 13.5px; }
+
+    /* ---------- featured ---------- */
+    .featured {
+      background: var(--bg2);
+      border: 1px solid rgba(201, 163, 92, 0.4);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .feat-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+    .feat-media { min-height: 0; }
+    .feat-media img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 16 / 10; }
+    .feat-body { padding: clamp(22px, 6vw, 48px); }
+    .feat-body h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(30px, 8.5vw, 54px);
+      line-height: 1.02;
+      margin-top: 12px;
+    }
+    .feat-body > p { margin-top: 14px; color: var(--muted); font-size: clamp(15px, 4.2vw, 16.5px); max-width: 40rem; }
+    .feat-body .feat-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 22px; }
+    .feat-price { display: block; margin-top: 18px; font-family: var(--serif); font-size: 24px; font-weight: 600; color: var(--gold); }
+    .feat-price small { font-family: var(--sans); font-weight: 600; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-left: 10px; }
+    .feat-includes { list-style: none; margin-top: 18px; border-top: 1px solid var(--line); }
+    .feat-includes li {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14.5px;
+      color: var(--muted);
+    }
+    .feat-includes li::before { content: "—"; color: var(--gold); }
+
+    /* ---------- stylists ---------- */
+    .st-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .st-card { background: var(--bg2); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .st-card .photo { aspect-ratio: 4 / 5; overflow: hidden; background: var(--bg3); }
+    .st-card .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .st-card:hover .photo img { transform: scale(1.03); }
+    .st-body { padding: 18px 20px 20px; }
+    .st-body .role { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+    .st-body h3 { font-family: var(--serif); font-weight: 600; font-size: 25px; margin-top: 4px; }
+    .st-body p { margin-top: 8px; font-size: 13.5px; color: var(--muted); }
+
+    /* ---------- transformations ---------- */
+    .tf-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .tf-card { background: var(--bg2); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+    .tf-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .tf-head h3 { font-weight: 800; font-size: 17px; }
+    .tf-imgs { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+    .tf-imgs figure { position: relative; border-radius: 10px; overflow: hidden; background: var(--bg3); }
+    .tf-imgs img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .tf-imgs figcaption {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      background: rgba(19, 18, 17, 0.82);
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--txt);
+    }
+    .tf-card > p { margin-top: 12px; font-size: 13.5px; color: var(--muted); }
+
+    /* ---------- gallery ---------- */
+    .gal { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .fig { border-radius: 12px; overflow: hidden; background: var(--bg2); position: relative; }
+    .fig img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; transition: transform 0.45s ease; }
+    .fig:hover img { transform: scale(1.03); }
+    .fig.tall img { aspect-ratio: 3 / 4; }
+    .fig figcaption {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      background: rgba(19, 18, 17, 0.8);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--txt);
+    }
+
+    /* ---------- why ---------- */
+    .why { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .why-item { border-top: 1px solid var(--line); padding: 20px 0 24px; }
+    .why-item .n { font-family: var(--serif); font-style: italic; font-size: 26px; color: var(--gold); }
+    .why-item h3 { font-weight: 800; font-size: 19px; margin-top: 8px; letter-spacing: 0.01em; }
+    .why-item p { margin-top: 8px; font-size: 14px; color: var(--muted); max-width: 30rem; }
+
+    /* ---------- booking ---------- */
+    .book-panel {
+      background: var(--bg2);
+      border: 1px solid rgba(201, 163, 92, 0.4);
+      border-radius: var(--radius);
+      padding: clamp(22px, 6vw, 48px);
+      max-width: 900px;
+    }
+    .book-panel h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(30px, 8.5vw, 52px);
+      line-height: 1.02;
+    }
+    .book-panel > p { margin-top: 12px; color: var(--muted); max-width: 34rem; }
+
+    .bk-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .field { display: grid; gap: 7px; }
+    .field label { font-size: 11.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .field input, .field select {
+      width: 100%;
+      min-height: 52px;
+      padding: 12px 14px;
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--txt);
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      appearance: none;
+    }
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23c9a35c' stroke-width='1.8'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+    .field input:focus, .field select:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px var(--gold);
+    }
+    .book-panel .btn { margin-top: 8px; width: 100%; }
+    .bk-ok, .bk-form { transition: opacity 0.3s ease; }
+    .bk-ok { display: none; }
+    .bk-ok.on { display: block; }
+    .bk-ok h3 { font-family: var(--serif); font-weight: 600; font-size: 30px; margin-top: 14px; }
+    .bk-ok p { margin-top: 10px; color: var(--muted); }
+    .bk-ok .btn { margin-top: 26px; width: auto; }
+
+    /* ---------- pricing ---------- */
+    .pc-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; align-items: stretch; }
+    .pc {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px 22px;
+    }
+    .pc.hot { border-color: rgba(201, 163, 92, 0.6); position: relative; }
+    .pc.hot .chip { position: absolute; top: -14px; left: 22px; background: var(--gold); color: #131211; border-color: var(--gold); }
+    .pc .kick { font-size: 11px; }
+    .pc h3 { font-family: var(--serif); font-weight: 600; font-size: 30px; margin-top: 6px; }
+    .pc .pc-price { font-family: var(--serif); font-size: 26px; font-weight: 600; color: var(--gold); margin-top: 10px; }
+    .pc .pc-price small { font-family: var(--sans); font-size: 11.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-left: 8px; }
+    .pc ul { list-style: none; margin-top: 18px; border-top: 1px solid var(--line); }
+    .pc li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .pc li::before { content: "✓"; color: var(--gold); font-size: 12px; }
+    .pc .btn { margin-top: auto; min-height: 48px; padding: 13px 20px; font-size: 14px; }
+    .pc-note { margin-top: 16px; font-size: 12.5px; color: var(--muted); }
+
+    /* ---------- about ---------- */
+    .about-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center; }
+    .about-copy h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(32px, 8.5vw, 58px);
+      line-height: 1.02;
+    }
+    .about-copy p { margin-top: 18px; color: var(--muted); font-size: clamp(15px, 4.2vw, 16.5px); max-width: 38rem; }
+    .about-copy p b { color: var(--txt); font-weight: 600; }
+    .about-media { border-radius: var(--radius); overflow: hidden; background: var(--bg2); }
+    .about-media img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+
+    /* ---------- reviews ---------- */
+    .rv-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .rv-card { background: var(--bg2); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 22px; }
+    .rv-card .stars { color: var(--gold); letter-spacing: 3px; font-size: 13px; }
+    .rv-card blockquote {
+      margin-top: 12px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(19px, 5vw, 23px);
+      line-height: 1.35;
+    }
+    .rv-card cite { display: block; margin-top: 14px; font-style: normal; font-size: 13px; color: var(--muted); }
+
+    /* ---------- location ---------- */
+    .loc-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+    .ci-list { border-top: 1px solid var(--line); }
+    .ci-list a, .ci-list div {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14.5px;
+    }
+    .ci-list a { text-decoration: none; }
+    .ci-list .k { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); flex: none; padding-top: 3px; }
+    .ci-list .v { text-align: right; font-weight: 500; }
+    .ci-list a:hover .v { color: var(--gold); }
+
+    .map-ph {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(var(--line), var(--line)) center / 1px 100% no-repeat,
+        linear-gradient(var(--line), var(--line)) center / 100% 1px no-repeat,
+        var(--bg2);
+      min-height: 240px;
+      display: grid;
+      place-items: center;
+    }
+    .map-ph span {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .loc-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .loc-actions .btn { min-height: 48px; padding: 13px 20px; font-size: 14px; }
+
+    /* ---------- final cta ---------- */
+    .final {
+      border-top: 1px solid var(--line);
+      padding: clamp(72px, 14vw, 150px) 0;
+      text-align: center;
+    }
+    .final h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(36px, 10vw, 84px);
+      line-height: 0.98;
+      max-width: 14ch;
+      margin-inline: auto;
+    }
+    .final h2 .seriff { color: var(--gold); }
+    .final p { margin-top: 20px; color: var(--muted); }
+    .final .hero-actions { justify-content: center; }
+
+    /* ---------- footer ---------- */
+    footer { border-top: 1px solid var(--line); padding: 52px 0 36px; }
+    .ft-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; }
+    .ft-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+    .ft-col a { display: flex; align-items: center; padding: 7px 0; text-decoration: none; font-size: 14.5px; color: var(--txt); min-height: 44px; }
+    .ft-col a:hover { color: var(--gold); }
+    .ft-col p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .socials { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 4px; }
+    .socials a {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .socials a:hover { border-color: var(--gold); color: var(--gold); }
+    .ft-bottom {
+      margin-top: 38px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+    .ft-bottom a { color: var(--muted); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; padding: 4px 0; }
+    .ft-bottom a:hover { color: var(--gold); }
+
+    /* ---------- reveal ---------- */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ---------- narrow (<=374px) ---------- */
+    @media (max-width: 374px) {
+      .logo small { display: none; }
+    }
+    @media (max-width: 359px) {
+      .sv-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    /* ---------- tablet ---------- */
+    @media (min-width: 640px) {
+      .sv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+      .why { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(24px, 5vw, 60px); }
+      .st-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .tf-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .tf-imgs { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+      .bk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .bk-grid .field.full { grid-column: 1 / -1; }
+      .pc-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .rv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .gal { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+      .ft-grid { grid-template-columns: 1.6fr 1fr 1fr 1.2fr; }
+    }
+
+    /* ---------- desktop ---------- */
+    @media (min-width: 1024px) {
+      .burger { display: none; }
+      .hd-nav { display: flex; align-items: center; gap: clamp(20px, 2.6vw, 36px); }
+      .hd-cta { display: inline-flex; }
+
+      .sv-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+      .feat-grid { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: stretch; }
+      .feat-media img { aspect-ratio: auto; height: 100%; }
+
+      .tf-imgs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+
+      .gal { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .fig.g1 { grid-column: span 2; grid-row: span 2; }
+      .fig.g1 img { aspect-ratio: 3 / 4; height: 100%; }
+      .fig.g2 img { aspect-ratio: 1 / 1; }
+      .fig.g3 img { aspect-ratio: 1 / 1; }
+      .fig.g4 { grid-column: span 2; }
+      .fig.g4 img { aspect-ratio: 16 / 10; }
+      .fig.g5 img { aspect-ratio: 1 / 1; }
+      .fig.g6 img { aspect-ratio: 1 / 1; }
+
+      .why { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .why-item { padding-right: clamp(18px, 3vw, 36px); }
+      .why-item + .why-item { border-left: 1px solid var(--line); padding-left: clamp(18px, 3vw, 36px); }
+
+      .book-panel .btn { width: auto; min-width: 260px; }
+
+      .about-grid { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+      .about-media img { aspect-ratio: 4 / 5; }
+
+      .loc-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="hd">
+    <div class="wrap hd-in">
+      <a class="logo" href="#top">NOIR<i class="amp"> &amp; </i>CO.<small>Hair · Grooming · Style</small></a>
+      <nav class="hd-nav" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#stylists">Stylists</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="hd-cta" href="#booking">Book Appointment</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <nav aria-label="Mobile navigation">
+      <a class="dr-link" href="#top"><small>00</small>Home</a>
+      <a class="dr-link" href="#services"><small>01</small>Services</a>
+      <a class="dr-link" href="#stylists"><small>02</small>Stylists</a>
+      <a class="dr-link" href="#gallery"><small>03</small>Gallery</a>
+      <a class="dr-link" href="#about"><small>04</small>About</a>
+      <a class="dr-link" href="#contact"><small>05</small>Contact</a>
+    </nav>
+    <a class="btn gold" href="#booking">Book Appointment</a>
+  </div>
+
+  <main id="main">
+    <div class="wrap" id="top">
+      <section class="hero">
+        <p class="kick reveal">Premium salon <b>·</b> hair studio <b>·</b> grooming lounge</p>
+        <h1 class="reveal">Look good. <span class="seriff">Feel unmistakably you.</span></h1>
+        <p class="lede reveal">Modern cuts, thoughtful styling and premium grooming in a space designed around you.</p>
+        <div class="hero-actions reveal">
+          <a class="btn gold" href="#booking">Book an Appointment</a>
+          <a class="btn ghost" href="#services">Explore Services</a>
+        </div>
+        <div class="trust reveal">
+          <span>Hair</span><i></i><span>Grooming</span><i></i><span>Styling</span>
+        </div>
+        <div class="hero-media reveal">
+          <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1600&h=1200&q=75" alt="Barber styling a client's hair in a moody salon" width="1600" height="1200" fetchpriority="high" decoding="async" />
+        </div>
+      </section>
+
+      <section class="sec" id="services">
+        <div class="sec-head reveal">
+          <span class="no">01 / 07</span>
+          <h2>Services</h2>
+        </div>
+
+        <div class="sv-group reveal">
+          <div class="sv-head"><span class="no">Hair</span><h3>Hair</h3></div>
+          <div class="sv-grid">
+            <div class="sv-card">
+              <h4>Signature Haircut</h4>
+              <p>A tailored cut shaped around your features, hair type and everyday routine.</p>
+              <span class="pr">₹1,200<small>45 min</small></span>
+              <a class="btn ghost" href="#booking">Book</a>
+            </div>
+            <div class="sv-card">
+              <h4>Hair Styling</h4>
+              <p>Wash, style and finishing for any occasion — from natural texture to sharp looks.</p>
+              <span class="pr">₹900<small>30 min</small></span>
+              <a class="btn ghost" href="#booking">Book</a>
+            </div>
+            <div class="sv-card">
+              <h4>Hair Colour</h4>
+              <p>Colour built around your skin tone, lifestyle and how much upkeep you want.</p>
+              <span class="pr">₹2,400<small>2 hr</small></span>
+              <a class="btn ghost" href="#booking">Book</a>
+            </div>
+            <div class="sv-card">
+              <h4>Blow Dry</h4>
+              <p>A smooth, voluminous finish with visible hold that lasts the day.</p>
+              <span class="pr">₹700<small>30 min</small></span>
+              <a class="btn ghost" href="#booking">Book</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sv-group reveal">
+          <div class="sv-head"><span class="no">Grooming</span><h3>Grooming</h3></div>
+          <div class="sv-grid">
+            <div class="sv-card">
+              <h4>Beard Trim</h4>
+              <p>A clean, precise trim that keeps your beard looking worked on, not overdone.</p>
+              <span class="pr">₹500<small>20 min</small></span>
+              <a class="btn ghost" href="#booking">Book</a>
+            </div>
+            <div class="sv-card">
+              <h4>Beard Styling</h4>
+              <p>Shaping, oiling and edge work to define your beard's natural line.</p>
+              <span class="pr">₹800<small>30 min</small></span>
+              <a class="btn ghost" href="#booking">Book</a>
+            </div>
+            <div class="sv-card">
+              <h4>Complete Grooming Package</h4>
+              <p>Haircut, beard and finish in one relaxed session — the full NOIR treatment.</p>
+              <span class="pr">₹1,500<small>60 min</small></span>
+              <a class="btn ghost" href="#booking">Book</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sv-group reveal">
+          <div class="sv-head"><span class="no">Care</span><h3>Care</h3></div>
+          <div class="sv-grid">
+            <div class="sv-card">
+              <h4>Hair Treatment</h4>
+              <p>Deep repair and nourishment tailored to your hair's current condition.</p>
+              <span class="pr">₹1,600<small>45 min</small></span>
+              <a class="btn ghost" href="#booking">Book</a>
+            </div>
+            <div class="sv-card">
+              <h4>Scalp Care</h4>
+              <p>A gentle, grounding session that resets scalp health and comfort.</p>
+              <span class="pr">₹1,100<small>40 min</small></span>
+              <a class="btn ghost" href="#booking">Book</a>
+            </div>
+            <div class="sv-card">
+              <h4>Styling Consultation</h4>
+              <p>Sit down with a stylist to plan a look that fits your hair, face and routine.</p>
+              <span class="pr">₹400<small>30 min</small></span>
+              <a class="btn ghost" href="#booking">Book</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="sec-head reveal">
+          <span class="no">Featured</span>
+          <h2>The NOIR Signature</h2>
+        </div>
+
+        <div class="featured reveal">
+          <div class="feat-grid">
+            <div class="feat-media">
+              <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=1400&h=1400&q=75" alt="Stylist finishing a client's look in the studio" loading="lazy" decoding="async" width="1400" height="1400" />
+            </div>
+            <div class="feat-body">
+              <span class="chip gold">Signed &amp; sealed</span>
+              <h3>The NOIR <span class="seriff">Signature</span></h3>
+              <p>A personalized cut and styling experience built around your features, preferences and everyday routine.</p>
+              <ul class="feat-includes">
+                <li>Personal styling consultation</li>
+                <li>Signature cut, tailored to your features</li>
+                <li>Wash, finish and at-home styling guidance</li>
+                <li>Take-home product notes</li>
+              </ul>
+              <span class="feat-price">₹1,800 <small>90 min · concept price</small></span>
+              <div class="feat-actions">
+                <a class="btn gold" href="#booking">Book This Service</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="stylists">
+        <div class="sec-head reveal">
+          <span class="no">02 / 07</span>
+          <h2>The Team</h2>
+        </div>
+
+        <div class="st-grid">
+          <article class="st-card reveal">
+            <div class="photo">
+              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1000&h=1250&q=70" alt="Portrait of Aarav Mehta" loading="lazy" decoding="async" width="1000" height="1250" />
+            </div>
+            <div class="st-body">
+              <span class="role">Creative Director</span>
+              <h3>Aarav Mehta</h3>
+              <p>Leads the team and shapes the seasonal cuts that give NOIR its look — precise, wearable and modern.</p>
+            </div>
+          </article>
+          <article class="st-card reveal">
+            <div class="photo">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1000&h=1250&q=70" alt="Portrait of Mira Kapoor" loading="lazy" decoding="async" width="1000" height="1250" />
+            </div>
+            <div class="st-body">
+              <span class="role">Senior Stylist</span>
+              <h3>Mira Kapoor</h3>
+              <p>Known for precision cuts and colour that suits real life — low maintenance, high impact.</p>
+            </div>
+          </article>
+          <article class="st-card reveal">
+            <div class="photo">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1000&h=1250&q=70" alt="Portrait of Kabir Shah" loading="lazy" decoding="async" width="1000" height="1250" />
+            </div>
+            <div class="st-body">
+              <span class="role">Grooming Specialist</span>
+              <h3>Kabir Shah</h3>
+              <p>Masters the beard — shaping, care and sharp edges that frame the face the right way.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="sec-head reveal">
+          <span class="no">Transformations</span>
+          <h2>Before / After</h2>
+        </div>
+
+        <div class="tf-grid">
+          <article class="tf-card reveal">
+            <div class="tf-head">
+              <h3>Haircut</h3>
+              <span class="chip">Concept / Sample work</span>
+            </div>
+            <div class="tf-imgs">
+              <figure>
+                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&h=675&q=70" alt="Before — groom preparing for a cut" loading="lazy" decoding="async" width="900" height="675" />
+                <figcaption>Before</figcaption>
+              </figure>
+              <figure>
+                <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&h=675&q=70" alt="After — signature cut finished" loading="lazy" decoding="async" width="900" height="675" />
+                <figcaption>After</figcaption>
+              </figure>
+            </div>
+            <p>Sample imagery illustrating the kind of transformation a signature haircut makes. Not real clients.</p>
+          </article>
+          <article class="tf-card reveal">
+            <div class="tf-head">
+              <h3>Styling</h3>
+              <span class="chip">Concept / Sample work</span>
+            </div>
+            <div class="tf-imgs">
+              <figure>
+                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=900&h=675&q=70" alt="Before — natural pre-styling hair" loading="lazy" decoding="async" width="900" height="675" />
+                <figcaption>Before</figcaption>
+              </figure>
+              <figure>
+                <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&h=675&q=70" alt="After — styled finish" loading="lazy" decoding="async" width="900" height="675" />
+                <figcaption>After</figcaption>
+              </figure>
+            </div>
+            <p>Styling examples showing how the right finish changes a look for the day. Sample work only.</p>
+          </article>
+          <article class="tf-card reveal">
+            <div class="tf-head">
+              <h3>Grooming</h3>
+              <span class="chip">Concept / Sample work</span>
+            </div>
+            <div class="tf-imgs">
+              <figure>
+                <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&h=675&q=70" alt="Before — grooming lounge setting" loading="lazy" decoding="async" width="900" height="675" />
+                <figcaption>Before</figcaption>
+              </figure>
+              <figure>
+                <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=900&h=675&q=70" alt="After — clean grooming session" loading="lazy" decoding="async" width="900" height="675" />
+                <figcaption>After</figcaption>
+              </figure>
+            </div>
+            <p>Illustration of the grooming package experience. Concept imagery, clearly not real clients.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="sec" id="gallery">
+        <div class="sec-head reveal">
+          <span class="no">03 / 07</span>
+          <h2>Gallery</h2>
+        </div>
+
+        <div class="gal">
+          <figure class="fig g1 reveal">
+            <img src="https://images.unsplash.com/photo-1620331311520-246422fd82f9?auto=format&fit=crop&w=900&h=1200&q=70" alt="Colour process in a salon" loading="lazy" decoding="async" width="900" height="1200" />
+            <figcaption>Haircuts</figcaption>
+          </figure>
+          <figure class="fig g2 reveal">
+            <img src="https://images.unsplash.com/photo-1519415943484-9fa1873496d4?auto=format&fit=crop&w=800&h=800&q=70" alt="Hair styling in progress" loading="lazy" decoding="async" width="800" height="800" />
+            <figcaption>Styling</figcaption>
+          </figure>
+          <figure class="fig g3 reveal">
+            <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&h=800&q=70" alt="Minimal salon interior" loading="lazy" decoding="async" width="800" height="800" />
+            <figcaption>Salon interior</figcaption>
+          </figure>
+          <figure class="fig g4 reveal">
+            <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=1100&h=690&q=70" alt="Grooming tools arranged on a counter" loading="lazy" decoding="async" width="1100" height="690" />
+            <figcaption>Grooming</figcaption>
+          </figure>
+          <figure class="fig g5 reveal">
+            <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=800&h=800&q=70" alt="Premium hair products on display" loading="lazy" decoding="async" width="800" height="800" />
+            <figcaption>Products</figcaption>
+          </figure>
+          <figure class="fig g6 reveal">
+            <img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=800&h=800&q=70" alt="Comfortable salon chair in warm light" loading="lazy" decoding="async" width="800" height="800" />
+            <figcaption>Client experience</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="sec-head reveal">
+          <span class="no">04 / 07</span>
+          <h2>Why NOIR</h2>
+        </div>
+
+        <div class="why">
+          <div class="why-item reveal">
+            <span class="n">01</span>
+            <h3>Personalized</h3>
+            <p>Every appointment starts with understanding what you want — not a template.</p>
+          </div>
+          <div class="why-item reveal">
+            <span class="n">02</span>
+            <h3>Modern</h3>
+            <p>Contemporary styles with techniques tailored to your hair and face.</p>
+          </div>
+          <div class="why-item reveal">
+            <span class="n">03</span>
+            <h3>Relaxed</h3>
+            <p>A comfortable environment without the rush. Your time is the schedule.</p>
+          </div>
+          <div class="why-item reveal">
+            <span class="n">04</span>
+            <h3>Detail-focused</h3>
+            <p>Attention to the small things — finished edges, clean lines, honest advice.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="booking">
+        <div class="sec-head reveal">
+          <span class="no">05 / 07</span>
+          <h2>Book an Appointment</h2>
+        </div>
+
+        <div class="book-panel reveal">
+          <div class="bk-form" id="bkFormWrap">
+            <h2>Reserve your <span class="seriff">chair.</span></h2>
+            <p>Pick a service and a time that suits you — we'll confirm your appointment shortly.</p>
+            <form class="bk-grid" id="bookingForm" novalidate>
+              <div class="field full">
+                <label for="bk-service">Service</label>
+                <select id="bk-service" name="service" required>
+                  <option value="">Select a service…</option>
+                  <option>Signature Haircut</option>
+                  <option>Hair Styling</option>
+                  <option>Hair Colour</option>
+                  <option>Blow Dry</option>
+                  <option>Beard Trim</option>
+                  <option>Beard Styling</option>
+                  <option>Complete Grooming Package</option>
+                  <option>Hair Treatment</option>
+                  <option>Scalp Care</option>
+                  <option>Styling Consultation</option>
+                  <option>The NOIR Signature</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="bk-stylist">Preferred stylist</label>
+                <select id="bk-stylist" name="stylist">
+                  <option value="">Any stylist</option>
+                  <option>Aarav Mehta</option>
+                  <option>Mira Kapoor</option>
+                  <option>Kabir Shah</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="bk-date">Date</label>
+                <input id="bk-date" name="date" type="date" required />
+              </div>
+              <div class="field">
+                <label for="bk-time">Time</label>
+                <select id="bk-time" name="time" required>
+                  <option value="">Select a time…</option>
+                  <option>10:00 AM</option>
+                  <option>11:00 AM</option>
+                  <option>12:00 PM</option>
+                  <option>1:00 PM</option>
+                  <option>2:00 PM</option>
+                  <option>3:00 PM</option>
+                  <option>4:00 PM</option>
+                  <option>5:00 PM</option>
+                  <option>6:00 PM</option>
+                  <option>7:00 PM</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="bk-name">Name</label>
+                <input id="bk-name" name="name" type="text" placeholder="Your name" required />
+              </div>
+              <div class="field">
+                <label for="bk-phone">Phone</label>
+                <input id="bk-phone" name="phone" type="tel" placeholder="+91 00000 00000" required />
+              </div>
+              <div class="field full">
+                <button class="btn gold" type="submit">Request Appointment</button>
+              </div>
+            </form>
+          </div>
+          <div class="bk-ok" id="bkOk">
+            <span class="chip gold">Request received</span>
+            <h3>Thanks! We'll confirm your <span class="seriff">appointment</span> shortly.</h3>
+            <p>This is a demo form for the concept site — no real appointment was booked.</p>
+            <button class="btn ghost" type="button" id="bkAgain">Book another appointment</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="sec-head reveal">
+          <span class="no">05 · Pricing</span>
+          <h2>Pricing</h2>
+        </div>
+
+        <div class="pc-grid">
+          <article class="pc reveal">
+            <span class="kick">Package 01</span>
+            <h3>Essential</h3>
+            <span class="pc-price">₹1,199 <small>45 min</small></span>
+            <ul>
+              <li>Signature haircut</li>
+              <li>Wash &amp; styling</li>
+              <li>Finishing advice</li>
+            </ul>
+            <a class="btn ghost" href="#booking">Book Essential</a>
+          </article>
+          <article class="pc hot reveal">
+            <span class="chip">Most booked</span>
+            <span class="kick">Package 02</span>
+            <h3>Complete</h3>
+            <span class="pc-price">₹1,799 <small>75 min</small></span>
+            <ul>
+              <li>Signature haircut</li>
+              <li>Beard trim or styling</li>
+              <li>Wash &amp; styling</li>
+              <li>Finishing advice</li>
+            </ul>
+            <a class="btn gold" href="#booking">Book Complete</a>
+          </article>
+          <article class="pc reveal">
+            <span class="kick">Package 03</span>
+            <h3>Signature</h3>
+            <span class="pc-price">₹2,499 <small>105 min</small></span>
+            <ul>
+              <li>Noir signature consultation</li>
+              <li>Haircut &amp; colour need assessment</li>
+              <li>Grooming session</li>
+              <li>Styling &amp; at-home care plan</li>
+            </ul>
+            <a class="btn ghost" href="#booking">Book Signature</a>
+          </article>
+        </div>
+        <p class="pc-note reveal">Fictional concept pricing for portfolio demo purposes.</p>
+      </section>
+
+      <section class="sec" id="about">
+        <div class="sec-head reveal">
+          <span class="no">06 / 07</span>
+          <h2>About NOIR</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-copy reveal">
+            <h2>Modern grooming &amp; <span class="seriff">personal expression.</span></h2>
+            <p>NOIR &amp; CO. is a fictional premium salon concept created for a web-design portfolio. The space it imagines is built around <b>personal expression</b> — a comfortable, unisex studio where modern cuts, careful grooming and honest styling advice come first.</p>
+            <p>We want every visit to feel relaxed and considered: no rush, no templates, just the small details that make a cut look intentional. Prices and team shown here are <b>concept content</b>, not real business claims.</p>
+          </div>
+          <div class="about-media reveal">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1100&h=1375&q=70" alt="Grooming tools arranged neatly on dark surface" loading="lazy" decoding="async" width="1100" height="1375" />
+          </div>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="sec-head reveal">
+          <span class="no">Client love</span>
+          <h2>Reviews</h2>
+        </div>
+
+        <div class="rv-grid">
+          <article class="rv-card reveal">
+            <span class="chip gold">Sample Client Review</span>
+            <div class="stars">★★★★★</div>
+            <blockquote>"The best haircut conversation I've had — they actually listened, then made it look easy."</blockquote>
+            <cite>— A. client, Bangalore · Fictional sample</cite>
+          </article>
+          <article class="rv-card reveal">
+            <span class="chip gold">Sample Client Review</span>
+            <div class="stars">★★★★★</div>
+            <blockquote>"The grooming package is the calmest part of my month now. My beard has never looked cleaner."</blockquote>
+            <cite>— R. client, Indiranagar · Fictional sample</cite>
+          </article>
+        </div>
+      </section>
+
+      <section class="sec" id="contact">
+        <div class="sec-head reveal">
+          <span class="no">07 / 07</span>
+          <h2>Visit NOIR</h2>
+        </div>
+
+        <div class="loc-grid">
+          <div class="ci-list reveal">
+            <div>
+              <span class="k">Address</span>
+              <span class="v">12, 100 Feet Road, Indiranagar,<br />Bengaluru, Karnataka 560038<br /><em>Concept address</em></span>
+            </div>
+            <div>
+              <span class="k">Hours</span>
+              <span class="v">Mon – Sat · 10:00 – 20:00<br />Sun · 11:00 – 18:00</span>
+            </div>
+            <a href="tel:+910000000000">
+              <span class="k">Phone</span>
+              <span class="v">+91 00000 00000<span style="display:block;font-size:12px;color:var(--muted);">Placeholder</span></span>
+            </a>
+            <a href="mailto:hello@noirco.example">
+              <span class="k">Email</span>
+              <span class="v">hello@noirco.example</span>
+            </a>
+          </div>
+
+          <div class="map-wrap reveal">
+            <div class="map-ph" role="img" aria-label="Map placeholder showing the salon's location">
+              <span>Map placeholder</span>
+            </div>
+            <div class="loc-actions">
+              <a class="btn gold" href="https://www.google.com/maps/search/?api=1&query=Indiranagar+Bengaluru" target="_blank" rel="noopener">Get Directions</a>
+              <a class="btn ghost" href="tel:+910000000000">Call Us</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="final">
+        <h2 class="reveal">Ready for your <span class="seriff">next look?</span></h2>
+        <p class="reveal">Book your appointment and let our team take care of the details.</p>
+        <div class="hero-actions reveal">
+          <a class="btn gold" href="#booking">Book an Appointment</a>
+          <a class="btn ghost" href="#services">View Services</a>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div class="wrap">
+        <div class="ft-grid">
+          <div>
+            <a class="logo" href="#top">NOIR<i class="amp"> &amp; </i>CO.</a>
+            <p style="margin-top: 12px; max-width: 22rem;">A premium unisex salon, hair studio &amp; grooming lounge — concept site for a portfolio.</p>
+          </div>
+          <nav class="ft-col" aria-label="Navigate">
+            <h4>Navigate</h4>
+            <a href="#services">Services</a>
+            <a href="#stylists">Stylists</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <div class="ft-col">
+            <h4>Hours</h4>
+            <p>Mon – Sat · 10:00 – 20:00<br />Sun · 11:00 – 18:00<br />Walk-ins when chairs allow.</p>
+          </div>
+          <div class="ft-col">
+            <h4>Contact</h4>
+            <a href="#booking">Book Appointment</a>
+            <a href="mailto:hello@noirco.example">hello@noirco.example</a>
+            <div class="socials">
+              <a href="#" aria-label="Instagram placeholder">IG</a>
+              <a href="#" aria-label="YouTube placeholder">YT</a>
+              <a href="#" aria-label="Behance placeholder">BE</a>
+            </div>
+          </div>
+        </div>
+        <div class="ft-bottom">
+          <span>© 2026 NOIR &amp; CO. · Concept project — all services, prices and people are fictional.</span>
+          <span><a href="index.html">← Back to portfolio</a></span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      var burger = document.getElementById('burger');
+      var drawer = document.getElementById('drawer');
+
+      function setState(open) {
+        document.body.classList.toggle('menu-open', open);
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      }
+
+      burger.addEventListener('click', function () {
+        setState(!document.body.classList.contains('menu-open'));
+      });
+
+      drawer.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setState(false); });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setState(false);
+      });
+
+      var revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              en.target.classList.add('in');
+              io.unobserve(en.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealEls.forEach(function (el) { io.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      var dateInput = document.getElementById('bk-date');
+      if (dateInput) {
+        var today = new Date();
+        var y = today.getFullYear();
+        var m = String(today.getMonth() + 1).padStart(2, '0');
+        var d = String(today.getDate()).padStart(2, '0');
+        dateInput.min = y + '-' + m + '-' + d;
+      }
+
+      var form = document.getElementById('bookingForm');
+      var okWrap = document.getElementById('bkOk');
+      var again = document.getElementById('bkAgain');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        document.getElementById('bkFormWrap').style.display = 'none';
+        okWrap.classList.add('on');
+      });
+      again.addEventListener('click', function () {
+        form.reset();
+        okWrap.classList.remove('on');
+        document.getElementById('bkFormWrap').style.display = '';
+      });
+    })();
+  </script>
+</body>
+</html>

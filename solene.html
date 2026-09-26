@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#faf6ef" />
+  <meta name="description" content="SOLENE — a modern fine-dining restaurant concept. Fictional concept project by a freelance web designer." />
+  <title>SOLENE — Modern Fine Dining</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #faf6ef;
+      --bg2: #f3ecdf;
+      --bg3: #ece2d0;
+      --line: rgba(56, 38, 26, 0.16);
+      --txt: #241a12;
+      --muted: #7c6a5a;
+      --acc: #b2431f;
+      --acc-dark: #8f3517;
+      --acc-soft: rgba(178, 67, 31, 0.1);
+      --header-h: 64px;
+      --radius: 16px;
+      --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+      --sans: "Outfit", "Inter", -apple-system, "Segoe UI", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--txt);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: clip;
+      min-height: 100vh;
+      -webkit-tap-highlight-color: rgba(178, 67, 31, 0.2);
+    }
+
+    body.menu-open { overflow: hidden; }
+
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    :focus-visible {
+      outline: 2px solid var(--acc);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    ::selection { background: rgba(178, 67, 31, 0.2); }
+
+    .wrap {
+      width: 100%;
+      max-width: 1200px;
+      margin-inline: auto;
+      padding-inline: clamp(18px, 5vw, 40px);
+    }
+
+    section[id] { scroll-margin-top: calc(var(--header-h) + 10px); }
+
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: -999px;
+      background: var(--acc);
+      color: #fff;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      z-index: 200;
+      text-decoration: none;
+    }
+    .skip:focus { top: 12px; }
+
+    /* ---------- header ---------- */
+    .hd {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(250, 246, 239, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hd-in {
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(22px, 5.8vw, 27px);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+    .logo i { font-style: italic; color: var(--acc); font-weight: 600; }
+    .logo small { display: block; font-family: var(--sans); font-weight: 500; font-size: 9.5px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--muted); margin-left: 12px; }
+
+    .hd-nav { display: none; }
+    .hd-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .hd-nav a:hover { color: var(--txt); }
+
+    .hd-cta {
+      display: none;
+      min-height: 44px;
+      align-items: center;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: var(--acc);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13.5px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.22s ease;
+    }
+    .hd-cta:hover, .hd-cta:focus-visible { background: var(--acc-dark); }
+
+    .burger {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 46px;
+      height: 46px;
+      margin-right: -8px;
+      padding: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .burger .bar {
+      width: 100%;
+      height: 2px;
+      background: var(--txt);
+      border-radius: 2px;
+      transition: transform 0.28s ease, opacity 0.2s ease;
+    }
+    body.menu-open .burger .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    body.menu-open .burger .bar:nth-child(2) { opacity: 0; }
+    body.menu-open .burger .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ---------- drawer ---------- */
+    .drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: calc(var(--header-h) + 18px) clamp(20px, 6vw, 40px) 36px;
+      transform: translateX(100%);
+      transition: transform 0.33s ease;
+      overflow-y: auto;
+    }
+    body.menu-open .drawer { transform: translateX(0); }
+
+    .drawer nav { display: grid; gap: 2px; }
+    .dr-link {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 15px 0;
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(26px, 7vw, 36px);
+    }
+    .dr-link small { font-family: var(--sans); font-size: 11.5px; font-weight: 700; letter-spacing: 0.18em; color: var(--acc); }
+    .drawer .btn { margin-top: 26px; width: 100%; }
+
+    /* ---------- buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 15px 28px;
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 14.5px;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.22s ease, color 0.22s ease, transform 0.15s ease, border-color 0.22s ease;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn.filled { background: var(--acc); color: #fff; border: 1px solid var(--acc); }
+    .btn.filled:hover, .btn.filled:focus-visible { background: var(--acc-dark); border-color: var(--acc-dark); }
+    .btn.outline { background: transparent; color: var(--txt); border: 1px solid rgba(36, 26, 18, 0.35); }
+    .btn.outline:hover, .btn.outline:focus-visible { border-color: var(--acc); color: var(--acc); }
+
+    /* ---------- shared ---------- */
+    .sec { padding: clamp(60px, 11vw, 110px) 0; }
+    .sec + .sec { border-top: 1px solid var(--line); }
+
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: clamp(26px, 5vw, 44px);
+    }
+    .sec-head .no {
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: var(--acc);
+    }
+    .sec-head h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(28px, 7.5vw, 52px);
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+    }
+
+    .kick {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .kick b { color: var(--acc); font-weight: 700; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .tag.filled { border-color: var(--acc); color: var(--acc); background: var(--acc-soft); }
+
+    /* ---------- hero ---------- */
+    .hero { padding-top: clamp(42px, 9vw, 96px); }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(38px, 11vw, 92px);
+      line-height: 1.03;
+      letter-spacing: -0.015em;
+      max-width: 13ch;
+      margin-top: 18px;
+    }
+    .hero h1 em { font-style: italic; color: var(--acc); }
+
+    .hero .lede {
+      margin-top: 22px;
+      max-width: 34rem;
+      font-size: clamp(16px, 4.4vw, 18.5px);
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .trust {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px 4px;
+      margin-top: 30px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .trust i {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--acc);
+      font-style: normal;
+      margin: 0 7px;
+    }
+
+    .hero-media {
+      margin-top: clamp(36px, 8vw, 68px);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg2);
+      aspect-ratio: 16 / 10;
+    }
+    .hero-media img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ---------- philosophy ---------- */
+    .ab-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: clamp(26px, 6vw, 64px);
+      align-items: center;
+    }
+    .ab-copy p { margin-top: 16px; color: var(--muted); font-size: clamp(15px, 4.2vw, 16.5px); max-width: 38rem; }
+    .ab-copy p b { color: var(--txt); font-weight: 600; }
+    .ab-principles { list-style: none; margin-top: 26px; border-top: 1px solid var(--line); }
+    .ab-principles li {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
+      color: var(--muted);
+    }
+    .ab-principles li b { color: var(--txt); font-weight: 600; }
+    .ab-principles li::before { content: "✦"; color: var(--acc); font-size: 12px; }
+    .ab-media { border-radius: var(--radius); overflow: hidden; background: var(--bg2); }
+    .ab-media img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+
+    /* ---------- menu ---------- */
+    .m-group { margin-bottom: clamp(34px, 6vw, 54px); }
+    .m-group:last-child { margin-bottom: 0; }
+    .m-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .m-head .no {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 600;
+      font-size: 22px;
+      color: var(--acc);
+    }
+    .m-head h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(20px, 5.5vw, 27px);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .m-head::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+    .m-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .m-item .tt { font-weight: 600; font-size: 15.5px; }
+    .m-item .ds { margin-top: 2px; font-size: 13.5px; color: var(--muted); }
+    .m-item .pr {
+      flex: none;
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--acc);
+    }
+    .m-item .pr small {
+      display: block;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .m-note { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
+
+    /* ---------- chef ---------- */
+    .chef-panel {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .chef-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+    .chef-media { background: var(--bg3); min-height: 0; }
+    .chef-media img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 3; }
+    .chef-body { padding: clamp(24px, 6vw, 52px); }
+    .chef-body h3 {
+      font-family: var(--serif);
+      font-size: clamp(30px, 8.5vw, 56px);
+      font-weight: 600;
+      line-height: 1.02;
+      margin-top: 12px;
+    }
+    .chef-body > p { margin-top: 16px; color: var(--muted); font-size: clamp(15px, 4.2vw, 16.5px); max-width: 40rem; }
+
+    /* ---------- gallery ---------- */
+    .gal { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .fig { border-radius: 12px; overflow: hidden; background: var(--bg2); position: relative; }
+    .fig img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; transition: transform 0.45s ease; }
+    .fig:hover img { transform: scale(1.03); }
+    .fig figcaption {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      background: rgba(250, 246, 239, 0.88);
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--txt);
+    }
+
+    /* ---------- reviews ---------- */
+    .rv-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .rv-card { background: var(--bg2); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 22px; }
+    .rv-card .stars { color: var(--acc); letter-spacing: 3px; font-size: 13px; }
+    .rv-card blockquote {
+      margin-top: 12px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(19px, 5vw, 23px);
+      line-height: 1.35;
+    }
+    .rv-card cite { display: block; margin-top: 14px; font-style: normal; font-size: 13px; color: var(--muted); }
+
+    /* ---------- reserve ---------- */
+    .rs-panel {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(22px, 6vw, 48px);
+      max-width: 880px;
+    }
+    .rs-panel h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(30px, 8.5vw, 50px);
+      line-height: 1.02;
+    }
+    .rs-panel > p { margin-top: 12px; color: var(--muted); max-width: 34rem; }
+
+    .rs-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .field { display: grid; gap: 7px; }
+    .field label { font-size: 11.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .field input, .field select {
+      width: 100%;
+      min-height: 52px;
+      padding: 12px 14px;
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--txt);
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      appearance: none;
+    }
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23b2431f' stroke-width='1.8'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+    .field input:focus, .field select:focus {
+      outline: none;
+      border-color: var(--acc);
+      box-shadow: 0 0 0 1px var(--acc);
+    }
+    .rs-panel .btn { margin-top: 8px; width: 100%; }
+    .rs-ok, .rs-form { transition: opacity 0.3s ease; }
+    .rs-ok { display: none; }
+    .rs-ok.on { display: block; }
+    .rs-ok h3 { font-family: var(--serif); font-weight: 600; font-size: 30px; margin-top: 14px; }
+    .rs-ok p { margin-top: 10px; color: var(--muted); }
+    .rs-ok .btn { margin-top: 26px; width: auto; }
+
+    /* ---------- visit ---------- */
+    .vgrid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+    .ci-list { border-top: 1px solid var(--line); }
+    .ci-list a, .ci-list div {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14.5px;
+    }
+    .ci-list a { text-decoration: none; }
+    .ci-list .k { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); flex: none; padding-top: 3px; }
+    .ci-list .v { text-align: right; font-weight: 500; }
+    .ci-list a:hover .v { color: var(--acc); }
+
+    .map-ph {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(var(--line), var(--line)) center / 1px 100% no-repeat,
+        linear-gradient(var(--line), var(--line)) center / 100% 1px no-repeat,
+        var(--bg2);
+      min-height: 240px;
+      display: grid;
+      place-items: center;
+    }
+    .map-ph span {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .vg-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .vg-actions .btn { min-height: 48px; padding: 13px 20px; font-size: 14px; }
+
+    /* ---------- final cta ---------- */
+    .final {
+      border-top: 1px solid var(--line);
+      padding: clamp(72px, 14vw, 150px) 0;
+      text-align: center;
+    }
+    .final h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(36px, 10vw, 84px);
+      line-height: 0.98;
+      max-width: 14ch;
+      margin-inline: auto;
+    }
+    .final h2 em { font-style: italic; color: var(--acc); }
+    .final p { margin-top: 20px; color: var(--muted); }
+    .final .hero-actions { justify-content: center; }
+
+    /* ---------- footer ---------- */
+    footer { border-top: 1px solid var(--line); padding: 52px 0 36px; }
+    .ft-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; }
+    .ft-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+    .ft-col a { display: flex; align-items: center; padding: 7px 0; text-decoration: none; font-size: 14.5px; color: var(--txt); min-height: 44px; }
+    .ft-col a:hover { color: var(--acc); }
+    .ft-col p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .socials { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 4px; }
+    .socials a {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .socials a:hover { border-color: var(--acc); color: var(--acc); }
+    .ft-bottom {
+      margin-top: 38px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+    .ft-bottom a { color: var(--muted); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; padding: 4px 0; }
+    .ft-bottom a:hover { color: var(--acc); }
+
+    /* ---------- reveal ---------- */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ---------- narrow (<=414px) ---------- */
+    @media (max-width: 414px) {
+      .logo small { display: none; }
+    }
+
+    /* ---------- tablet ---------- */
+    @media (min-width: 640px) {
+      .m-item .tt { font-size: 16.5px; }
+      .why { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(24px, 5vw, 60px); }
+      .rs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .rs-grid .field.full { grid-column: 1 / -1; }
+      .rv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .gal { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+      .ft-grid { grid-template-columns: 1.5fr 1fr 1fr 1.2fr; }
+    }
+
+    /* ---------- desktop ---------- */
+    @media (min-width: 1024px) {
+      .burger { display: none; }
+      .hd-nav { display: flex; align-items: center; gap: clamp(20px, 2.6vw, 36px); }
+      .hd-cta { display: inline-flex; }
+
+      .ab-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+
+      .chef-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: stretch; }
+      .chef-media img { aspect-ratio: auto; height: 100%; }
+
+      .gal { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .fig.g1 { grid-column: span 2; grid-row: span 2; }
+      .fig.g1 img { aspect-ratio: 3 / 4; height: 100%; }
+
+      .rs-panel .btn { width: auto; min-width: 260px; }
+
+      .vgrid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="hd">
+    <div class="wrap hd-in">
+      <a class="logo" href="#top">SOLEN<em>E</em><small>Seasonal · Honest · Unhurried</small></a>
+      <nav class="hd-nav" aria-label="Main navigation">
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#reserve">Reserve</a>
+        <a href="#visit">Visit</a>
+      </nav>
+      <a class="hd-cta" href="#reserve">Reserve a Table</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <nav aria-label="Mobile navigation">
+      <a class="dr-link" href="#top"><small>00</small>Home</a>
+      <a class="dr-link" href="#menu"><small>01</small>Menu</a>
+      <a class="dr-link" href="#about"><small>02</small>About</a>
+      <a class="dr-link" href="#gallery"><small>03</small>Gallery</a>
+      <a class="dr-link" href="#reserve"><small>04</small>Reserve</a>
+      <a class="dr-link" href="#visit"><small>05</small>Visit</a>
+    </nav>
+    <a class="btn filled" href="#reserve">Reserve a Table</a>
+  </div>
+
+  <main id="main">
+    <div class="wrap" id="top">
+      <section class="hero">
+        <p class="kick reveal">Modern fine dining <b>·</b> Bengaluru</p>
+        <h1 class="reveal">Seasonal. Honest. <em>Unhurried.</em></h1>
+        <p class="lede reveal">A small tasting-menu restaurant built around produce, patience and food that tastes like the moment.</p>
+        <div class="hero-actions reveal">
+          <a class="btn filled" href="#reserve">Reserve a Table</a>
+          <a class="btn outline" href="#menu">View the Menu</a>
+        </div>
+        <div class="trust reveal">
+          <span>6-course menu</span><i></i><span>Local produce</span><i></i><span>Concept pricing</span>
+        </div>
+        <div class="hero-media reveal">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&h=1000&q=75" alt="Warm, candle-lit dining room of a fine-dining restaurant" width="1600" height="1000" fetchpriority="high" decoding="async" />
+        </div>
+      </section>
+
+      <section class="sec" id="menu">
+        <div class="sec-head reveal">
+          <span class="no">01 / 06</span>
+          <h2>The Menu</h2>
+        </div>
+
+        <div class="m-group reveal">
+          <div class="m-head"><span class="no">To Share</span><h3>To Share</h3></div>
+          <div class="m-item">
+            <div><div class="tt">Charred Sourdough</div><div class="ds">Fermented honey butter, smoked sea salt</div></div>
+            <span class="pr">₹350<small>Course</small></span>
+          </div>
+          <div class="m-item">
+            <div><div class="tt">Heirloom Tomato</div><div class="ds">Sea buckthorn, basil oil, whipped ricotta</div></div>
+            <span class="pr">₹520<small>Course</small></span>
+          </div>
+          <div class="m-item">
+            <div><div class="tt">Crispy Baby Potato</div><div class="ds">Brown butter, chives, smoked paprika</div></div>
+            <span class="pr">₹480<small>Course</small></span>
+          </div>
+        </div>
+
+        <div class="m-group reveal">
+          <div class="m-head"><span class="no">Mains</span><h3>Mains</h3></div>
+          <div class="m-item">
+            <div><div class="tt">Market Fish</div><div class="ds">Charred leek, lemon verbena, warm vinaigrette</div></div>
+            <span class="pr">₹1,450<small>Course</small></span>
+          </div>
+          <div class="m-item">
+            <div><div class="tt">Grass-fed Tenderloin</div><div class="ds">Burnt onion, jus, winter greens</div></div>
+            <span class="pr">₹1,650<small>Course</small></span>
+          </div>
+          <div class="m-item">
+            <div><div class="tt">Pumpkin &amp; Sage</div><div class="ds">Brown butter emulsion, toasted seeds (vegetarian)</div></div>
+            <span class="pr">₹1,050<small>Course</small></span>
+          </div>
+        </div>
+
+        <div class="m-group reveal">
+          <div class="m-head"><span class="no">To Finish</span><h3>To Finish</h3></div>
+          <div class="m-item">
+            <div><div class="tt">Dark Chocolate</div><div class="ds">Burnt orange, cocoa soil, whipped crème fraîche</div></div>
+            <span class="pr">₹550<small>Course</small></span>
+          </div>
+          <div class="m-item">
+            <div><div class="tt">Local Cheese</div><div class="ds">Poached pear, walnut, honeycomb</div></div>
+            <span class="pr">₹600<small>Course</small></span>
+          </div>
+          <div class="m-item">
+            <div><div class="tt">Jaggery &amp; Cardamom</div><div class="ds">Warm kheer, toasted almonds</div></div>
+            <span class="pr">₹450<small>Course</small></span>
+          </div>
+        </div>
+
+        <p class="m-note reveal">Fictional concept menu with sample pricing for portfolio demonstration. No real dishes or prices.</p>
+      </section>
+
+      <section class="sec" id="about">
+        <div class="sec-head reveal">
+          <span class="no">02 / 06</span>
+          <h2>About</h2>
+        </div>
+
+        <div class="ab-grid">
+          <div class="ab-copy reveal">
+            <p><b>Solene</b> is a fictional fine-dining concept created for a web-design portfolio. It imagines a small restaurant with a short menu, a tight room and the confidence to slow down.</p>
+            <p>Everything begins with what's in season — farmers, market stalls and the weather decide the menu. We cook honestly, plate simply and let the produce speak.</p>
+            <ul class="ab-principles">
+              <li><b>Local first</b> — produce sourced within a day's drive</li>
+              <li><b>Short menu</b> — six courses, changed often</li>
+              <li><b>No rushes</b> — dinner is an evening, not a table flip</li>
+              <li><b>Quiet service</b> — attentive, never hovering</li>
+            </ul>
+          </div>
+          <div class="ab-media reveal">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1100&h=1375&q=70" alt="A plated fine-dining dish on a dark ceramic plate" loading="lazy" decoding="async" width="1100" height="1375" />
+          </div>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="sec-head reveal">
+          <span class="no">03 / 06</span>
+          <h2>Our Chef</h2>
+        </div>
+
+        <div class="chef-panel reveal">
+          <div class="chef-grid">
+            <div class="chef-media">
+              <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=1100&h=880&q=70" alt="Portrait of head chef working in the kitchen" loading="lazy" decoding="async" width="1100" height="880" />
+            </div>
+            <div class="chef-body">
+              <span class="tag filled">Chef · Concept persona</span>
+              <h3>Aditi Rao</h3>
+              <p>A fictional head chef for the concept. Aditi's style is simple on the plate and exacting in the prep — fire, salt and timing over tricks and garnish.</p>
+              <p>The kitchen she leads runs a tight, seasonal menu that changes with the market, written on a single board each morning.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="gallery">
+        <div class="sec-head reveal">
+          <span class="no">04 / 06</span>
+          <h2>Gallery</h2>
+        </div>
+
+        <div class="gal">
+          <figure class="fig g1 reveal">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1000&h=1250&q=70" alt="Plated main course with fresh ingredients" loading="lazy" decoding="async" width="1000" height="1250" />
+            <figcaption>Plates</figcaption>
+          </figure>
+          <figure class="fig reveal">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&h=800&q=70" alt="Vibrant seasonal bowl of market vegetables" loading="lazy" decoding="async" width="800" height="800" />
+            <figcaption>Market</figcaption>
+          </figure>
+          <figure class="fig reveal">
+            <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=800&h=800&q=70" alt="Hands preparing fresh ingredients" loading="lazy" decoding="async" width="800" height="800" />
+            <figcaption>The kitchen</figcaption>
+          </figure>
+          <figure class="fig reveal">
+            <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=1100&h=690&q=70" alt="A carefully composed dish with herbs" loading="lazy" decoding="async" width="1100" height="690" />
+            <figcaption>Composition</figcaption>
+          </figure>
+          <figure class="fig reveal">
+            <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&h=800&q=70" alt="Close-up of a finished dish with garnish" loading="lazy" decoding="async" width="800" height="800" />
+            <figcaption>Details</figcaption>
+          </figure>
+          <figure class="fig reveal">
+            <img src="https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&w=800&h=800&q=70" alt="Candle-lit table set for dinner" loading="lazy" decoding="async" width="800" height="800" />
+            <figcaption>The room</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="sec-head reveal">
+          <span class="no">Reviews</span>
+          <h2>Kind Words</h2>
+        </div>
+
+        <div class="rv-grid">
+          <article class="rv-card reveal">
+            <span class="tag filled">Sample Client Review</span>
+            <div class="stars">★★★★★</div>
+            <blockquote>"The six courses felt like a conversation. Every plate made sense, and nothing felt rushed."</blockquote>
+            <cite>— K. guest, Bangalore · Fictional sample</cite>
+          </article>
+          <article class="rv-card reveal">
+            <span class="tag filled">Sample Client Review</span>
+            <div class="stars">★★★★★</div>
+            <blockquote>"Quiet room, honest cooking, and service that was there exactly when you needed it."</blockquote>
+            <cite>— S. guest, Whitefield · Fictional sample</cite>
+          </article>
+        </div>
+      </section>
+
+      <section class="sec" id="reserve">
+        <div class="sec-head reveal">
+          <span class="no">05 / 06</span>
+          <h2>Reserve</h2>
+        </div>
+
+        <div class="rs-panel reveal">
+          <div class="rs-form" id="rsFormWrap">
+            <h2>An evening, <em>booked.</em></h2>
+            <p>Tables are released on the first of each month. Request a seat and we'll confirm by text or call.</p>
+            <form class="rs-grid" id="resForm" novalidate>
+              <div class="field full">
+                <label for="rs-name">Name</label>
+                <input id="rs-name" name="name" type="text" placeholder="Your name" required />
+              </div>
+              <div class="field">
+                <label for="rs-phone">Phone</label>
+                <input id="rs-phone" name="phone" type="tel" placeholder="+91 00000 00000" required />
+              </div>
+              <div class="field">
+                <label for="rs-date">Date</label>
+                <input id="rs-date" name="date" type="date" required />
+              </div>
+              <div class="field">
+                <label for="rs-time">Seating</label>
+                <select id="rs-time" name="time" required>
+                  <option value="">Select a seating…</option>
+                  <option>6:00 PM</option>
+                  <option>6:30 PM</option>
+                  <option>7:00 PM</option>
+                  <option>7:30 PM</option>
+                  <option>8:00 PM</option>
+                  <option>8:30 PM</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="rs-guests">Guests</label>
+                <select id="rs-guests" name="guests">
+                  <option value="2">2 guests</option>
+                  <option value="3">3 guests</option>
+                  <option value="4">4 guests</option>
+                  <option value="5">5 guests</option>
+                  <option value="6">6 guests</option>
+                </select>
+              </div>
+              <div class="field full">
+                <button class="btn filled" type="submit">Request a Reservation</button>
+              </div>
+            </form>
+          </div>
+          <div class="rs-ok" id="resOk">
+            <span class="tag filled">Request received</span>
+            <h3>Thank you — we'll <em>confirm your table</em> shortly.</h3>
+            <p>This is a demo form for the concept site — no real reservation was made.</p>
+            <button class="btn outline" type="button" id="rsAgain">Make another request</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="visit">
+        <div class="sec-head reveal">
+          <span class="no">06 / 06</span>
+          <h2>Visit</h2>
+        </div>
+
+        <div class="vgrid">
+          <div class="ci-list reveal">
+            <div>
+              <span class="k">Address</span>
+              <span class="v">24, Lavelle Road,<br />Bengaluru, Karnataka 560001<br /><em>Concept address</em></span>
+            </div>
+            <div>
+              <span class="k">Hours</span>
+              <span class="v">Tue – Sun · 6:00 – 11:00 PM<br />Closed Mondays</span>
+            </div>
+            <a href="tel:+910000000000">
+              <span class="k">Phone</span>
+              <span class="v">+91 00000 00000<span style="display:block;font-size:12px;color:var(--muted);">Placeholder</span></span>
+            </a>
+            <a href="mailto:hello@solene.example">
+              <span class="k">Email</span>
+              <span class="v">hello@solene.example</span>
+            </a>
+          </div>
+
+          <div class="reveal">
+            <div class="map-ph" role="img" aria-label="Map placeholder showing the restaurant's location">
+              <span>Map placeholder</span>
+            </div>
+            <div class="vg-actions">
+              <a class="btn filled" href="https://www.google.com/maps/search/?api=1&query=Lavelle+Road+Bengaluru" target="_blank" rel="noopener">Get Directions</a>
+              <a class="btn outline" href="#reserve">Reserve a Table</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="final">
+        <h2 class="reveal">Come hungry. <em>Stay curious.</em></h2>
+        <p class="reveal">A table, a few courses and an evening that takes its time.</p>
+        <div class="hero-actions reveal">
+          <a class="btn filled" href="#reserve">Reserve a Table</a>
+          <a class="btn outline" href="#menu">View the Menu</a>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div class="wrap">
+        <div class="ft-grid">
+          <div>
+            <a class="logo" href="#top">SOLEN<em>E</em></a>
+            <p style="margin-top: 12px; max-width: 22rem;">A modern fine-dining concept — small menu, seasonal produce, unhurried evenings. Concept site for a portfolio.</p>
+          </div>
+          <nav class="ft-col" aria-label="Navigate">
+            <h4>Navigate</h4>
+            <a href="#menu">Menu</a>
+            <a href="#about">About</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#reserve">Reserve</a>
+            <a href="#visit">Visit</a>
+          </nav>
+          <div class="ft-col">
+            <h4>Hours</h4>
+            <p>Tue – Sun · 6:00 – 11:00 PM<br />Closed Mondays<br />No walk-ins — reservations only.</p>
+          </div>
+          <div class="ft-col">
+            <h4>Contact</h4>
+            <a href="#reserve">Reserve a table</a>
+            <a href="mailto:hello@solene.example">hello@solene.example</a>
+            <div class="socials">
+              <a href="#" aria-label="Instagram placeholder">IG</a>
+              <a href="#" aria-label="Facebook placeholder">FB</a>
+              <a href="#" aria-label="Behance placeholder">BE</a>
+            </div>
+          </div>
+        </div>
+        <div class="ft-bottom">
+          <span>© 2026 SOLENE · Concept project — all dishes, prices and people are fictional.</span>
+          <span><a href="index.html">← Back to portfolio</a></span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      var burger = document.getElementById('burger');
+      var drawer = document.getElementById('drawer');
+
+      function setState(open) {
+        document.body.classList.toggle('menu-open', open);
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      }
+
+      burger.addEventListener('click', function () {
+        setState(!document.body.classList.contains('menu-open'));
+      });
+
+      drawer.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setState(false); });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setState(false);
+      });
+
+      var revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              en.target.classList.add('in');
+              io.unobserve(en.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealEls.forEach(function (el) { io.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      var dateInput = document.getElementById('rs-date');
+      if (dateInput) {
+        var today = new Date();
+        dateInput.min = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+      }
+
+      var form = document.getElementById('resForm');
+      var okWrap = document.getElementById('resOk');
+      var again = document.getElementById('rsAgain');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        document.getElementById('rsFormWrap').style.display = 'none';
+        okWrap.classList.add('on');
+      });
+      again.addEventListener('click', function () {
+        form.reset();
+        okWrap.classList.remove('on');
+        document.getElementById('rsFormWrap').style.display = '';
+      });
+    })();
+  </script>
+</body>
+</html>

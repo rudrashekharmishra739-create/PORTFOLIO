@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f8fc" />
+  <meta name="description" content="KITE — modern banking for founders and freelancers. Fictional concept product landing page by a freelance web designer." />
+  <title>KITE — Banking for Builders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f8fc;
+      --bg2: #ffffff;
+      --bg3: #eef0fb;
+      --line: rgba(15, 22, 48, 0.12);
+      --txt: #0f1630;
+      --muted: #5a637d;
+      --acc: #4f46e5;
+      --acc-dark: #4338ca;
+      --acc-soft: rgba(79, 70, 229, 0.1);
+      --accent2: #7c3aed;
+      --ok: #16a34a;
+      --header-h: 64px;
+      --radius: 16px;
+      --sans: "Sora", "Inter", -apple-system, "Segoe UI", sans-serif;
+      --body: "Inter", -apple-system, "Segoe UI", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--txt);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: clip;
+      min-height: 100vh;
+      -webkit-tap-highlight-color: rgba(79, 70, 229, 0.2);
+    }
+
+    body.menu-open { overflow: hidden; }
+
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    :focus-visible {
+      outline: 2px solid var(--acc);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    ::selection { background: rgba(79, 70, 229, 0.18); }
+
+    .wrap {
+      width: 100%;
+      max-width: 1180px;
+      margin-inline: auto;
+      padding-inline: clamp(18px, 5vw, 40px);
+    }
+
+    section[id] { scroll-margin-top: calc(var(--header-h) + 10px); }
+
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: -999px;
+      background: var(--acc);
+      color: #fff;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      z-index: 200;
+      text-decoration: none;
+    }
+    .skip:focus { top: 12px; }
+
+    /* ---------- header ---------- */
+    .hd {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(247, 248, 252, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hd-in {
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .logo {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(18px, 5vw, 22px);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      white-space: nowrap;
+    }
+    .logo .mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--acc), var(--accent2));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 13px;
+      flex: none;
+    }
+
+    .hd-nav { display: none; }
+    .hd-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .hd-nav a:hover { color: var(--txt); }
+
+    .hd-cta {
+      display: none;
+      min-height: 44px;
+      align-items: center;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: var(--acc);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13.5px;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.22s ease;
+    }
+    .hd-cta:hover, .hd-cta:focus-visible { background: var(--acc-dark); }
+
+    .burger {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 46px;
+      height: 46px;
+      margin-right: -8px;
+      padding: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .burger .bar {
+      width: 100%;
+      height: 2px;
+      background: var(--txt);
+      border-radius: 2px;
+      transition: transform 0.28s ease, opacity 0.2s ease;
+    }
+    body.menu-open .burger .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    body.menu-open .burger .bar:nth-child(2) { opacity: 0; }
+    body.menu-open .burger .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ---------- drawer ---------- */
+    .drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: calc(var(--header-h) + 18px) clamp(20px, 6vw, 40px) 36px;
+      transform: translateX(100%);
+      transition: transform 0.33s ease;
+      overflow-y: auto;
+    }
+    body.menu-open .drawer { transform: translateX(0); }
+
+    .drawer nav { display: grid; gap: 2px; }
+    .dr-link {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 15px 0;
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: clamp(24px, 6.5vw, 34px);
+      letter-spacing: -0.01em;
+    }
+    .dr-link small { font-family: var(--body); font-size: 11.5px; font-weight: 700; letter-spacing: 0.18em; color: var(--acc); }
+    .drawer .btn { margin-top: 26px; width: 100%; }
+
+    /* ---------- buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 15px 28px;
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 14.5px;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.22s ease, color 0.22s ease, box-shadow 0.2s ease, transform 0.15s ease, border-color 0.22s ease;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn.filled { background: var(--acc); color: #fff; border: 1px solid var(--acc); box-shadow: 0 8px 20px rgba(79, 70, 229, 0.28); }
+    .btn.filled:hover, .btn.filled:focus-visible { background: var(--acc-dark); border-color: var(--acc-dark); }
+    .btn.outline { background: var(--bg2); color: var(--txt); border: 1px solid rgba(15, 22, 48, 0.22); }
+    .btn.outline:hover, .btn.outline:focus-visible { border-color: var(--acc); color: var(--acc); }
+
+    /* ---------- shared ---------- */
+    .sec { padding: clamp(60px, 11vw, 110px) 0; }
+    .sec + .sec { border-top: 1px solid var(--line); }
+
+    .sec-head {
+      max-width: 46rem;
+      margin-bottom: clamp(26px, 5vw, 44px);
+    }
+    .sec-head h2 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(26px, 7vw, 46px);
+      letter-spacing: -0.025em;
+      line-height: 1.08;
+      margin-top: 10px;
+    }
+    .sec-head p { margin-top: 10px; color: var(--muted); font-size: clamp(15px, 4.2vw, 16.5px); max-width: 38rem; }
+
+    .kick {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--acc);
+      background: var(--acc-soft);
+      border: 1px solid rgba(79, 70, 229, 0.25);
+      border-radius: 999px;
+      padding: 6px 14px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      background: var(--bg2);
+    }
+    .tag.filled { border-color: rgba(79, 70, 229, 0.35); color: var(--acc); background: var(--acc-soft); }
+
+    /* ---------- hero ---------- */
+    .hero { padding-top: clamp(42px, 9vw, 96px); }
+
+    .hero h1 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(36px, 11vw, 88px);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+      max-width: 14ch;
+      margin-top: 20px;
+    }
+    .hero h1 span { background: linear-gradient(120deg, var(--acc), var(--accent2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .hero .lede {
+      margin-top: 20px;
+      max-width: 36rem;
+      font-size: clamp(16px, 4.4vw, 18.5px);
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero-note {
+      margin-top: 18px;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .hero-media {
+      margin-top: clamp(36px, 8vw, 68px);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(15, 22, 48, 0.12);
+      background: var(--bg2);
+      box-shadow: 0 30px 70px rgba(15, 22, 48, 0.12);
+      aspect-ratio: 16 / 10;
+    }
+    .hero-media img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ---------- features ---------- */
+    .fx-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .fx-card { display: flex; flex-direction: column; gap: 6px; background: var(--bg2); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 22px; }
+    .fx-card .ic {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--acc-soft);
+      color: var(--acc);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .fx-card h3 { font-family: var(--sans); font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+    .fx-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ---------- how it works ---------- */
+    .hm-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .hm-item { border-top: 1px solid var(--line); padding: 22px 0 26px; }
+    .hm-item .n { font-family: var(--sans); font-weight: 800; font-size: 14px; color: var(--acc); letter-spacing: 0.08em; }
+    .hm-item h3 { font-family: var(--sans); font-weight: 700; font-size: 18px; margin-top: 8px; letter-spacing: -0.01em; }
+    .hm-item p { margin-top: 8px; font-size: 14px; color: var(--muted); max-width: 30rem; }
+
+    /* ---------- product band ---------- */
+    .pb {
+      background: var(--bg3);
+      border: 1px solid rgba(79, 70, 229, 0.18);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .pb-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+    .pb-media { min-height: 0; }
+    .pb-media img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 16 / 10; }
+    .pb-body { padding: clamp(24px, 6vw, 52px); }
+    .pb-body h3 { font-family: var(--sans); font-weight: 800; font-size: clamp(28px, 7.5vw, 44px); letter-spacing: -0.025em; line-height: 1.08; margin-top: 12px; }
+    .pb-body > p { margin-top: 14px; color: var(--muted); font-size: clamp(15px, 4.2vw, 16.5px); max-width: 38rem; }
+    .pb-list { list-style: none; margin-top: 18px; border-top: 1px solid var(--line); }
+    .pb-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14.5px;
+      color: var(--muted);
+    }
+    .pb-list li::before { content: "✓"; color: var(--acc); font-weight: 800; }
+    .pb-body .btn { margin-top: 20px; }
+
+    /* ---------- pricing ---------- */
+    .pc-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; align-items: stretch; }
+    .pc {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px 22px;
+    }
+    .pc.hot { border-color: rgba(79, 70, 229, 0.55); box-shadow: 0 18px 44px rgba(79, 70, 229, 0.12); position: relative; }
+    .pc .kick { align-self: flex-start; }
+    .pc h3 { font-family: var(--sans); font-weight: 800; font-size: 20px; margin-top: 14px; letter-spacing: -0.01em; }
+    .pc .pc-price { font-family: var(--sans); font-weight: 800; font-size: 34px; letter-spacing: -0.02em; margin-top: 8px; }
+    .pc .pc-price small { font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: 0.02em; }
+    .pc p { margin-top: 8px; font-size: 13.5px; color: var(--muted); }
+    .pc ul { list-style: none; margin-top: 18px; border-top: 1px solid var(--line); }
+    .pc li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .pc li::before { content: "✓"; color: var(--acc); font-size: 12px; font-weight: 800; }
+    .pc .btn { margin-top: auto; min-height: 48px; padding: 13px 20px; font-size: 14px; }
+    .pc-note { margin-top: 16px; font-size: 12.5px; color: var(--muted); }
+
+    /* ---------- faq ---------- */
+    .faq { max-width: 720px; border-top: 1px solid var(--line); }
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-q {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--txt);
+      padding: 16px 0;
+      min-height: 52px;
+    }
+    .faq-q .pm {
+      flex: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      color: var(--acc);
+      transition: transform 0.25s ease;
+    }
+    .faq-item.open .pm { transform: rotate(45deg); }
+    .faq-a {
+      display: none;
+      padding: 0 0 18px;
+      color: var(--muted);
+      font-size: 14.5px;
+      max-width: 40rem;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ---------- signup ---------- */
+    .sg-panel {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(22px, 6vw, 48px);
+      max-width: 880px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: clamp(24px, 5vw, 48px);
+    }
+    .sg-copy h2 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(28px, 7.5vw, 46px);
+      letter-spacing: -0.025em;
+      line-height: 1.06;
+    }
+    .sg-copy > p { margin-top: 12px; color: var(--muted); max-width: 32rem; }
+    .sg-list { list-style: none; margin-top: 18px; }
+    .sg-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .sg-list li::before { content: "✓"; color: var(--acc); font-weight: 800; }
+    .sg-form { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 22px; align-self: start; }
+    .field { display: grid; gap: 7px; margin-bottom: 14px; }
+    .field label { font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .field input {
+      width: 100%;
+      min-height: 52px;
+      padding: 12px 14px;
+      font-family: var(--body);
+      font-size: 15px;
+      color: var(--txt);
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    .field input:focus {
+      outline: none;
+      border-color: var(--acc);
+      box-shadow: 0 0 0 1px var(--acc);
+    }
+    .sg-form .btn { width: 100%; }
+    .sg-ok, .sg-in { transition: opacity 0.3s ease; }
+    .sg-ok { display: none; }
+    .sg-ok.on { display: block; text-align: center; padding: 30px 6px; }
+    .sg-ok .big { font-size: 34px; }
+    .sg-ok h3 { font-family: var(--sans); font-weight: 800; font-size: 26px; letter-spacing: -0.02em; margin-top: 12px; }
+    .sg-ok p { margin-top: 10px; color: var(--muted); font-size: 14.5px; }
+    .sg-ok .btn { margin-top: 22px; width: auto; }
+
+    /* ---------- final cta ---------- */
+    .final {
+      border-top: 1px solid var(--line);
+      padding: clamp(72px, 14vw, 150px) 0;
+      text-align: center;
+    }
+    .final h2 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(36px, 10vw, 84px);
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      max-width: 15ch;
+      margin-inline: auto;
+    }
+    .final h2 span { background: linear-gradient(120deg, var(--acc), var(--accent2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .final p { margin-top: 20px; color: var(--muted); }
+    .final .hero-actions { justify-content: center; }
+
+    /* ---------- footer ---------- */
+    footer { border-top: 1px solid var(--line); padding: 52px 0 36px; }
+    .ft-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; }
+    .ft-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+    .ft-col a { display: flex; align-items: center; padding: 7px 0; text-decoration: none; font-size: 14.5px; color: var(--txt); min-height: 44px; }
+    .ft-col a:hover { color: var(--acc); }
+    .ft-col p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .socials { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 4px; }
+    .socials a {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+    .socials a:hover { border-color: var(--acc); color: var(--acc); }
+    .ft-bottom {
+      margin-top: 38px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+    .ft-bottom a { color: var(--muted); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; padding: 4px 0; }
+    .ft-bottom a:hover { color: var(--acc); }
+
+    /* ---------- reveal ---------- */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ---------- tablet ---------- */
+    @media (min-width: 640px) {
+      .fx-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hm-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(22px, 4vw, 44px); }
+      .pc-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .ft-grid { grid-template-columns: 1.5fr 1fr 1fr 1.2fr; }
+    }
+
+    /* ---------- desktop ---------- */
+    @media (min-width: 1024px) {
+      .burger { display: none; }
+      .hd-nav { display: flex; align-items: center; gap: clamp(20px, 2.6vw, 34px); }
+      .hd-cta { display: inline-flex; }
+
+      .fx-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+      .pb-grid { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: stretch; }
+      .pb-media img { aspect-ratio: auto; height: 100%; }
+
+      .sg-panel { grid-template-columns: 1fr 1fr; align-items: start; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="hd">
+    <div class="wrap hd-in">
+      <a class="logo" href="#top"><span class="mark">K</span>KITE<small style="display:none;">.</small></a>
+      <nav class="hd-nav" aria-label="Main navigation">
+        <a href="#product">Product</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="hd-cta" href="#signup">Get Started</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <nav aria-label="Mobile navigation">
+      <a class="dr-link" href="#top"><small>00</small>Home</a>
+      <a class="dr-link" href="#product"><small>01</small>Product</a>
+      <a class="dr-link" href="#features"><small>02</small>Features</a>
+      <a class="dr-link" href="#pricing"><small>03</small>Pricing</a>
+      <a class="dr-link" href="#faq"><small>04</small>FAQ</a>
+      <a class="dr-link" href="#signup"><small>05</small>Sign up</a>
+    </nav>
+    <a class="btn filled" href="#signup">Get Started</a>
+  </div>
+
+  <main id="main">
+    <div class="wrap" id="top">
+      <section class="hero">
+        <span class="kick reveal">Modern banking · Concept product</span>
+        <h1 class="reveal">Money that <span>stays in flow.</span></h1>
+        <p class="lede reveal">KITE is a fictional banking concept for founders and freelancers — invoices, expenses and runway in one quiet dashboard.</p>
+        <div class="hero-actions reveal">
+          <a class="btn filled" href="#signup">Get Started Free</a>
+          <a class="btn outline" href="#product">See the Product</a>
+        </div>
+        <p class="hero-note reveal">Concept landing page — no real accounts, cards or numbers.</p>
+        <div class="hero-media reveal">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&h=1000&q=75" alt="Financial analytics dashboard with charts on screen" width="1600" height="1000" fetchpriority="high" decoding="async" />
+        </div>
+      </section>
+
+      <section class="sec" id="product">
+        <div class="sec-head reveal">
+          <span class="kick">01 / Product</span>
+          <h2>One dashboard for the whole money side.</h2>
+          <p>Invoices you can send in two taps, expenses that categorize themselves, and a runway line you can finally trust.</p>
+        </div>
+
+        <div class="pb reveal">
+          <div class="pb-grid">
+            <div class="pb-media">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&h=880&q=75" alt="Laptop showing analytics and financial charts" loading="lazy" decoding="async" width="1400" height="880" />
+            </div>
+            <div class="pb-body">
+              <span class="tag filled">Concept features</span>
+              <h3>Built for people who bill by the hour.</h3>
+              <p>Connect your bank in minutes and watch transactions turn into clean categories, project totals and a runway you can act on.</p>
+              <ul class="pb-list">
+                <li>Auto-categorized transactions</li>
+                <li>Invoices from project or client</li>
+                <li>Runway &amp; tax-fee estimates</li>
+                <li>Multi-currency for remote work</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="features">
+        <div class="sec-head reveal">
+          <span class="kick">02 / Features</span>
+          <h2>Everything, without the setup.</h2>
+          <p>Fictional capabilities shown as product content for a concept landing page.</p>
+        </div>
+
+        <div class="fx-grid">
+          <article class="fx-card reveal">
+            <span class="ic">☰</span>
+            <h3>Smart Categories</h3>
+            <p>Bank feeds learn your patterns and tag expenses on their own — marketing, tools, coffee, done.</p>
+          </article>
+          <article class="fx-card reveal">
+            <span class="ic">✉</span>
+            <h3>Two-tap Invoices</h3>
+            <p>Turn a client or project into an invoice, send it, and watch the payment land in the same view.</p>
+          </article>
+          <article class="fx-card reveal">
+            <span class="ic">◔</span>
+            <h3>Real Runway</h3>
+            <p>A conservative, always-current look at how long your money lasts — with polite nudges, not drama.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="sec-head reveal">
+          <span class="kick">03 / How it works</span>
+          <h2>Three steps to a clearer month.</h2>
+        </div>
+
+        <div class="hm-grid">
+          <div class="hm-item reveal">
+            <span class="n">01</span>
+            <h3>Connect a bank</h3>
+            <p>Link your business account with bank-grade security. Read-only until you enable payments.</p>
+          </div>
+          <div class="hm-item reveal">
+            <span class="n">02</span>
+            <h3>Watch it categorize</h3>
+            <p>Transactions sort themselves. Fix a few and KITE learns how you spend.</p>
+          </div>
+          <div class="hm-item reveal">
+            <span class="n">03</span>
+            <h3>Invoice and relax</h3>
+            <p>Send invoices, track payments and check runway anytime. That's the whole product.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="pricing">
+        <div class="sec-head reveal">
+          <span class="kick">04 / Pricing</span>
+          <h2>Simple, honest plans.</h2>
+          <p>Concept pricing for demonstration. There is no real billing — the product is fictional.</p>
+        </div>
+
+        <div class="pc-grid">
+          <article class="pc reveal">
+            <span class="kick">Starter</span>
+            <h3>For the first year</h3>
+            <span class="pc-price">₹0 <small>/ mo · concept</small></span>
+            <p>Get organized without paying yet.</p>
+            <ul>
+              <li>1 bank connection</li>
+              <li>50 categorized transactions / mo</li>
+              <li>2 invoices / mo</li>
+              <li>Standard support</li>
+            </ul>
+            <a class="btn outline" href="#signup">Get Started</a>
+          </article>
+          <article class="pc hot reveal">
+            <span class="tag filled">Most popular</span>
+            <span class="kick">Pro</span>
+            <h3>For working founders</h3>
+            <span class="pc-price">₹499 <small>/ mo · concept</small></span>
+            <p>Unlimited everything, forensic clarity.</p>
+            <ul>
+              <li>Unlimited bank connections</li>
+              <li>Unlimited transactions</li>
+              <li>Unlimited invoices &amp; estimates</li>
+              <li>Runway &amp; tax-fee reports</li>
+              <li>Priority support</li>
+            </ul>
+            <a class="btn filled" href="#signup">Start Pro</a>
+          </article>
+          <article class="pc reveal">
+            <span class="kick">Scale</span>
+            <h3>For teams</h3>
+            <span class="pc-price">₹1,299 <small>/ mo · concept</small></span>
+            <p>Shared books, seats and controls.</p>
+            <ul>
+              <li>Everything in Pro</li>
+              <li>Up to 10 team seats</li>
+              <li>Roles &amp; approvals</li>
+              <li>Accounting export</li>
+              <li>Dedicated support</li>
+            </ul>
+            <a class="btn outline" href="#signup">Add Teams</a>
+          </article>
+        </div>
+        <p class="pc-note reveal">Fictional concept pricing shown for portfolio purposes only.</p>
+      </section>
+
+      <section class="sec" id="faq">
+        <div class="sec-head reveal">
+          <span class="kick">05 / FAQ</span>
+          <h2>Questions, answered.</h2>
+        </div>
+
+        <div class="faq reveal">
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">Is KITE a real product?<span class="pm">+</span></button>
+            <div class="faq-a">No. KITE is a fictional concept product built for a web-design portfolio to demonstrate a mobile-first product landing page.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">Is my bank data safe?<span class="pm">+</span></button>
+            <div class="faq-a">In this concept, bank connections are described as read-only, encrypted and revocable — standard framing for a finance landing page. No real data is involved.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">Can I cancel anytime?<span class="pm">+</span></button>
+            <div class="faq-a">Concept plans are billed monthly with no lock-in — consistent with how a product page would present its terms.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">Which countries does it support?<span class="pm">+</span></button>
+            <div class="faq-a">For the concept, multi-currency invoicing is described as available for remote workers. Actual availability is not part of this demo.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="signup">
+        <div class="sec-head reveal">
+          <span class="kick">06 / Sign up</span>
+          <h2>Start your clearer month.</h2>
+        </div>
+
+        <div class="sg-panel reveal">
+          <div class="sg-copy">
+            <h2>Two minutes to <span style="color:var(--acc);">a clearer money month.</span></h2>
+            <p>Join the concept waitlist below — or just try the demo form to see it work.</p>
+            <ul class="sg-list">
+              <li>Free to start, no card required</li>
+              <li>Cancel anytime</li>
+              <li>Concept signup — no real emails collected</li>
+            </ul>
+          </div>
+
+          <div class="sg-form">
+            <div class="sg-in" id="sgFormWrap">
+              <form id="signupForm" novalidate>
+                <div class="field">
+                  <label for="sg-name">Name</label>
+                  <input id="sg-name" name="name" type="text" placeholder="Your name" required />
+                </div>
+                <div class="field">
+                  <label for="sg-email">Work email</label>
+                  <input id="sg-email" name="email" type="email" placeholder="you@company.com" required />
+                </div>
+                <button class="btn filled" type="submit">Get Started Free</button>
+              </form>
+            </div>
+            <div class="sg-ok" id="signupOk">
+              <div class="big">🎉</div>
+              <h3>You're in line.</h3>
+              <p>This demo form was submitted successfully — no real account was created.</p>
+              <button class="btn outline" type="button" id="sgAgain">Submit another email</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="final">
+        <h2 class="reveal">Your money, <span>in flow.</span></h2>
+        <p class="reveal">A fictional product page — give the demo form a try on the way down.</p>
+        <div class="hero-actions reveal">
+          <a class="btn filled" href="#signup">Get Started Free</a>
+          <a class="btn outline" href="#features">Explore Features</a>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div class="wrap">
+        <div class="ft-grid">
+          <div>
+            <a class="logo" href="#top"><span class="mark">K</span>KITE</a>
+            <p style="margin-top: 12px; max-width: 22rem;">A fictional modern-banking concept for founders and freelancers. Product landing page built for a portfolio.</p>
+          </div>
+          <nav class="ft-col" aria-label="Navigate">
+            <h4>Product</h4>
+            <a href="#product">Product</a>
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+          <div class="ft-col">
+            <h4>Note</h4>
+            <p>KITE is a concept. All features, pricing and claims are fictional portfolio content.</p>
+          </div>
+          <div class="ft-col">
+            <h4>Company</h4>
+            <a href="#signup">Get started</a>
+            <a href="mailto:hello@kite.example">hello@kite.example</a>
+            <div class="socials">
+              <a href="#" aria-label="X placeholder">X</a>
+              <a href="#" aria-label="LinkedIn placeholder">IN</a>
+              <a href="#" aria-label="GitHub placeholder">GH</a>
+            </div>
+          </div>
+        </div>
+        <div class="ft-bottom">
+          <span>© 2026 KITE · Concept project — no real banking services are offered.</span>
+          <span><a href="index.html">← Back to portfolio</a></span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      var burger = document.getElementById('burger');
+      var drawer = document.getElementById('drawer');
+
+      function setState(open) {
+        document.body.classList.toggle('menu-open', open);
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      }
+
+      burger.addEventListener('click', function () {
+        setState(!document.body.classList.contains('menu-open'));
+      });
+
+      drawer.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setState(false); });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setState(false);
+      });
+
+      var revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              en.target.classList.add('in');
+              io.unobserve(en.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealEls.forEach(function (el) { io.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      document.querySelectorAll('.faq-q').forEach(function (q) {
+        q.addEventListener('click', function () {
+          var item = q.closest('.faq-item');
+          var open = item.classList.toggle('open');
+          q.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+
+      var form = document.getElementById('signupForm');
+      var okWrap = document.getElementById('signupOk');
+      var again = document.getElementById('sgAgain');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        document.getElementById('sgFormWrap').style.display = 'none';
+        okWrap.classList.add('on');
+      });
+      again.addEventListener('click', function () {
+        form.reset();
+        okWrap.classList.remove('on');
+        document.getElementById('sgFormWrap').style.display = '';
+      });
+    })();
+  </script>
+</body>
+</html>

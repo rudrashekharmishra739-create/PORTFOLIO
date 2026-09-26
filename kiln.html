@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4ede2" />
+  <meta name="description" content="KILN — an artisan coffee roastery concept. Fictional concept project by a freelance web designer." />
+  <title>KILN — Coffee Roasters</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4ede2;
+      --bg2: #ede3d2;
+      --bg3: #e3d5bf;
+      --line: rgba(63, 43, 30, 0.16);
+      --txt: #32241a;
+      --muted: #7c6a57;
+      --acc: #b5692f;
+      --acc-dark: #99551f;
+      --acc-soft: rgba(181, 105, 47, 0.12);
+      --header-h: 64px;
+      --radius: 16px;
+      --serif: "Fraunces", Georgia, "Times New Roman", serif;
+      --sans: "Work Sans", "Inter", -apple-system, "Segoe UI", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--txt);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: clip;
+      min-height: 100vh;
+      -webkit-tap-highlight-color: rgba(181, 105, 47, 0.2);
+    }
+
+    body.menu-open { overflow: hidden; }
+
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    :focus-visible {
+      outline: 2px solid var(--acc);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    ::selection { background: rgba(181, 105, 47, 0.22); }
+
+    .wrap {
+      width: 100%;
+      max-width: 1200px;
+      margin-inline: auto;
+      padding-inline: clamp(18px, 5vw, 40px);
+    }
+
+    section[id] { scroll-margin-top: calc(var(--header-h) + 10px); }
+
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: -999px;
+      background: var(--acc);
+      color: #fff;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      z-index: 200;
+      text-decoration: none;
+    }
+    .skip:focus { top: 12px; }
+
+    /* ---------- header ---------- */
+    .hd {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(244, 237, 226, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hd-in {
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(24px, 6.2vw, 30px);
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+    .logo i { color: var(--acc); font-style: normal; }
+    .logo small { display: block; font-family: var(--sans); font-weight: 600; font-size: 9.5px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--muted); margin-left: 12px; }
+
+    .hd-nav { display: none; }
+    .hd-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .hd-nav a:hover { color: var(--txt); }
+
+    .hd-cta {
+      display: none;
+      min-height: 44px;
+      align-items: center;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: var(--acc);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13.5px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.22s ease;
+    }
+    .hd-cta:hover, .hd-cta:focus-visible { background: var(--acc-dark); }
+
+    .burger {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 46px;
+      height: 46px;
+      margin-right: -8px;
+      padding: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .burger .bar {
+      width: 100%;
+      height: 2px;
+      background: var(--txt);
+      border-radius: 2px;
+      transition: transform 0.28s ease, opacity 0.2s ease;
+    }
+    body.menu-open .burger .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    body.menu-open .burger .bar:nth-child(2) { opacity: 0; }
+    body.menu-open .burger .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ---------- drawer ---------- */
+    .drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: calc(var(--header-h) + 18px) clamp(20px, 6vw, 40px) 36px;
+      transform: translateX(100%);
+      transition: transform 0.33s ease;
+      overflow-y: auto;
+    }
+    body.menu-open .drawer { transform: translateX(0); }
+
+    .drawer nav { display: grid; gap: 2px; }
+    .dr-link {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 15px 0;
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(26px, 7vw, 36px);
+      letter-spacing: -0.01em;
+    }
+    .dr-link small { font-family: var(--sans); font-size: 11.5px; font-weight: 700; letter-spacing: 0.18em; color: var(--acc); }
+    .drawer .btn { margin-top: 26px; width: 100%; }
+
+    /* ---------- buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 15px 28px;
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 14.5px;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.22s ease, color 0.22s ease, transform 0.15s ease, border-color 0.22s ease;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn.filled { background: var(--acc); color: #fff; border: 1px solid var(--acc); }
+    .btn.filled:hover, .btn.filled:focus-visible { background: var(--acc-dark); border-color: var(--acc-dark); }
+    .btn.outline { background: transparent; color: var(--txt); border: 1px solid rgba(50, 36, 26, 0.35); }
+    .btn.outline:hover, .btn.outline:focus-visible { border-color: var(--acc); color: var(--acc); }
+
+    /* ---------- shared ---------- */
+    .sec { padding: clamp(60px, 11vw, 110px) 0; }
+    .sec + .sec { border-top: 1px solid var(--line); }
+
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: clamp(26px, 5vw, 44px);
+    }
+    .sec-head .no {
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: var(--acc);
+    }
+    .sec-head h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(28px, 7.5vw, 52px);
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+    }
+
+    .kick {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .kick b { color: var(--acc); font-weight: 700; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .tag.filled { border-color: var(--acc); color: var(--acc); background: var(--acc-soft); }
+
+    /* ---------- hero ---------- */
+    .hero { padding-top: clamp(42px, 9vw, 96px); }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(38px, 11vw, 92px);
+      line-height: 1.02;
+      letter-spacing: -0.015em;
+      max-width: 12ch;
+      margin-top: 18px;
+    }
+    .hero h1 em { font-style: italic; color: var(--acc); }
+
+    .hero .lede {
+      margin-top: 22px;
+      max-width: 34rem;
+      font-size: clamp(16px, 4.4vw, 18.5px);
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .trust {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px 4px;
+      margin-top: 30px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .trust i {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--acc);
+      font-style: normal;
+      margin: 0 7px;
+    }
+
+    .hero-media {
+      margin-top: clamp(36px, 8vw, 68px);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg2);
+      aspect-ratio: 16 / 10;
+    }
+    .hero-media img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ---------- story ---------- */
+    .st-grid2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: clamp(26px, 6vw, 64px);
+      align-items: center;
+    }
+    .st-copy p { margin-top: 16px; color: var(--muted); font-size: clamp(15px, 4.2vw, 16.5px); max-width: 38rem; }
+    .st-copy p b { color: var(--txt); font-weight: 600; }
+    .st-media { border-radius: var(--radius); overflow: hidden; background: var(--bg2); }
+    .st-media img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+
+    /* ---------- roast ---------- */
+    .ro-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .ro-item { border-top: 1px solid var(--line); padding: 22px 0 26px; }
+    .ro-item .n { font-family: var(--serif); font-style: italic; font-size: 26px; color: var(--acc); }
+    .ro-item h3 { font-weight: 700; font-size: 19px; margin-top: 8px; }
+    .ro-item p { margin-top: 8px; font-size: 14px; color: var(--muted); max-width: 30rem; }
+
+    /* ---------- coffees ---------- */
+    .co-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .co-card { display: flex; flex-direction: column; background: var(--bg2); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+    .co-card .roast { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--acc); }
+    .co-card h3 { font-family: var(--serif); font-weight: 600; font-size: 25px; margin-top: 6px; }
+    .co-card .origin { margin-top: 4px; font-size: 13.5px; color: var(--muted); }
+    .co-card .notes { list-style: none; margin-top: 16px; border-top: 1px solid var(--line); }
+    .co-card .notes li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .co-card .notes li::before { content: "◆"; color: var(--acc); font-size: 8px; }
+    .co-card .pr { margin-top: 14px; font-family: var(--serif); font-size: 23px; font-weight: 600; color: var(--txt); }
+    .co-card .pr small { font-family: var(--sans); font-size: 11.5px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-left: 8px; }
+    .co-card .btn { margin-top: auto; min-height: 48px; padding: 13px 20px; font-size: 14px; }
+    .co-note { margin-top: 16px; font-size: 12.5px; color: var(--muted); }
+
+    /* ---------- cafe ---------- */
+    .cafe {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .cafe-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+    .cafe-media { background: var(--bg3); min-height: 0; }
+    .cafe-media img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 16 / 10; }
+    .cafe-body { padding: clamp(24px, 6vw, 52px); }
+    .cafe-body h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(30px, 8.5vw, 54px);
+      line-height: 1.02;
+      margin-top: 12px;
+    }
+    .cafe-body > p { margin-top: 14px; color: var(--muted); font-size: clamp(15px, 4.2vw, 16.5px); max-width: 40rem; }
+    .cafe-hours { list-style: none; margin-top: 18px; border-top: 1px solid var(--line); }
+    .cafe-hours li {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14.5px;
+      color: var(--muted);
+    }
+    .cafe-hours li b { color: var(--txt); font-weight: 600; }
+
+    /* ---------- newsletter ---------- */
+    .nl-panel {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(22px, 6vw, 48px);
+      max-width: 720px;
+    }
+    .nl-panel h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(30px, 8.5vw, 50px);
+      line-height: 1.02;
+    }
+    .nl-panel > p { margin-top: 12px; color: var(--muted); max-width: 34rem; }
+    .nl-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .field { display: grid; gap: 7px; }
+    .field label { font-size: 11.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .field input {
+      width: 100%;
+      min-height: 52px;
+      padding: 12px 14px;
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--txt);
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    .field input:focus {
+      outline: none;
+      border-color: var(--acc);
+      box-shadow: 0 0 0 1px var(--acc);
+    }
+    .nl-panel .btn { margin-top: 8px; width: 100%; }
+    .nl-ok, .nl-form { transition: opacity 0.3s ease; }
+    .nl-ok { display: none; }
+    .nl-ok.on { display: block; }
+    .nl-ok h3 { font-family: var(--serif); font-weight: 600; font-size: 30px; margin-top: 14px; }
+    .nl-ok p { margin-top: 10px; color: var(--muted); }
+    .nl-ok .btn { margin-top: 26px; width: auto; }
+
+    /* ---------- visit ---------- */
+    .vgrid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+    .ci-list { border-top: 1px solid var(--line); }
+    .ci-list a, .ci-list div {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14.5px;
+    }
+    .ci-list a { text-decoration: none; }
+    .ci-list .k { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); flex: none; padding-top: 3px; }
+    .ci-list .v { text-align: right; font-weight: 500; }
+    .ci-list a:hover .v { color: var(--acc); }
+
+    .map-ph {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(var(--line), var(--line)) center / 1px 100% no-repeat,
+        linear-gradient(var(--line), var(--line)) center / 100% 1px no-repeat,
+        var(--bg2);
+      min-height: 240px;
+      display: grid;
+      place-items: center;
+    }
+    .map-ph span {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .vg-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .vg-actions .btn { min-height: 48px; padding: 13px 20px; font-size: 14px; }
+
+    /* ---------- final cta ---------- */
+    .final {
+      border-top: 1px solid var(--line);
+      padding: clamp(72px, 14vw, 150px) 0;
+      text-align: center;
+    }
+    .final h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(36px, 10vw, 84px);
+      line-height: 0.98;
+      max-width: 14ch;
+      margin-inline: auto;
+    }
+    .final h2 em { font-style: italic; color: var(--acc); }
+    .final p { margin-top: 20px; color: var(--muted); }
+    .final .hero-actions { justify-content: center; }
+
+    /* ---------- footer ---------- */
+    footer { border-top: 1px solid var(--line); padding: 52px 0 36px; }
+    .ft-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; }
+    .ft-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+    .ft-col a { display: flex; align-items: center; padding: 7px 0; text-decoration: none; font-size: 14.5px; color: var(--txt); min-height: 44px; }
+    .ft-col a:hover { color: var(--acc); }
+    .ft-col p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .socials { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 4px; }
+    .socials a {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .socials a:hover { border-color: var(--acc); color: var(--acc); }
+    .ft-bottom {
+      margin-top: 38px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+    .ft-bottom a { color: var(--muted); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; padding: 4px 0; }
+    .ft-bottom a:hover { color: var(--acc); }
+
+    /* ---------- reveal ---------- */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ---------- narrow (<=414px) ---------- */
+    @media (max-width: 414px) {
+      .logo small { display: none; }
+    }
+
+    /* ---------- tablet ---------- */
+    @media (min-width: 640px) {
+      .ro-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(24px, 5vw, 60px); }
+      .co-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .nl-grid { grid-template-columns: 1.4fr 1fr; align-items: end; }
+      .ft-grid { grid-template-columns: 1.5fr 1fr 1fr 1.2fr; }
+    }
+
+    /* ---------- desktop ---------- */
+    @media (min-width: 1024px) {
+      .burger { display: none; }
+      .hd-nav { display: flex; align-items: center; gap: clamp(20px, 2.6vw, 36px); }
+      .hd-cta { display: inline-flex; }
+
+      .st-grid2 { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+
+      .ro-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .ro-item { padding-right: clamp(18px, 3vw, 36px); }
+      .ro-item + .ro-item { border-left: 1px solid var(--line); padding-left: clamp(18px, 3vw, 36px); }
+
+      .cafe-grid { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: stretch; }
+      .cafe-media img { aspect-ratio: auto; height: 100%; }
+
+      .nl-panel .btn { width: auto; min-width: 240px; }
+
+      .vgrid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="hd">
+    <div class="wrap hd-in">
+      <a class="logo" href="#top">KILN<i>.</i><small>Small-batch Coffee Roasters</small></a>
+      <nav class="hd-nav" aria-label="Main navigation">
+        <a href="#coffees">Coffees</a>
+        <a href="#roast">Our Roast</a>
+        <a href="#story">Story</a>
+        <a href="#cafe">Cafe</a>
+        <a href="#subscribe">Subscribe</a>
+      </nav>
+      <a class="hd-cta" href="#subscribe">Join the List</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <nav aria-label="Mobile navigation">
+      <a class="dr-link" href="#top"><small>00</small>Home</a>
+      <a class="dr-link" href="#coffees"><small>01</small>Coffees</a>
+      <a class="dr-link" href="#roast"><small>02</small>Our Roast</a>
+      <a class="dr-link" href="#story"><small>03</small>Story</a>
+      <a class="dr-link" href="#cafe"><small>04</small>Cafe</a>
+      <a class="dr-link" href="#subscribe"><small>05</small>Subscribe</a>
+    </nav>
+    <a class="btn filled" href="#subscribe">Join the List</a>
+  </div>
+
+  <main id="main">
+    <div class="wrap" id="top">
+      <section class="hero">
+        <p class="kick reveal">Small-batch roasting <b>·</b> Bengaluru</p>
+        <h1 class="reveal">Roasted slow. <em>Right now.</em></h1>
+        <p class="lede reveal">We buy green coffee in small lots, roast it in a 12-kilo drum and sell it within a week of the drop.</p>
+        <div class="hero-actions reveal">
+          <a class="btn filled" href="#coffees">Shop Coffees</a>
+          <a class="btn outline" href="#roast">How We Roast</a>
+        </div>
+        <div class="trust reveal">
+          <span>12 kg drum</span><i></i><span>Roasted to order</span><i></i><span>Concept roastery</span>
+        </div>
+        <div class="hero-media reveal">
+          <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1600&h=1000&q=75" alt="Pour-over coffee brewing in warm light" width="1600" height="1000" fetchpriority="high" decoding="async" />
+        </div>
+      </section>
+
+      <section class="sec" id="coffees">
+        <div class="sec-head reveal">
+          <span class="no">01 / 06</span>
+          <h2>The Coffees</h2>
+        </div>
+
+        <div class="co-grid">
+          <article class="co-card reveal">
+            <span class="roast">Light · Filter</span>
+            <h3>Highland</h3>
+            <p class="origin">Kurikuppa, Chikmagalur · washed</p>
+            <ul class="notes">
+              <li>Citrus &amp; white tea</li>
+              <li>Clean, sweet finish</li>
+              <li>Great for pour-over</li>
+            </ul>
+            <span class="pr">₹420 <small>250 g · concept</small></span>
+            <a class="btn outline" href="#subscribe">Get a bag</a>
+          </article>
+          <article class="co-card reveal">
+            <span class="roast">Medium · All round</span>
+            <h3>The Daily</h3>
+            <p class="origin">Coorg estate blend · honey</p>
+            <ul class="notes">
+              <li>Cocoa &amp; brown sugar</li>
+              <li>Works in any brewer</li>
+              <li>Our most-recommended</li>
+            </ul>
+            <span class="pr">₹395 <small>250 g · concept</small></span>
+            <a class="btn outline" href="#subscribe">Get a bag</a>
+          </article>
+          <article class="co-card reveal">
+            <span class="roast">Dark · Espresso</span>
+            <h3>Kiln House</h3>
+            <p class="origin">Baba Budan, Karnataka · washed</p>
+            <ul class="notes">
+              <li>Dark chocolate &amp; smoke</li>
+              <li>Syrupy body for milk</li>
+              <li>Built for espresso</li>
+            </ul>
+            <span class="pr">₹440 <small>250 g · concept</small></span>
+            <a class="btn outline" href="#subscribe">Get a bag</a>
+          </article>
+        </div>
+        <p class="co-note reveal">Fictional concept coffees with sample pricing for portfolio demonstration.</p>
+      </section>
+
+      <section class="sec" id="roast">
+        <div class="sec-head reveal">
+          <span class="no">02 / 06</span>
+          <h2>How We Roast</h2>
+        </div>
+
+        <div class="ro-grid">
+          <div class="ro-item reveal">
+            <span class="n">01</span>
+            <h3>Buy green</h3>
+            <p>Small lots bought direct from growers we can name, cupped before they leave the farm.</p>
+          </div>
+          <div class="ro-item reveal">
+            <span class="n">02</span>
+            <h3>Roast gently</h3>
+            <p>A slow drum, careful heat and constant cupping until the coffee tastes like itself.</p>
+          </div>
+          <div class="ro-item reveal">
+            <span class="n">03</span>
+            <h3>Rest &amp; release</h3>
+            <p>Beans rest for three days, then hit the shelf with a roast date you can read.</p>
+          </div>
+          <div class="ro-item reveal">
+            <span class="n">04</span>
+            <h3>Fresh only</h3>
+            <p>If a bag sits past two weeks, we pull it and give it to the cafe's batch brew.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="story">
+        <div class="sec-head reveal">
+          <span class="no">03 / 06</span>
+          <h2>The Story</h2>
+        </div>
+
+        <div class="st-grid2">
+          <div class="st-copy reveal">
+            <p><b>KILN</b> is a fictional coffee roastery concept created for a web-design portfolio. It imagines a two-person roastery operating out of a small warehouse in Indiranagar.</p>
+            <p>No blends for the sake of it, no names that promise more than the cup — just green coffee treated gently and sent out fast while it still tastes alive.</p>
+            <p>The cafe counter sits beside the drum, so the roast of the week always has a brew bar next to it.</p>
+          </div>
+          <div class="st-media reveal">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1100&h=1375&q=70" alt="Barista pouring coffee before serving" loading="lazy" decoding="async" width="1100" height="1375" />
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="cafe">
+        <div class="sec-head reveal">
+          <span class="no">04 / 06</span>
+          <h2>The Cafe</h2>
+        </div>
+
+        <div class="cafe reveal">
+          <div class="cafe-grid">
+            <div class="cafe-media">
+              <img src="https://images.unsplash.com/photo-1447078806655-40579c2520d6?auto=format&fit=crop&w=1400&h=880&q=70" alt="Cozy roastery cafe with counter seating" loading="lazy" decoding="async" width="1400" height="880" />
+            </div>
+            <div class="cafe-body">
+              <span class="tag filled">Roastery cafe · concept</span>
+              <h3>Brewed <em>next to the drum.</em></h3>
+              <p>Counter, batch brew and espresso pulled from the roast currently on the shelf. No fuss, no foam art exams — just good coffee and the people who made it.</p>
+              <ul class="cafe-hours">
+                <li><span>Weekdays</span><b>7:00 AM – 5:00 PM</b></li>
+                <li><span>Weekends</span><b>8:00 AM – 4:00 PM</b></li>
+                <li><span>Brew bar</span><b>Roast of the week</b></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="subscribe">
+        <div class="sec-head reveal">
+          <span class="no">05 / 06</span>
+          <h2>Subscribe</h2>
+        </div>
+
+        <div class="nl-panel reveal">
+          <div class="nl-form" id="nlFormWrap">
+            <h2>The <em>Kiln List.</em></h2>
+            <p>A short note when a new lot lands, plus early dibs on limited roasts. No spam, unsubscribe anytime.</p>
+            <form class="nl-grid" id="newsForm" novalidate>
+              <div class="field">
+                <label for="nl-name">Name</label>
+                <input id="nl-name" name="name" type="text" placeholder="Your name" required />
+              </div>
+              <div class="field">
+                <label for="nl-email">Email</label>
+                <input id="nl-email" name="email" type="email" placeholder="you@example.com" required />
+              </div>
+              <div class="field" style="grid-column: 1 / -1;">
+                <button class="btn filled" type="submit">Join the List</button>
+              </div>
+            </form>
+          </div>
+          <div class="nl-ok" id="newsOk">
+            <span class="tag filled">You're on the list</span>
+            <h3>Welcome to <em>Kiln.</em></h3>
+            <p>This is a demo form for the concept site — no real emails were collected.</p>
+            <button class="btn outline" type="button" id="nlAgain">Join with another email</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="visit">
+        <div class="sec-head reveal">
+          <span class="no">06 / 06</span>
+          <h2>Visit</h2>
+        </div>
+
+        <div class="vgrid">
+          <div class="ci-list reveal">
+            <div>
+              <span class="k">Address</span>
+              <span class="v">9, 12th Main Road,<br />Indiranagar, Bengaluru 560038<br /><em>Concept address</em></span>
+            </div>
+            <div>
+              <span class="k">Hours</span>
+              <span class="v">Mon – Fri · 7:00 AM – 5:00 PM<br />Sat – Sun · 8:00 AM – 4:00 PM</span>
+            </div>
+            <a href="mailto:hello@kiln.example">
+              <span class="k">Email</span>
+              <span class="v">hello@kiln.example</span>
+            </a>
+          </div>
+
+          <div class="reveal">
+            <div class="map-ph" role="img" aria-label="Map placeholder showing the roastery's location">
+              <span>Map placeholder</span>
+            </div>
+            <div class="vg-actions">
+              <a class="btn filled" href="https://www.google.com/maps/search/?api=1&query=Indiranagar+Bengaluru" target="_blank" rel="noopener">Get Directions</a>
+              <a class="btn outline" href="#coffees">Shop Coffees</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="final">
+        <h2 class="reveal">Fresh coffee, <em>always close.</em></h2>
+        <p class="reveal">Get the roast happening this week on your doorstep.</p>
+        <div class="hero-actions reveal">
+          <a class="btn filled" href="#subscribe">Subscribe</a>
+          <a class="btn outline" href="#coffees">Shop Coffees</a>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div class="wrap">
+        <div class="ft-grid">
+          <div>
+            <a class="logo" href="#top">KILN<i>.</i></a>
+            <p style="margin-top: 12px; max-width: 22rem;">An artisan coffee roastery concept — roasted slow, sold fresh, brewed loud. Concept site for a portfolio.</p>
+          </div>
+          <nav class="ft-col" aria-label="Navigate">
+            <h4>Navigate</h4>
+            <a href="#coffees">Coffees</a>
+            <a href="#roast">Our Roast</a>
+            <a href="#story">Story</a>
+            <a href="#cafe">Cafe</a>
+            <a href="#subscribe">Subscribe</a>
+          </nav>
+          <div class="ft-col">
+            <h4>Note</h4>
+            <p>All coffees, origins and prices shown here are fictional concept content for portfolio demonstration.</p>
+          </div>
+          <div class="ft-col">
+            <h4>Connect</h4>
+            <a href="#subscribe">Join the list</a>
+            <a href="mailto:hello@kiln.example">hello@kiln.example</a>
+            <div class="socials">
+              <a href="#" aria-label="Instagram placeholder">IG</a>
+              <a href="#" aria-label="YouTube placeholder">YT</a>
+              <a href="#" aria-label="Behance placeholder">BE</a>
+            </div>
+          </div>
+        </div>
+        <div class="ft-bottom">
+          <span>© 2026 KILN · Concept project — all coffees, origins and prices are fictional.</span>
+          <span><a href="index.html">← Back to portfolio</a></span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      var burger = document.getElementById('burger');
+      var drawer = document.getElementById('drawer');
+
+      function setState(open) {
+        document.body.classList.toggle('menu-open', open);
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      }
+
+      burger.addEventListener('click', function () {
+        setState(!document.body.classList.contains('menu-open'));
+      });
+
+      drawer.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setState(false); });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setState(false);
+      });
+
+      var revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              en.target.classList.add('in');
+              io.unobserve(en.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealEls.forEach(function (el) { io.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      var form = document.getElementById('newsForm');
+      var okWrap = document.getElementById('newsOk');
+      var again = document.getElementById('nlAgain');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        document.getElementById('nlFormWrap').style.display = 'none';
+        okWrap.classList.add('on');
+      });
+      again.addEventListener('click', function () {
+        form.reset();
+        okWrap.classList.remove('on');
+        document.getElementById('nlFormWrap').style.display = '';
+      });
+    })();
+  </script>
+</body>
+</html>

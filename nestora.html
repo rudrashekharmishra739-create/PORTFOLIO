@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fbfaf7" />
+  <meta name="description" content="NESTORA — a modern real estate agency. Explore thoughtfully selected homes, apartments and villas across the city." />
+  <title>NESTORA — Modern Real Estate Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fbfaf7;
+      --surface: #ffffff;
+      --surface-2: #f4f2ed;
+      --line: #e6e3dc;
+      --ink: #1d1f24;
+      --muted: #666b74;
+      --accent: #1c6b50;
+      --accent-2: #14503c;
+      --accent-soft: rgba(28, 107, 80, 0.09);
+      --shadow-sm: 0 1px 2px rgba(20, 22, 26, 0.05);
+      --shadow-md: 0 14px 38px rgba(20, 22, 26, 0.09);
+      --radius: 18px;
+      --header-h: 64px;
+      --font-display: "Fraunces", Georgia, serif;
+      --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: auto; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 15.5px;
+      line-height: 1.6;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: clip;
+    }
+
+    body.menu-open { overflow: hidden; }
+
+    img { display: block; max-width: 100%; height: auto; }
+
+    a { color: inherit; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+    .skip-link {
+      position: absolute;
+      left: 12px;
+      top: -60px;
+      z-index: 100;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 8px;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus { top: 12px; }
+
+    .wrap { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: clamp(18px, 5vw, 32px); }
+
+    section { position: relative; padding-block: clamp(64px, 11vw, 116px); scroll-margin-top: var(--header-h); }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .kicker::before { content: ""; width: 24px; height: 1.5px; background: var(--accent); }
+
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.08; letter-spacing: -0.5px; }
+
+    h1 { font-size: clamp(40px, 11vw, 86px); }
+
+    h2 { font-size: clamp(32px, 8.5vw, 60px); margin-bottom: clamp(14px, 3vw, 22px); }
+
+    h3 { font-size: clamp(21px, 5vw, 27px); }
+
+    .lead { color: var(--muted); font-size: clamp(15.5px, 4vw, 18px); max-width: 56ch; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 15px 30px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 15.5px;
+      text-decoration: none;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-accent { background: var(--accent); color: #fff; box-shadow: 0 10px 26px rgba(28, 107, 80, 0.25); }
+
+    .btn-accent:active { transform: scale(0.97); }
+
+    .btn-outline { background: var(--surface); color: var(--ink); border-color: var(--line); }
+
+    .btn-outline:active { border-color: var(--accent); color: var(--accent); }
+
+    .btn-soft { background: var(--accent-soft); color: var(--accent); }
+
+    .btn-block { width: 100%; }
+
+    @media (hover: hover) {
+      .btn-accent:hover { background: var(--accent-2); transform: translateY(-1px); }
+      .btn-outline:hover { border-color: var(--ink); }
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 15px;
+      min-height: 42px;
+      line-height: 1.2;
+    }
+
+    .chip.accent { color: var(--accent); background: var(--accent-soft); border-color: rgba(28, 107, 80, 0.25); }
+
+    .svg-ic { flex: none; }
+
+    /* header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(251, 250, 247, 0.88);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; white-space: nowrap; min-height: 44px; padding: 4px 0; }
+
+    .logo-mark {
+      width: 30px; height: 30px; flex: none; border-radius: 10px;
+      background: linear-gradient(135deg, #1c6b50, #0f3d2d);
+      display: grid; place-items: center; color: #fff;
+      box-shadow: 0 4px 12px rgba(28, 107, 80, 0.3);
+    }
+
+    .logo-text { font-family: var(--font-display); font-weight: 600; font-size: clamp(18px, 4.6vw, 22px); letter-spacing: 0.2px; color: var(--ink); line-height: 1; }
+
+    .nav { display: none; }
+
+    .nav-list { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 32px); }
+
+    .nav-list a { color: var(--muted); text-decoration: none; font-weight: 600; font-size: 15px; transition: color 0.2s; }
+
+    .nav-list a:hover { color: var(--ink); }
+
+    .header-cta { min-height: 44px; padding: 10px 18px; font-size: 14.5px; }
+
+    .burger {
+      width: 46px; height: 46px; display: flex; flex-direction: column; justify-content: center; gap: 5px;
+      padding: 13px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; cursor: pointer;
+    }
+
+    .burger .bar { width: 100%; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
+
+    body.menu-open .burger .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    body.menu-open .burger .bar:nth-child(2) { opacity: 0; }
+    body.menu-open .burger .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .drawer {
+      position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0; z-index: 55;
+      background: rgba(251, 250, 247, 0.98);
+      -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+      padding: 24px clamp(18px, 5vw, 32px) 32px;
+      transform: translateX(100%); transition: transform 0.3s ease;
+      display: flex; flex-direction: column; overflow-y: auto;
+    }
+
+    body.menu-open .drawer { transform: translateX(0); }
+
+    .drawer nav { display: flex; flex-direction: column; }
+
+    .drawer a.link {
+      color: var(--ink); text-decoration: none;
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(26px, 7vw, 32px); letter-spacing: -0.3px;
+      padding: 14px 0; border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .drawer a.link::after { content: ""; width: 8px; height: 8px; border-top: 2px solid var(--accent); border-right: 2px solid var(--accent); transform: rotate(45deg); }
+
+    .drawer .cta { margin-top: 28px; }
+
+    /* hero */
+    .hero { position: relative; padding: 0; overflow: hidden; }
+
+    .hero-media { position: relative; min-height: clamp(420px, 78vh, 640px); display: flex; align-items: flex-end; }
+
+    .hero-media .bg {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+    }
+
+    .hero-media::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(20, 22, 26, 0.42) 0%, rgba(20, 22, 26, 0.58) 55%, rgba(20, 22, 26, 0.82) 100%);
+    }
+
+    .hero-inner { position: relative; z-index: 1; max-width: 720px; padding-bottom: clamp(40px, 8vw, 72px); padding-top: clamp(32px, 7vw, 64px); }
+
+    .hero h1 { color: #fff; margin-bottom: 18px; }
+
+    .hero p { color: #e2e4e8; max-width: 48ch; margin-bottom: 26px; font-size: clamp(15.5px, 4vw, 18px); }
+
+    .hero-actions { display: flex; flex-direction: column; gap: 12px; }
+
+    .hero .btn-outline { background: rgba(255, 255, 255, 0.08); color: #fff; border-color: rgba(255, 255, 255, 0.35); backdrop-filter: blur(6px); }
+
+    .hero .btn-outline:active { border-color: #fff; color: #fff; }
+
+    @media (hover: hover) {
+      .hero .btn-outline:hover { border-color: #fff; }
+    }
+
+    /* search card overlaps hero */
+    .search-shell { position: relative; z-index: 2; margin-top: -clamp(30px, 7vw, 56px); }
+
+    .search-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow-md);
+      padding: clamp(18px, 4.5vw, 28px);
+      display: grid;
+      gap: clamp(14px, 3.5vw, 20px);
+    }
+
+    .seg { display: flex; gap: 8px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 5px; }
+
+    .seg button {
+      flex: 1; min-height: 44px; border: none; background: transparent; border-radius: 999px;
+      font-family: var(--font-body); font-weight: 600; font-size: 14.5px; color: var(--muted); cursor: pointer; transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .seg button.on { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-sm); }
+
+    .se-grid { display: grid; grid-template-columns: 1fr; gap: clamp(12px, 3vw, 16px); }
+
+    .field label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+
+    .field select, .field input {
+      width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+      padding: 14px 16px; min-height: 52px; color: var(--ink); font-family: var(--font-body); font-size: 15.5px;
+      transition: border-color 0.2s; appearance: none;
+    }
+
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23666b74' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 16px center; padding-right: 42px;
+    }
+
+    .field select:focus, .field input:focus { outline: none; border-color: var(--accent); }
+
+    .search-note { display: none; align-items: center; gap: 10px; background: var(--accent-soft); border: 1px solid rgba(28, 107, 80, 0.3); color: var(--accent); border-radius: 12px; padding: 12px 14px; font-size: 14px; font-weight: 500; }
+
+    .search-note.show { display: flex; animation: fadein 0.35s ease; }
+
+    @keyframes fadein { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+    /* properties */
+    .featured-head { display: flex; flex-direction: column; gap: 14px; margin-bottom: clamp(26px, 5vw, 40px); }
+
+    .properties { display: grid; grid-template-columns: 1fr; gap: clamp(16px, 4vw, 24px); }
+
+    .property {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
+      display: flex; flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .property-media { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: linear-gradient(135deg, #eeece6, #e0ddd5); }
+
+    .property-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.45s ease; }
+
+    .property-tag {
+      position: absolute; top: 12px; left: 12px; z-index: 1;
+      background: rgba(255, 255, 255, 0.92); color: var(--accent-2);
+      font-size: 11.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      padding: 7px 12px; border-radius: 999px;
+    }
+
+    .property-price {
+      position: absolute; bottom: 12px; left: 12px; z-index: 1;
+      background: rgba(20, 22, 26, 0.62); color: #fff;
+      font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: 0.2px;
+      padding: 8px 14px; border-radius: 999px; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    }
+
+    .property-body { padding: clamp(16px, 4vw, 22px); display: flex; flex-direction: column; gap: 14px; flex: 1; }
+
+    .property-body h3 { margin-bottom: 2px; }
+
+    .ploc { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 14px; }
+
+    .ploc svg { flex: none; }
+
+    .pspecs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+    .spec { background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 10px 8px; text-align: center; min-height: 58px; display: flex; flex-direction: column; justify-content: center; gap: 2px; }
+
+    .spec b { font-weight: 600; font-size: 14.5px; }
+
+    .spec span { color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .property .btn { margin-top: auto; }
+
+    @media (hover: hover) {
+      .property:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: rgba(28, 107, 80, 0.35); }
+      .property:hover .property-media img { transform: scale(1.04); }
+    }
+
+    /* categories */
+    .categories { display: grid; grid-template-columns: 1fr; gap: clamp(12px, 3vw, 18px); }
+
+    .cat {
+      position: relative; border-radius: 18px; overflow: hidden; min-height: 200px; display: flex; align-items: flex-end;
+      border: 1px solid var(--line); background: linear-gradient(135deg, #eeece6, #e0ddd5);
+    }
+
+    .cat img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    .cat::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,22,26,0.05) 30%, rgba(20,22,26,0.78) 100%); }
+
+    .cat-copy { position: relative; z-index: 1; padding: 16px; width: 100%; color: #fff; }
+
+    .cat-copy h3 { font-size: clamp(22px, 5vw, 27px); margin-bottom: 4px; }
+
+    .cat-copy p { font-size: 13px; color: rgba(255,255,255,0.85); max-width: 30ch; }
+
+    @media (hover: hover) {
+      .cat { transition: transform 0.2s ease; }
+      .cat:hover { transform: translateY(-3px); }
+      .cat img { transition: transform 0.45s ease; }
+      .cat:hover img { transform: scale(1.05); }
+    }
+
+    /* why */
+    .why-grid { display: grid; grid-template-columns: 1fr; gap: clamp(14px, 3.5vw, 20px); margin-top: clamp(26px, 5vw, 40px); }
+
+    .why {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: clamp(20px, 4.5vw, 28px); display: grid; gap: 14px;
+      box-shadow: var(--shadow-sm); transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .why .ico {
+      width: 50px; height: 50px; border-radius: 14px;
+      background: var(--accent-soft); color: var(--accent);
+      display: grid; place-items: center;
+    }
+
+    .why p { color: var(--muted); font-size: 14.5px; }
+
+    @media (hover: hover) {
+      .why:hover { transform: translateY(-3px); border-color: rgba(28, 107, 80, 0.35); }
+    }
+
+    /* areas */
+    .areas { display: grid; grid-template-columns: 1fr; gap: clamp(16px, 4vw, 22px); margin-top: clamp(26px, 5vw, 40px); }
+
+    .area { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+
+    .area-media { aspect-ratio: 16 / 9; overflow: hidden; background: linear-gradient(135deg, #eeece6, #e0ddd5); }
+
+    .area-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.45s ease; }
+
+    .area-body { padding: clamp(16px, 4vw, 22px); display: grid; gap: 12px; }
+
+    .area-body p { color: var(--muted); font-size: 14.5px; }
+
+    .area-count { color: var(--muted); font-size: 13px; }
+
+    .area-count b { color: var(--accent); font-weight: 600; }
+
+    .area .btn { margin-top: 6px; }
+
+    @media (hover: hover) {
+      .area:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+      .area:hover .area-media img { transform: scale(1.04); }
+    }
+
+    /* agents */
+    .agents { display: grid; grid-template-columns: 1fr; gap: clamp(16px, 4vw, 22px); margin-top: clamp(26px, 5vw, 40px); }
+
+    .agent { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+
+    .agent-media { position: relative; aspect-ratio: 4 / 4.4; overflow: hidden; background: linear-gradient(135deg, #eeece6, #e0ddd5); }
+
+    .agent-media img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.45s ease; }
+
+    .agent-body { padding: clamp(18px, 4.5vw, 22px); display: grid; gap: 10px; }
+
+    .agent-role { color: var(--accent); font-weight: 600; font-size: 12.5px; text-transform: uppercase; letter-spacing: 2px; }
+
+    .agent-body p { color: var(--muted); font-size: 14.5px; }
+
+    @media (hover: hover) {
+      .agent:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+      .agent:hover .agent-media img { transform: scale(1.04); }
+    }
+
+    /* how it works */
+    .steps { display: grid; grid-template-columns: 1fr; gap: clamp(14px, 3.5vw, 20px); margin-top: clamp(26px, 5vw, 40px); }
+
+    .step {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: clamp(20px, 4.5vw, 26px); display: grid; gap: 12px; box-shadow: var(--shadow-sm);
+    }
+
+    .step .num { font-family: var(--font-display); font-weight: 600; font-size: clamp(38px, 9vw, 52px); line-height: 1; color: var(--accent); }
+
+    .step p { color: var(--muted); font-size: 14.5px; }
+
+    /* inquiry */
+    .inquiry { background: var(--surface); border: 1px solid var(--line); border-radius: 26px; padding: clamp(24px, 6vw, 48px); box-shadow: var(--shadow-sm); }
+
+    .inquiry-grid { display: grid; gap: clamp(22px, 5vw, 36px); align-items: start; }
+
+    .form { display: grid; gap: 14px; }
+
+    .form .grid-2 { display: grid; gap: 14px; }
+
+    .form label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+
+    .form select, .form input, .form textarea {
+      width: 100%; background: var(--bg); border: 1px solid var(--line); border-radius: 12px;
+      padding: 14px 16px; min-height: 52px; color: var(--ink); font-family: var(--font-body); font-size: 15.5px;
+      transition: border-color 0.2s; appearance: none;
+    }
+
+    .form select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23666b74' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 16px center; padding-right: 42px;
+    }
+
+    .form textarea { min-height: 120px; resize: vertical; }
+
+    .form select:focus, .form input:focus, .form textarea:focus { outline: none; border-color: var(--accent); }
+
+    .form input::placeholder, .form textarea::placeholder { color: #9a9ea6; }
+
+    .form-success { display: none; align-items: center; gap: 10px; background: var(--accent-soft); border: 1px solid rgba(28, 107, 80, 0.35); color: var(--accent); border-radius: 14px; padding: 15px 16px; font-size: 14.5px; font-weight: 500; }
+
+    .form-success.show { display: flex; animation: fadein 0.35s ease; }
+
+    .form-note { color: var(--muted); font-size: 13px; }
+
+    .inq-check { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 14px; }
+
+    /* about */
+    .about-grid { display: grid; gap: clamp(22px, 5vw, 40px); align-items: center; }
+
+    .about-media { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+    .about-media img { border-radius: 16px; width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 5; border: 1px solid var(--line); }
+
+    .about-media img:first-child { margin-top: 22px; }
+
+    .about-list { list-style: none; display: grid; gap: 12px; margin-top: 22px; }
+
+    .about-list li { display: flex; gap: 10px; align-items: flex-start; color: var(--ink); font-size: 15px; }
+
+    .about-list li::before { content: ""; flex: none; width: 20px; height: 20px; margin-top: -2px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%231c6b50' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6'/%3E%3C/svg%3E") no-repeat center; }
+
+    /* gallery */
+    .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: clamp(26px, 5vw, 40px); }
+
+    .g-item { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 1; background: linear-gradient(135deg, #eeece6, #e0ddd5); border: 1px solid var(--line); }
+
+    .g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.45s ease; }
+
+    .g-dot { position: absolute; bottom: 10px; left: 10px; color: rgba(255,255,255,0.95); font-size: 12px; font-weight: 600; text-shadow: 0 1px 6px rgba(0,0,0,0.6); }
+
+    @media (hover: hover) {
+      .g-item:hover img { transform: scale(1.05); }
+    }
+
+    /* final cta */
+    .final { text-align: center; background: #f1efe9; border-top: 1px solid var(--line); padding-block: clamp(80px, 13vw, 130px); }
+
+    .final h2 { max-width: 18ch; margin-inline: auto; }
+
+    .final p { color: var(--muted); max-width: 46ch; margin-inline: auto; margin-bottom: 28px; }
+
+    .final-actions { display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin-inline: auto; }
+
+    /* footer */
+    footer { background: #14161b; color: #cfd3da; }
+
+    .foot-inner { padding-block: clamp(44px, 8vw, 64px) 20px; }
+
+    .foot-top { display: grid; gap: clamp(26px, 5vw, 40px); }
+
+    .foot-brand p { color: #9aa0ab; font-size: 14px; max-width: 34ch; margin-top: 14px; }
+
+    .foot-brand .logo-text { color: #fff; }
+
+    .foot-col h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #fff; margin-bottom: 14px; }
+
+    .foot-col a { display: flex; align-items: center; color: #9aa0ab; text-decoration: none; font-size: 14.5px; min-height: 42px; padding: 4px 0; }
+
+    .foot-col a:hover { color: #fff; }
+
+    .foot-col a svg { margin-right: 8px; }
+
+    .foot-bottom { border-top: 1px solid #2a2d35; margin-top: clamp(26px, 5vw, 40px); padding-block: 20px 32px; display: flex; flex-direction: column; gap: 10px; color: #7e8490; font-size: 13px; }
+
+    .foot-bottom a { color: #fff; text-decoration: none; display: inline-flex; align-items: center; min-height: 40px; }
+
+    .foot-legal { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+
+    /* reveal */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1); transition-delay: calc(var(--d, 0) * 70ms); will-change: opacity, transform; }
+
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    @media (min-width: 640px) {
+      .hero-actions { flex-direction: row; }
+      .hero .btn { flex: 0 1 auto; }
+
+      .se-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .categories { grid-template-columns: repeat(2, 1fr); }
+      .cat { min-height: 260px; }
+
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .areas { grid-template-columns: repeat(2, 1fr); }
+      .agents { grid-template-columns: repeat(2, 1fr); }
+
+      .final-actions { flex-direction: row; }
+      .final-actions .btn { flex: 1; min-width: 0; }
+    }
+
+    @media (min-width: 900px) {
+      .form .grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .inquiry-grid { grid-template-columns: 1fr 1.15fr; }
+      .about-grid { grid-template-columns: 1fr 1.15fr; }
+    }
+
+    @media (min-width: 1024px) {
+      .burger { display: none; }
+      .nav { display: flex; }
+      .drawer { display: none; }
+
+      .hero-media { min-height: min(88vh, 720px); align-items: center; }
+
+      .hero-media::after { background: linear-gradient(90deg, rgba(20,22,26,0.72) 0%, rgba(20,22,26,0.45) 45%, rgba(20,22,26,0.2) 100%); }
+
+      .search-shell { max-width: 1080px; margin-inline: auto; }
+
+      .se-grid { grid-template-columns: 1.1fr 1.1fr 1fr 1fr auto; align-items: end; }
+      .se-grid .field { min-width: 0; }
+      .se-grid .btn { flex: none; min-width: 220px; }
+      .se-grid .btn span { display: inline; }
+
+      .properties { grid-template-columns: repeat(3, 1fr); }
+      .why-grid { grid-template-columns: repeat(4, 1fr); }
+      .steps { grid-template-columns: repeat(4, 1fr); }
+      .areas { grid-template-columns: repeat(3, 1fr); }
+      .agents { grid-template-columns: repeat(3, 1fr); }
+      .categories { grid-template-columns: repeat(4, 1fr); }
+      .cat { min-height: 180px; }
+
+      .gallery {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 220px);
+        grid-auto-flow: dense;
+      }
+      .g-item:nth-child(1) { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+      .g-item:nth-child(4) { grid-column: span 2; aspect-ratio: auto; }
+      .g-item:nth-child(6) { grid-column: span 2; aspect-ratio: auto; }
+
+      .foot-top { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="header">
+    <div class="wrap header-inner">
+      <a class="logo" href="#top" aria-label="NESTORA home">
+        <span class="logo-mark" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg>
+        </span>
+        <span class="logo-text">NESTORA</span>
+      </a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <div class="nav-list">
+          <a href="#properties">Buy</a>
+          <a href="#properties">Rent</a>
+          <a href="#properties">Properties</a>
+          <a href="#areas">Areas</a>
+          <a href="#about">About</a>
+          <a href="#inquiry">Contact</a>
+        </div>
+      </nav>
+
+      <div style="display:flex; align-items:center; gap:8px;">
+        <a class="btn btn-accent header-cta" href="#properties">Find a Property</a>
+        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="drawer" id="drawer">
+    <nav class="drawer-nav" aria-label="Mobile navigation">
+      <a class="link" href="#properties">Buy</a>
+      <a class="link" href="#properties">Rent</a>
+      <a class="link" href="#properties">Properties</a>
+      <a class="link" href="#areas">Areas</a>
+      <a class="link" href="#about">About</a>
+      <a class="link" href="#inquiry">Contact</a>
+    </nav>
+    <a class="btn btn-accent btn-block cta" href="#inquiry">Talk to an Agent</a>
+  </div>
+
+  <main id="main">
+    <section class="hero" id="top" aria-label="Intro">
+      <div class="hero-media">
+        <img class="bg" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&h=1100&q=70" alt="A modern home exterior at dusk, pool lit in the foreground" fetchpriority="high" />
+        <div class="wrap hero-inner">
+          <h1 class="reveal">Find a place that feels like yours.</h1>
+          <p class="reveal">Explore thoughtfully selected homes, apartments and villas designed for the way you want to live.</p>
+          <div class="hero-actions reveal">
+            <a class="btn btn-accent" href="#properties">Explore Properties</a>
+            <a class="btn btn-outline" href="#inquiry">Talk to an Agent</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="search-shell">
+      <div class="wrap">
+        <div class="search-card reveal">
+          <div class="seg" role="tablist" aria-label="Buy or rent">
+            <button type="button" class="on" data-mode="buy" aria-selected="true">Buy</button>
+            <button type="button" data-mode="rent" aria-selected="false">Rent</button>
+          </div>
+
+          <form class="se-grid" id="searchForm">
+            <div class="field">
+              <label for="sLoc">Location</label>
+              <select id="sLoc" name="location">
+                <option value="any" selected>Anywhere in the city</option>
+                <option>Central District</option>
+                <option>Greenview</option>
+                <option>Riverside</option>
+                <option>West Heights</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sType">Property type</label>
+              <select id="sType" name="type">
+                <option value="any" selected>Any type</option>
+                <option>Apartment</option>
+                <option>Villa</option>
+                <option>Independent Home</option>
+                <option>Penthouse</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sBudget">Budget</label>
+              <select id="sBudget" name="budget">
+                <option value="any" selected>Any budget</option>
+                <option>Up to ₹2 Cr</option>
+                <option>₹2 – 5 Cr</option>
+                <option>₹5 – 10 Cr</option>
+                <option>₹10 Cr &amp; above</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sBeds">Bedrooms</label>
+              <select id="sBeds" name="beds">
+                <option value="any" selected>Any</option>
+                <option>1+</option>
+                <option>2+</option>
+                <option>3+</option>
+                <option>4+</option>
+              </select>
+            </div>
+            <button class="btn btn-accent" type="submit">Search Properties</button>
+          </form>
+
+          <p class="search-note" id="searchNote">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            This is a concept search — showing all featured properties below.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <section id="properties">
+      <div class="wrap">
+        <div class="featured-head reveal">
+          <div>
+            <span class="kicker">Featured properties</span>
+            <h2>Handpicked for you</h2>
+          </div>
+          <p class="lead">A selection of homes across the city. All properties and prices are fictional for this concept.</p>
+        </div>
+
+        <div class="properties" id="propertyList">
+          <article class="property reveal">
+            <div class="property-media">
+              <span class="property-tag">For Sale</span>
+              <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&h=560&q=70" alt="Exterior of a modern home with a glowing pool at night" loading="lazy" decoding="async" width="900" height="560" />
+              <span class="property-price">₹6.2 Cr</span>
+            </div>
+            <div class="property-body">
+              <div>
+                <h3>The Willow Residence</h3>
+                <span class="ploc">
+                  <svg class="svg-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                  Greenview
+                </span>
+              </div>
+              <div class="pspecs">
+                <div class="spec"><b>4</b><span>Bedrooms</span></div>
+                <div class="spec"><b>4</b><span>Bathrooms</span></div>
+                <div class="spec"><b>2,850</b><span>Sq ft</span></div>
+              </div>
+              <a class="btn btn-outline" href="nestora-property.html">View Property</a>
+            </div>
+          </article>
+
+          <article class="property reveal">
+            <div class="property-media">
+              <span class="property-tag">For Sale</span>
+              <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=900&h=560&q=70" alt="Modern apartment building glowing in the evening" loading="lazy" decoding="async" width="900" height="560" />
+              <span class="property-price">₹2.9 Cr</span>
+            </div>
+            <div class="property-body">
+              <div>
+                <h3>Skyline Heights</h3>
+                <span class="ploc">
+                  <svg class="svg-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                  Central District
+                </span>
+              </div>
+              <div class="pspecs">
+                <div class="spec"><b>3</b><span>Bedrooms</span></div>
+                <div class="spec"><b>3</b><span>Bathrooms</span></div>
+                <div class="spec"><b>1,950</b><span>Sq ft</span></div>
+              </div>
+              <a class="btn btn-outline" href="nestora-property.html">View Property</a>
+            </div>
+          </article>
+
+          <article class="property reveal">
+            <div class="property-media">
+              <span class="property-tag">For Sale</span>
+              <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&h=560&q=70" alt="A luxury villa with a terrace, pool and greenery" loading="lazy" decoding="async" width="900" height="560" />
+              <span class="property-price">₹8.5 Cr</span>
+            </div>
+            <div class="property-body">
+              <div>
+                <h3>The Courtyard Villa</h3>
+                <span class="ploc">
+                  <svg class="svg-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                  West Heights
+                </span>
+              </div>
+              <div class="pspecs">
+                <div class="spec"><b>5</b><span>Bedrooms</span></div>
+                <div class="spec"><b>5</b><span>Bathrooms</span></div>
+                <div class="spec"><b>3,600</b><span>Sq ft</span></div>
+              </div>
+              <a class="btn btn-outline" href="nestora-property.html">View Property</a>
+            </div>
+          </article>
+
+          <article class="property reveal">
+            <div class="property-media">
+              <span class="property-tag">For Sale</span>
+              <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&h=560&q=70" alt="Bright apartment interior with natural light" loading="lazy" decoding="async" width="900" height="560" />
+              <span class="property-price">₹1.35 Cr</span>
+            </div>
+            <div class="property-body">
+              <div>
+                <h3>Parkview Apartment</h3>
+                <span class="ploc">
+                  <svg class="svg-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                  Greenview
+                </span>
+              </div>
+              <div class="pspecs">
+                <div class="spec"><b>2</b><span>Bedrooms</span></div>
+                <div class="spec"><b>2</b><span>Bathrooms</span></div>
+                <div class="spec"><b>1,250</b><span>Sq ft</span></div>
+              </div>
+              <a class="btn btn-outline" href="nestora-property.html">View Property</a>
+            </div>
+          </article>
+
+          <article class="property reveal">
+            <div class="property-media">
+              <span class="property-tag">For Sale</span>
+              <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&h=560&q=70" alt="Refined penthouse interior with floor-to-ceiling windows" loading="lazy" decoding="async" width="900" height="560" />
+              <span class="property-price">₹5.4 Cr</span>
+            </div>
+            <div class="property-body">
+              <div>
+                <h3>Oakwood Penthouse</h3>
+                <span class="ploc">
+                  <svg class="svg-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                  Riverside
+                </span>
+              </div>
+              <div class="pspecs">
+                <div class="spec"><b>4</b><span>Bedrooms</span></div>
+                <div class="spec"><b>4</b><span>Bathrooms</span></div>
+                <div class="spec"><b>2,700</b><span>Sq ft</span></div>
+              </div>
+              <a class="btn btn-outline" href="nestora-property.html">View Property</a>
+            </div>
+          </article>
+
+          <article class="property reveal">
+            <div class="property-media">
+              <span class="property-tag">For Sale</span>
+              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&h=560&q=70" alt="Contemporary house exterior with a landscaped lawn" loading="lazy" decoding="async" width="900" height="560" />
+              <span class="property-price">₹3.6 Cr</span>
+            </div>
+            <div class="property-body">
+              <div>
+                <h3>Riverside House</h3>
+                <span class="ploc">
+                  <svg class="svg-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                  Riverside
+                </span>
+              </div>
+              <div class="pspecs">
+                <div class="spec"><b>3</b><span>Bedrooms</span></div>
+                <div class="spec"><b>3</b><span>Bathrooms</span></div>
+                <div class="spec"><b>2,100</b><span>Sq ft</span></div>
+              </div>
+              <a class="btn btn-outline" href="nestora-property.html">View Property</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="categories">
+      <div class="wrap">
+        <div class="reveal">
+          <span class="kicker">Categories</span>
+          <h2>What are you looking for?</h2>
+        </div>
+        <div class="categories">
+          <article class="cat reveal">
+            <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=700&h=900&q=70" alt="Rows of modern apartment balconies" loading="lazy" decoding="async" width="700" height="900" />
+            <div class="cat-copy"><h3>Apartments</h3><p>Modern residences with shared amenities.</p></div>
+          </article>
+          <article class="cat reveal">
+            <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=700&h=900&q=70" alt="Villa exterior lit in the evening with a pool" loading="lazy" decoding="async" width="700" height="900" />
+            <div class="cat-copy"><h3>Villas</h3><p>Spacious homes built around outdoor living.</p></div>
+          </article>
+          <article class="cat reveal">
+            <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=700&h=900&q=70" alt="Contemporary independent home with clean lines" loading="lazy" decoding="async" width="700" height="900" />
+            <div class="cat-copy"><h3>Independent Homes</h3><p>Full-floor and set-back residences with more room.</p></div>
+          </article>
+          <article class="cat reveal">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&h=900&q=70" alt="Luxury living room with double-height ceilings" loading="lazy" decoding="async" width="700" height="900" />
+            <div class="cat-copy"><h3>Luxury Properties</h3><p>Premium finishes and landmark buildings.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="why">
+      <div class="wrap">
+        <div class="reveal">
+          <span class="kicker">Why NESTORA</span>
+          <h2>A calmer way to search</h2>
+        </div>
+        <div class="why-grid">
+          <article class="why reveal">
+            <div class="ico">
+              <svg class="svg-ic" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            </div>
+            <h3>Curated Properties</h3>
+            <p>Carefully selected homes and spaces, reviewed before they reach you.</p>
+          </article>
+          <article class="why reveal">
+            <div class="ico">
+              <svg class="svg-ic" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </div>
+            <h3>Local Knowledge</h3>
+            <p>Helping buyers understand the neighborhoods they are considering.</p>
+          </article>
+          <article class="why reveal">
+            <div class="ico">
+              <svg class="svg-ic" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 10-8 8"/><path d="M12 7v5l3 3"/><path d="M16 21l2-2 2 2M16 18v3"/></svg>
+            </div>
+            <h3>Personal Guidance</h3>
+            <p>Support throughout your property search, question by question.</p>
+          </article>
+          <article class="why reveal">
+            <div class="ico">
+              <svg class="svg-ic" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
+            </div>
+            <h3>Simple Process</h3>
+            <p>Clear communication from inquiry through to viewing.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="areas">
+      <div class="wrap">
+        <div class="reveal">
+          <span class="kicker">Neighborhoods</span>
+          <h2>Parts of the city we know</h2>
+          <p class="lead">Fictional areas created for this concept.</p>
+        </div>
+
+        <div class="areas">
+          <article class="area reveal">
+            <div class="area-media">
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&h=560&q=70" alt="Business district with glass towers" loading="lazy" decoding="async" width="900" height="560" />
+            </div>
+            <div class="area-body">
+              <h3>Central District</h3>
+              <p>Wide avenues, office towers and compact modern apartments.</p>
+              <span class="area-count">Placeholder — <b>18 homes</b> listed</span>
+              <a class="btn btn-soft" href="#properties">Explore</a>
+            </div>
+          </article>
+
+          <article class="area reveal">
+            <div class="area-media">
+              <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=900&h=560&q=70" alt="A quiet residential street lined with family homes" loading="lazy" decoding="async" width="900" height="560" />
+            </div>
+            <div class="area-body">
+              <h3>Greenview</h3>
+              <p>Tree-lined lanes, parks and quiet family residences.</p>
+              <span class="area-count">Placeholder — <b>24 homes</b> listed</span>
+              <a class="btn btn-soft" href="#properties">Explore</a>
+            </div>
+          </article>
+
+          <article class="area reveal">
+            <div class="area-media">
+              <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&h=560&q=70" alt="Aerial view of a river winding through the city" loading="lazy" decoding="async" width="900" height="560" />
+            </div>
+            <div class="area-body">
+              <h3>Riverside</h3>
+              <p>Waterfront residences and spacious premium homes.</p>
+              <span class="area-count">Placeholder — <b>15 homes</b> listed</span>
+              <a class="btn btn-soft" href="#properties">Explore</a>
+            </div>
+          </article>
+
+          <article class="area reveal">
+            <div class="area-media">
+              <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=900&h=560&q=70" alt="City buildings at dusk in a hilly district" loading="lazy" decoding="async" width="900" height="560" />
+            </div>
+            <div class="area-body">
+              <h3>West Heights</h3>
+              <p>Hill-view villas and gated communities above the city.</p>
+              <span class="area-count">Placeholder — <b>12 homes</b> listed</span>
+              <a class="btn btn-soft" href="#properties">Explore</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="agents">
+      <div class="wrap">
+        <div class="reveal">
+          <span class="kicker">Your agents</span>
+          <h2>People who'll help you look</h2>
+        </div>
+
+        <div class="agents">
+          <article class="agent reveal">
+            <div class="agent-media">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&h=780&q=70" alt="Portrait of property consultant Arjun Malhotra" loading="lazy" decoding="async" width="700" height="780" />
+            </div>
+            <div class="agent-body">
+              <div>
+                <h3>Arjun Malhotra</h3>
+                <span class="agent-role">Property Consultant</span>
+              </div>
+              <p>Helps buyers clarify their requirements and shortlist homes that genuinely fit.</p>
+              <a class="btn btn-outline" href="#inquiry">Contact</a>
+            </div>
+          </article>
+
+          <article class="agent reveal">
+            <div class="agent-media">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=700&h=780&q=70" alt="Portrait of luxury property specialist Riya Sharma" loading="lazy" decoding="async" width="700" height="780" />
+            </div>
+            <div class="agent-body">
+              <div>
+                <h3>Riya Sharma</h3>
+                <span class="agent-role">Luxury Property Specialist</span>
+              </div>
+              <p>Specializes in premium residences, villas and landmark buildings.</p>
+              <a class="btn btn-outline" href="#inquiry">Contact</a>
+            </div>
+          </article>
+
+          <article class="agent reveal">
+            <div class="agent-media">
+              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=700&h=780&q=70" alt="Portrait of residential advisor Dev Kapoor" loading="lazy" decoding="async" width="700" height="780" />
+            </div>
+            <div class="agent-body">
+              <div>
+                <h3>Dev Kapoor</h3>
+                <span class="agent-role">Residential Advisor</span>
+              </div>
+              <p>Guides first-time buyers and families through a straightforward search.</p>
+              <a class="btn btn-outline" href="#inquiry">Contact</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="wrap">
+        <div class="reveal">
+          <span class="kicker">How it works</span>
+          <h2>Four simple steps</h2>
+        </div>
+        <div class="steps">
+          <article class="step reveal">
+            <span class="num" aria-hidden="true">01</span>
+            <h3>Explore</h3>
+            <p>Browse properties that match your needs.</p>
+          </article>
+          <article class="step reveal">
+            <span class="num" aria-hidden="true">02</span>
+            <h3>Shortlist</h3>
+            <p>Save the homes you like as you go.</p>
+          </article>
+          <article class="step reveal">
+            <span class="num" aria-hidden="true">03</span>
+            <h3>Schedule</h3>
+            <p>Request a property viewing at a time that works.</p>
+          </article>
+          <article class="step reveal">
+            <span class="num" aria-hidden="true">04</span>
+            <h3>Decide</h3>
+            <p>Get support through your next steps.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="inquiry">
+      <div class="wrap">
+        <div class="inquiry reveal">
+          <div class="inquiry-grid">
+            <div>
+              <span class="kicker">Inquiry</span>
+              <h2>Looking for something specific?</h2>
+              <p class="lead">Share your search details and an agent will pick up the conversation.</p>
+            </div>
+
+            <form class="form" id="inquiryForm" novalidate>
+              <div class="grid-2">
+                <div>
+                  <label for="qName">Name</label>
+                  <input id="qName" name="name" type="text" placeholder="Your name" required autocomplete="name" />
+                </div>
+                <div>
+                  <label for="qContact">Phone / Email</label>
+                  <input id="qContact" name="contact" type="text" placeholder="Phone or email" required autocomplete="tel" />
+                </div>
+              </div>
+              <div class="grid-2">
+                <div>
+                  <label for="qMode">Buy or Rent</label>
+                  <select id="qMode" name="mode" required>
+                    <option value="" selected disabled>Select</option>
+                    <option>Buy</option>
+                    <option>Rent</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="qLoc">Preferred location</label>
+                  <select id="qLoc" name="location">
+                    <option value="" selected disabled>Select an area</option>
+                    <option>Central District</option>
+                    <option>Greenview</option>
+                    <option>Riverside</option>
+                    <option>West Heights</option>
+                    <option>Not decided yet</option>
+                  </select>
+                </div>
+              </div>
+              <div class="grid-2">
+                <div>
+                  <label for="qType">Property type</label>
+                  <select id="qType" name="type">
+                    <option value="" selected disabled>Select type</option>
+                    <option>Apartment</option>
+                    <option>Villa</option>
+                    <option>Independent Home</option>
+                    <option>Penthouse</option>
+                    <option>Not sure yet</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="qBudget">Budget</label>
+                  <select id="qBudget" name="budget">
+                    <option value="" selected disabled>Select budget</option>
+                    <option>Up to ₹2 Cr</option>
+                    <option>₹2 – 5 Cr</option>
+                    <option>₹5 – 10 Cr</option>
+                    <option>₹10 Cr &amp; above</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label for="qMsg">Message</label>
+                <textarea id="qMsg" name="message" placeholder="Anything else we should know (optional)"></textarea>
+              </div>
+              <button class="btn btn-accent" type="submit">Send Inquiry</button>
+              <p class="form-note">This concept form has no backend — in a real build it would route to the agency CRM.</p>
+              <p class="form-success" id="inquirySuccess">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                Thanks! Your inquiry is ready to route. An agent would get back to you soon in a live build.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="about-grid">
+          <div class="about-media reveal">
+            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&h=740&q=70" alt="White modern home exterior with a tidy garden" loading="lazy" decoding="async" width="600" height="740" />
+            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&h=740&q=70" alt="Bright, minimal living room interior" loading="lazy" decoding="async" width="600" height="740" />
+          </div>
+          <div class="reveal">
+            <span class="kicker">About NESTORA</span>
+            <h2>A modern way to find your home</h2>
+            <p class="lead" style="margin-bottom:14px;">
+              NESTORA is a modern real estate agency focused on helping people discover suitable properties — with clear communication, a modern property search and personal guidance along the way.
+            </p>
+            <p class="lead">
+              This is a concept project for a freelance web-design portfolio. No company history or market data is implied.
+            </p>
+            <ul class="about-list">
+              <li>Thoughtfully presented property listings</li>
+              <li>Focused, easy-to-use search</li>
+              <li>Supportive, human conversations</li>
+            </ul>
+            <a class="btn btn-accent" href="#inquiry" style="margin-top:26px;">Talk to an Agent</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="wrap">
+        <div class="reveal">
+          <span class="kicker">Gallery</span>
+          <h2>Spaces we love</h2>
+        </div>
+
+        <div class="gallery">
+          <figure class="g-item reveal">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&h=800&q=70" alt="Contemporary home with landscaped lawn" loading="lazy" decoding="async" width="800" height="800" />
+            <figcaption class="g-dot">Homes</figcaption>
+          </figure>
+          <figure class="g-item reveal">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&h=600&q=70" alt="Sunlit apartment interior" loading="lazy" decoding="async" width="600" height="600" />
+            <figcaption class="g-dot">Apartments</figcaption>
+          </figure>
+          <figure class="g-item reveal">
+            <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=600&h=600&q=70" alt="Cosy living space with warm lighting" loading="lazy" decoding="async" width="600" height="600" />
+            <figcaption class="g-dot">Interiors</figcaption>
+          </figure>
+          <figure class="g-item reveal">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&h=700&q=70" alt="Architectural modern home facade" loading="lazy" decoding="async" width="800" height="700" />
+            <figcaption class="g-dot">Architecture</figcaption>
+          </figure>
+          <figure class="g-item reveal">
+            <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=600&h=600&q=70" alt="Neighborhood apartment buildings" loading="lazy" decoding="async" width="600" height="600" />
+            <figcaption class="g-dot">Neighborhoods</figcaption>
+          </figure>
+          <figure class="g-item reveal">
+            <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=800&h=600&q=70" alt="Modern glass and wood house exterior" loading="lazy" decoding="async" width="800" height="600" />
+            <figcaption class="g-dot">Homes</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="wrap">
+        <span class="kicker reveal" style="margin-inline:auto;">NESTORA</span>
+        <h2 class="reveal">Your next address could be here.</h2>
+        <p class="reveal">Tell us what you're looking for and we'll help you explore the possibilities.</p>
+        <div class="final-actions reveal">
+          <a class="btn btn-accent" href="#properties">Explore Properties</a>
+          <a class="btn btn-outline" href="#inquiry">Talk to an Agent</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot-inner">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <a class="logo" href="#top" style="min-height:40px;">
+            <span class="logo-mark" aria-hidden="true">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg>
+            </span>
+            <span class="logo-text">NESTORA</span>
+          </a>
+          <p>A modern real estate agency concept — thoughtfully selected homes, clear guidance and a calmer way to search.</p>
+        </div>
+
+        <nav class="foot-col" aria-label="Buy and rent">
+          <h4>Discover</h4>
+          <a href="#properties">Buy</a>
+          <a href="#properties">Rent</a>
+          <a href="#properties">Properties</a>
+          <a href="#areas">Areas</a>
+          <a href="#about">About</a>
+          <a href="#inquiry">Contact</a>
+        </nav>
+
+        <div class="foot-col">
+          <h4>Contact</h4>
+          <a href="#inquiry">Hello, NESTORA team</a>
+          <a href="#inquiry">+91 98765 43210</a>
+          <a href="#inquiry">hello@nestora.in</a>
+        </div>
+
+        <div class="foot-col">
+          <h4>Follow</h4>
+          <a href="#" aria-label="Instagram placeholder">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+            Instagram
+          </a>
+          <a href="#" aria-label="LinkedIn placeholder">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4V9h4v1.5"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+          <a href="#" aria-label="X placeholder">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23.3 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.4L1 2h6.5l4.4 5.9z"/></svg>
+            X
+          </a>
+        </div>
+      </div>
+
+      <div class="foot-bottom">
+        <p>© <span id="year">2026</span> NESTORA. All rights reserved.</p>
+        <p class="foot-legal">
+          <span>Concept project — fictional agency, properties &amp; details for a freelance web-design portfolio.</span>
+          <a href="index.html">← Back to portfolio</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var burger = document.getElementById('burger');
+      var drawer = document.getElementById('drawer');
+
+      function setMenu(open) {
+        document.body.classList.toggle('menu-open', open);
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      }
+
+      burger.addEventListener('click', function () {
+        setMenu(!document.body.classList.contains('menu-open'));
+      });
+
+      drawer.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setMenu(false); });
+      });
+
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && document.body.classList.contains('menu-open')) setMenu(false);
+      });
+
+      var seg = document.querySelectorAll('.seg button');
+      seg.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          seg.forEach(function (b) { b.classList.remove('on'); b.setAttribute('aria-selected', 'false'); });
+          btn.classList.add('on');
+          btn.setAttribute('aria-selected', 'true');
+        });
+      });
+
+      var searchForm = document.getElementById('searchForm');
+      searchForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        document.getElementById('searchNote').classList.add('show');
+        document.getElementById('searchNote').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+
+      var inquiryForm = document.getElementById('inquiryForm');
+      inquiryForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var s = document.getElementById('inquirySuccess');
+        s.classList.add('show');
+        s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        inquiryForm.reset();
+      });
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduceMotion) {
+        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var reveals = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+        reveals.forEach(function (el, i) { el.style.setProperty('--d', i % 5); io.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add('in'); });
+      }
+    })();
+  </script>
+</body>
+</html>
