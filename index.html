@@ -283,6 +283,16 @@
       -webkit-user-select: none;
     }
     .tech-text-canvas { display: block; width: 100%; height: 100%; }
+
+    /* ---- ClickSpark overlay (click/tap sparks, page-wide) ---- */
+    #sparkCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 90;
+    }
     #techWord {
       width: 100%;
       height: clamp(190px, 38vw, 330px);
@@ -767,6 +777,7 @@
   </style>
 </head>
 <body>
+  <canvas id="sparkCanvas" aria-hidden="true"></canvas>
   <header class="header">
     <div class="wrap header-inner">
       <a class="logo" href="#top">Rudra<small>Web Studio</small></a>
@@ -1129,6 +1140,7 @@
   </div>
 
   <script src="tech-text.js"></script>
+  <script src="click-spark.js"></script>
   <script>
     (function () {
       var burger = document.getElementById('burger');
@@ -1360,6 +1372,19 @@
           labels: true,
           draggable: true,
           sweep: true
+        });
+      })();
+
+      // ClickSpark page-wide click/tap sparks — same settings as the snippet
+      (function () {
+        var sc = document.getElementById('sparkCanvas');
+        if (!sc || typeof window.initClickSpark !== 'function') return;
+        window.initClickSpark(sc, {
+          sparkColor: '#fff',
+          sparkSize: 10,
+          sparkRadius: 15,
+          sparkCount: 8,
+          duration: 400
         });
       })();
 
