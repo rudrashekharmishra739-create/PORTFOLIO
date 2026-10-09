@@ -273,6 +273,76 @@
 
     .hero-actions { display: flex; flex-direction: column; gap: 12px; margin-bottom: 34px; }
 
+    /* ---- hero visual: floating phones ---- */
+    .hero { overflow: clip; }
+    .hero-grid { display: grid; gap: 4px; }
+    .hero-visual { position: relative; height: 370px; margin-top: 4px; }
+    .phone {
+      position: absolute;
+      width: clamp(104px, 30vw, 150px);
+      transform: translate3d(calc(var(--px, 0px) * var(--depth, 1)), calc(var(--py, 0px) * var(--depth, 1)), 0);
+      will-change: transform;
+    }
+    .phone-inner {
+      background: #101010;
+      border: 1px solid var(--line2);
+      border-radius: 26px;
+      padding: 10px 9px 12px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+      animation: float var(--d, 6s) ease-in-out infinite;
+      animation-delay: var(--dl, 0s);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+      50% { transform: translateY(-12px) rotate(var(--r, 0deg)); }
+    }
+    .phone.p1 { left: 7%; top: 56px; --r: -6deg; --d: 6.5s; }
+    .phone.p2 { left: 37%; top: 8px; --r: 3deg; --d: 5.6s; --dl: -2s; }
+    .phone.p3 { display: none; }
+    .p-notch { width: 44px; height: 5px; border-radius: 999px; background: var(--line2); margin: 0 auto 8px; }
+    .p-title { font-size: 9px; font-weight: 800; letter-spacing: 0.6px; color: var(--text); margin-bottom: 6px; white-space: nowrap; overflow: hidden; }
+    .p-thumb { border-radius: 12px; height: 62px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 7px; }
+    .p-thumb.pt1 { background: linear-gradient(135deg, #1a1816, #2e2a26); }
+    .p-thumb.pt2 { background: linear-gradient(135deg, #14151a, #262b33); }
+    .p-thumb.pt3 { background: linear-gradient(135deg, #1a1613, #2e2822); }
+    .p-line { height: 5px; width: 100%; border-radius: 999px; background: var(--line2); margin-bottom: 5px; }
+    .p-line.w60 { width: 60%; }
+    .p-line.w80 { width: 80%; }
+    .p-btn { height: 18px; border-radius: 999px; background: #f7f7f5; margin-top: 8px; }
+    .p-bars { display: flex; align-items: flex-end; gap: 4px; height: 38px; margin-bottom: 7px; }
+    .p-bars i { flex: 1; background: var(--line2); border-radius: 3px; min-height: 6px; }
+
+    /* ---- work marquee ---- */
+    .marquee { overflow: hidden; border-block: 1px solid var(--line); padding-block: 15px; margin-top: 8px; }
+    .marquee-track { display: flex; width: max-content; animation: mscroll 26s linear infinite; }
+    .marquee-track span {
+      font-weight: 800;
+      font-size: clamp(15px, 4vw, 20px);
+      letter-spacing: -0.3px;
+      color: #d9d9d4;
+      white-space: nowrap;
+      margin-right: 44px;
+      display: flex;
+      align-items: center;
+      gap: 44px;
+    }
+    .marquee-track span i { font-style: normal; color: var(--muted2); font-size: 11px; }
+    @keyframes mscroll { to { transform: translateX(-50%); } }
+    @media (hover: hover) { .marquee:hover .marquee-track { animation-play-state: paused; } }
+
+    /* ---- animated counters ---- */
+    .stats-band { padding-block: clamp(28px, 7vw, 56px); }
+    .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px 14px;
+      text-align: center;
+    }
+    .stat b { display: block; font-size: clamp(30px, 8vw, 46px); font-weight: 900; letter-spacing: -1.5px; }
+    .stat small { color: var(--muted); font-size: 13.5px; font-weight: 600; }
+
     /* shimmering wordmark */
     .gradient {
       background: linear-gradient(110deg, #f7f7f5 30%, #b9b9b4 50%, #f7f7f5 70%);
@@ -620,6 +690,8 @@
       .thumb { transition: none; }
       .project-link .arr { transition: none; }
       .reveal { transition: none; }
+      .phone-inner { animation: none; }
+      .marquee-track { animation: none; }
     }
 
     /* ============ tablet (>= 640px) ============ */
@@ -646,6 +718,19 @@
 
       .contact-grid { grid-template-columns: 1.25fr 1fr; align-items: start; }
       .cta-actions { flex-direction: row; }
+
+      .hero-grid { grid-template-columns: 1.02fr 0.98fr; gap: 44px; align-items: center; }
+      .hero-visual { height: 520px; margin-top: 0; }
+      .phone { width: 168px; }
+      .phone.p1 { left: 2%; top: 92px; --r: -8deg; }
+      .phone.p2 { left: 36%; top: 12px; --r: 2deg; }
+      .phone.p3 { display: block; right: 1%; top: 112px; --r: 8deg; --d: 7.2s; --dl: -4s; }
+      .p-thumb { height: 84px; font-size: 32px; }
+    }
+
+    @media (min-width: 640px) and (max-width: 1023px) {
+      .hero-visual { height: 400px; }
+      .phone.p3 { display: block; right: 6%; top: 62px; --r: 7deg; --d: 7s; --dl: -3s; }
     }
 
     /* contact success panel */
@@ -705,6 +790,7 @@
   <div class="wrap" id="top">
     <!-- hero -->
     <section class="hero">
+      <div class="hero-grid">
       <div class="hero-copy">
         <span class="badge reveal"><span class="pulse"></span>Available for new projects</span>
         <h1 class="reveal">I run the digital side of your business.</h1>
@@ -715,7 +801,41 @@
           <a class="btn btn-ghost" href="https://wa.me/917398644158?text=Hi%20Rudra%2C%20I%20found%20your%20portfolio%20and%20want%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">WhatsApp me</a>
         </div>
       </div>
+      <div class="hero-visual reveal" id="heroVisual" aria-hidden="true">
+        <div class="phone p1" style="--depth:.7"><div class="phone-inner">
+          <div class="p-notch"></div>
+          <div class="p-title">NOIR &amp; CO.</div>
+          <div class="p-thumb pt1">💈</div>
+          <div class="p-line w80"></div>
+          <div class="p-line w60"></div>
+          <div class="p-btn"></div>
+        </div></div>
+        <div class="phone p2" style="--depth:1"><div class="phone-inner">
+          <div class="p-notch"></div>
+          <div class="p-title">KITE · BALANCE</div>
+          <div class="p-bars"><i style="height:35%"></i><i style="height:60%"></i><i style="height:45%"></i><i style="height:80%"></i><i style="height:65%"></i><i style="height:95%"></i></div>
+          <div class="p-thumb pt2">💳</div>
+          <div class="p-line"></div>
+        </div></div>
+        <div class="phone p3" style="--depth:1.3"><div class="phone-inner">
+          <div class="p-notch"></div>
+          <div class="p-title">SOLENE</div>
+          <div class="p-thumb pt3">🍽️</div>
+          <div class="p-line w60"></div>
+          <div class="p-line w80"></div>
+          <div class="p-btn"></div>
+        </div></div>
+      </div>
+      </div>
     </section>
+
+    <!-- work marquee -->
+    <div class="marquee reveal" aria-label="Selected work">
+      <div class="marquee-track">
+        <span>NOIR &amp; CO. <i>✦</i></span><span>FORM / SPACE <i>✦</i></span><span>NESTORA <i>✦</i></span><span>FORGE ATHLETICS <i>✦</i></span><span>SOLENE <i>✦</i></span><span>TERRA <i>✦</i></span><span>KILN <i>✦</i></span><span>KITE <i>✦</i></span>
+        <span aria-hidden="true">NOIR &amp; CO. <i>✦</i></span><span aria-hidden="true">FORM / SPACE <i>✦</i></span><span aria-hidden="true">NESTORA <i>✦</i></span><span aria-hidden="true">FORGE ATHLETICS <i>✦</i></span><span aria-hidden="true">SOLENE <i>✦</i></span><span aria-hidden="true">TERRA <i>✦</i></span><span aria-hidden="true">KILN <i>✦</i></span><span aria-hidden="true">KITE <i>✦</i></span>
+      </div>
+    </div>
 
     <!-- services -->
     <section id="services">
@@ -757,6 +877,16 @@
         <span class="skill reveal" style="--i:10">Next.js</span>
         <span class="skill reveal" style="--i:11">REST APIs</span>
         <span class="skill reveal" style="--i:12">Accessibility</span>
+      </div>
+    </section>
+
+    <!-- counters -->
+    <section class="stats-band" aria-label="In numbers">
+      <div class="stats">
+        <div class="stat reveal"><b><span data-count="8">0</span></b><small>Concept projects</small></div>
+        <div class="stat reveal" style="--i:1"><b><span data-count="13">0</span></b><small>Tools in my stack</small></div>
+        <div class="stat reveal" style="--i:2"><b><span data-count="11">0</span></b><small>Pages on this site</small></div>
+        <div class="stat reveal" style="--i:3"><b><span data-count="24">0</span>h</b><small>Usual first reply</small></div>
       </div>
     </section>
 
@@ -1129,6 +1259,59 @@
           tx = -200;
           ty = -200;
           if (!raf) raf = requestAnimationFrame(step);
+        });
+      }
+
+      // animated counters
+      document.querySelectorAll('[data-count]').forEach(function (el) {
+        var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+        if (reduce || !('IntersectionObserver' in window)) { el.textContent = target; return; }
+        var started = false;
+        var cio = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting && !started) {
+              started = true;
+              var t0 = null, dur = 1300;
+              (function frame(t) {
+                if (!t0) t0 = t;
+                var p = Math.min((t - t0) / dur, 1);
+                var e = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(target * e);
+                if (p < 1) requestAnimationFrame(frame);
+              })(performance.now());
+              cio.unobserve(el);
+            }
+          });
+        }, { threshold: 0.4 });
+        cio.observe(el);
+      });
+
+      // hero phone parallax (fine-pointer devices only)
+      var hv = document.getElementById('heroVisual');
+      var heroSec = document.querySelector('.hero');
+      if (hv && heroSec && window.matchMedia('(pointer: fine)').matches && !reduce) {
+        var pxx = 0, pyy = 0, ptx = 0, pty = 0, praf = null;
+        function pstep() {
+          pxx += (ptx - pxx) * 0.08;
+          pyy += (pty - pyy) * 0.08;
+          hv.style.setProperty('--px', pxx.toFixed(2) + 'px');
+          hv.style.setProperty('--py', pyy.toFixed(2) + 'px');
+          if (Math.abs(ptx - pxx) > 0.3 || Math.abs(pty - pyy) > 0.3) {
+            praf = requestAnimationFrame(pstep);
+          } else {
+            praf = null;
+          }
+        }
+        heroSec.addEventListener('mousemove', function (e) {
+          var r = hv.getBoundingClientRect();
+          ptx = ((e.clientX - r.left) / r.width - 0.5) * 28;
+          pty = ((e.clientY - r.top) / r.height - 0.5) * 22;
+          if (!praf) praf = requestAnimationFrame(pstep);
+        }, { passive: true });
+        heroSec.addEventListener('mouseleave', function () {
+          ptx = 0;
+          pty = 0;
+          if (!praf) praf = requestAnimationFrame(pstep);
         });
       }
 
