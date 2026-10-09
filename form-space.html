@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f3f0e8" />
+  <meta name="theme-color" content="#080808" />
   <meta name="description" content="FORM / SPACE — Architecture &amp; Interior Design Studio. Fictional concept project by a freelance web designer." />
   <title>FORM / SPACE — Architecture &amp; Interior Design</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --paper: #f3f0e8;
-      --paper-2: #ece8dc;
-      --ink: #1b1812;
-      --muted: #6e685a;
-      --line: #ddd7c6;
-      --accent: #b24e26;
+      --paper: #080808;
+      --paper-2: #0d0d0d;
+      --ink: #f7f7f5;
+      --muted: #9c9c9c;
+      --line: #232323;
+      --accent: #f7f7f5;
       --header-h: 62px;
-      --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
-      --disp: "Archivo", "Inter", -apple-system, "Segoe UI", sans-serif;
+      --serif: "Inter", -apple-system, "Segoe UI", sans-serif;
+      --disp: "Inter", -apple-system, "Segoe UI", sans-serif;
       --sans: "Inter", -apple-system, "Segoe UI", sans-serif;
     }
 
@@ -35,7 +35,7 @@
       line-height: 1.65;
       overflow-x: clip;
       min-height: 100vh;
-      -webkit-tap-highlight-color: rgba(178, 78, 38, 0.12);
+      -webkit-tap-highlight-color: rgba(247, 247, 245, 0.14);
     }
 
     body.menu-open { overflow: hidden; }
@@ -77,7 +77,7 @@
       position: sticky;
       top: 0;
       z-index: 60;
-      background: rgba(243, 240, 232, 0.9);
+      background: rgba(8, 8, 8, 0.85);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
@@ -617,7 +617,7 @@
     }
     .field textarea { min-height: 120px; resize: vertical; }
     .field select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%236e685a' stroke-width='1.6'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%239c9c9c' stroke-width='1.6'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 16px center;
       padding-right: 40px;
@@ -744,6 +744,167 @@
     .ft-bottom a { color: var(--muted); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; padding: 4px 0; }
     .ft-bottom a:hover { color: var(--accent); }
 
+    /* ---------- DARK MONO Material Lab overrides ---------- */
+    :root {
+      --bg: #080808;
+      --bg2: #0d0d0d;
+      --card: #111111;
+      --card2: #161616;
+      --line: #232323;
+      --line2: #303030;
+      --text: #f7f7f5;
+      --muted: #9c9c9c;
+      --muted2: #6f6f6f;
+      --paper: #080808;
+      --paper-2: #0d0d0d;
+      --ink: #f7f7f5;
+      --accent: #f7f7f5;
+      --radius: 18px;
+      --sans: "Inter", -apple-system, "Segoe UI", sans-serif;
+      --disp: "Inter", -apple-system, "Segoe UI", sans-serif;
+      --serif: "Inter", -apple-system, "Segoe UI", sans-serif;
+    }
+    html { background: var(--bg); }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, "Segoe UI", sans-serif;
+      -webkit-tap-highlight-color: rgba(247, 247, 245, 0.14);
+    }
+    ::selection { background: var(--text); color: #0a0a0a; }
+    :focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+    .hd {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(8, 8, 8, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .logo { color: #ffffff; font-weight: 900; font-family: Inter, -apple-system, "Segoe UI", sans-serif; }
+    .logo .slash { color: var(--muted2); }
+    .hd-nav a { color: var(--muted); }
+    .hd-nav a:hover { color: var(--text); }
+    .hd-cta { color: var(--text); font-family: Inter, -apple-system, "Segoe UI", sans-serif; }
+    .hd-book {
+      display: none;
+      align-items: center;
+      min-height: 44px;
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: #f7f7f5;
+      color: #0a0a0a;
+      font-family: Inter, -apple-system, "Segoe UI", sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      border: 1px solid #f7f7f5;
+      white-space: nowrap;
+    }
+    .hd-book:hover { background: #ffffff; border-color: #ffffff; }
+    @media (min-width: 1024px) { .hd-book { display: inline-flex; } }
+    .burger .bar { background: var(--text); }
+    .drawer { background: var(--bg); border-left: 1px solid var(--line); }
+    .dr-link { color: var(--text); border-bottom: 1px solid var(--line); font-family: Inter, -apple-system, "Segoe UI", sans-serif; font-weight: 800; letter-spacing: -0.01em; }
+    .dr-link small { color: var(--muted2); }
+    .btn {
+      border-radius: 999px;
+      min-height: 52px;
+      font-family: Inter, -apple-system, "Segoe UI", sans-serif;
+      font-weight: 700;
+      border: 1px solid #f7f7f5;
+    }
+    .btn.solid { background: #f7f7f5; color: #0a0a0a; border-color: #f7f7f5; }
+    .btn.solid:hover, .btn.solid:focus-visible { background: #ffffff; border-color: #ffffff; color: #0a0a0a; }
+    .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line2); }
+    .btn.ghost:hover, .btn.ghost:focus-visible { border-color: var(--text); background: transparent; color: var(--text); }
+    .text-link { color: var(--text); font-family: Inter, -apple-system, "Segoe UI", sans-serif; }
+    .kick { font-size: 12.5px; letter-spacing: 2px; color: var(--muted2); }
+    .seriff { font-family: Inter, -apple-system, "Segoe UI", sans-serif; font-style: normal; font-weight: 800; letter-spacing: -0.02em; }
+    .sec { border-top: 1px solid var(--line); }
+    .sec-head .no { color: var(--muted2); font-family: Inter, -apple-system, "Segoe UI", sans-serif; }
+    .sec-head h2 { color: var(--text); font-family: Inter, -apple-system, "Segoe UI", sans-serif; font-weight: 800; font-size: clamp(24px, 6vw, 40px); letter-spacing: -1.5px; }
+    .tag-chip { background: var(--card2); border: 1px solid var(--line); color: var(--muted); border-radius: 999px; font-family: Inter, -apple-system, "Segoe UI", sans-serif; }
+    .hero h1 { font-family: Inter, -apple-system, "Segoe UI", sans-serif; font-weight: 900; font-size: clamp(36px, 9vw, 84px); letter-spacing: -2px; line-height: 1.02; color: var(--text); }
+    .hero .lede { color: var(--muted); }
+    .hero-media { border-top: 1px solid var(--line); }
+    .hero-media figure, .proj-media, .sv-media, .studio-media, .phil figure, .fig { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: border-color 0.25s ease, transform 0.25s ease; }
+    .hero-media figcaption, .fig figcaption { color: var(--muted); }
+    .proj:hover .proj-media, .sv:hover .sv-media, .fig:hover { border-color: var(--line2); transform: translateY(-2px); }
+    .proj + .proj, .sv + .sv { border-top: 1px solid var(--line); }
+    .proj-no { color: var(--muted2); font-family: Inter, -apple-system, "Segoe UI", sans-serif; }
+    .proj-no::after { background: var(--line); }
+    .proj-body h3 { font-family: Inter, -apple-system, "Segoe UI", sans-serif; font-weight: 800; letter-spacing: -1px; color: var(--text); }
+    .proj-meta, .proj-body p { color: var(--muted); }
+    .sv-head .no { color: var(--muted2); font-family: Inter, -apple-system, "Segoe UI", sans-serif; }
+    .sv-head h3 { font-family: Inter, -apple-system, "Segoe UI", sans-serif; color: var(--text); }
+    .sv p { color: var(--muted); }
+    .studio-copy h2 { font-family: Inter, -apple-system, "Segoe UI", sans-serif; font-weight: 900; letter-spacing: -1.5px; color: var(--text); }
+    .studio-copy > p { color: var(--muted); }
+    .principles { border-top: 1px solid var(--line); }
+    .principles div { border-bottom: 1px solid var(--line); font-family: Inter, -apple-system, "Segoe UI", sans-serif; color: var(--text); }
+    .principles div span { color: var(--muted); font-family: Inter, -apple-system, "Segoe UI", sans-serif; }
+    .step { border-top: 1px solid var(--line); }
+    .step .n { font-family: Inter, -apple-system, "Segoe UI", sans-serif; font-style: normal; font-weight: 800; color: var(--muted2); }
+    .step h3 { font-family: Inter, -apple-system, "Segoe UI", sans-serif; color: var(--text); }
+    .step p { color: var(--muted); }
+    .phil figcaption b { font-family: Inter, -apple-system, "Segoe UI", sans-serif; color: var(--text); }
+    .phil figcaption span { color: var(--muted); }
+    .j-item { border-top: 1px solid var(--line); }
+    .j-item h3 { font-family: Inter, -apple-system, "Segoe UI", sans-serif; font-weight: 800; letter-spacing: -1px; color: var(--text); }
+    .j-item span.meta2 { color: var(--muted); }
+    .form-panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+    .form-panel h2 { font-family: Inter, -apple-system, "Segoe UI", sans-serif; font-weight: 800; letter-spacing: -1px; color: var(--text); }
+    .form-panel > p { color: var(--muted); }
+    .field label { color: var(--text); font-family: Inter, -apple-system, "Segoe UI", sans-serif; }
+    .field input, .field select, .field textarea {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      color: var(--text);
+      border-radius: 14px;
+      min-height: 52px;
+      font-family: Inter, -apple-system, "Segoe UI", sans-serif;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: var(--muted2); }
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%239c9c9c' stroke-width='1.6'/%3E%3C/svg%3E");
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--text); box-shadow: none; }
+    .form-ok { color: var(--text); }
+    .ci-list { border-top: 1px solid var(--line); }
+    .ci-list a, .ci-list div { border-bottom: 1px solid var(--line); color: var(--text); }
+    .ci-list .k { color: var(--muted2); }
+    .ci-list .v { color: var(--text); }
+    .map-ph { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+    .map-ph span { background: var(--card2); border: 1px solid var(--line); color: var(--muted); border-radius: 999px; }
+    .final { border-top: 1px solid var(--line); }
+    .final h2 { font-family: Inter, -apple-system, "Segoe UI", sans-serif; font-weight: 900; letter-spacing: -1.5px; color: var(--text); }
+    .final p { color: var(--muted); }
+    .cta-band {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: clamp(34px, 8vw, 70px);
+      text-align: center;
+      margin: clamp(36px, 7vw, 72px) 0 0;
+    }
+    .cta-band h2 { font-family: Inter, -apple-system, "Segoe UI", sans-serif; font-weight: 800; font-size: clamp(24px, 6vw, 40px); letter-spacing: -1.5px; color: var(--text); margin-top: 12px; }
+    .cta-band .sub { color: var(--muted); margin-top: 12px; }
+    .cta-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 26px; }
+    footer { border-top: 1px solid var(--line); background: var(--bg); text-align: center; }
+    .ft-logo { color: #ffffff; font-family: Inter, -apple-system, "Segoe UI", sans-serif; font-weight: 900; }
+    .ft-col h4 { color: var(--muted2); }
+    .ft-col a { color: var(--muted); }
+    .ft-col a:hover { color: var(--text); }
+    .socials a { border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+    .socials a:hover { border-color: var(--text); color: var(--text); }
+    .ft-bottom { border-top: 1px solid var(--line); color: var(--muted2); }
+    .ft-bottom a { color: var(--muted2); }
+    .ft-bottom a:hover { color: var(--text); }
+    .skip { background: var(--text); color: #0a0a0a; }
+
     /* ---------- reveal ---------- */
     .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.in { opacity: 1; transform: none; }
@@ -828,6 +989,7 @@
         <a href="#contact">Contact</a>
       </nav>
       <a class="hd-cta" href="#contact">Start a Project <span class="arr">→</span></a>
+      <a class="hd-book" href="https://wa.me/917398644158?text=Hi%20Rudra%2C%20I%20want%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">Book a call</a>
       <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
@@ -1256,6 +1418,16 @@
           <a class="btn ghost" href="#projects">View Our Work</a>
         </div>
       </section>
+
+      <section class="cta-band reveal" aria-label="Call to action">
+        <p class="kick">Let's talk</p>
+        <h2>Got a project in mind?</h2>
+        <p class="sub">Tell us about your space — we reply within two working days.</p>
+        <div class="cta-btns">
+          <a class="btn solid" href="https://wa.me/917398644158?text=Hi%20Rudra%2C%20I%20have%20a%20project%20in%20mind." target="_blank" rel="noopener noreferrer">WhatsApp us</a>
+          <a class="btn ghost" href="#contact">Send a message</a>
+        </div>
+      </section>
     </div>
 
     <footer>
@@ -1289,7 +1461,7 @@
           </div>
         </div>
         <div class="ft-bottom">
-          <span>© 2026 FORM / SPACE · Concept project for a portfolio — studio and all content are fictional.</span>
+          <span>© 2026 FORM / SPACE · Concept site by Rudra</span>
           <span><a href="index.html">← Back to portfolio</a></span>
         </div>
       </div>

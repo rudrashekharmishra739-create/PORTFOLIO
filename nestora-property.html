@@ -3,30 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#fbfaf7" />
+  <meta name="theme-color" content="#080808" />
   <meta name="description" content="The Willow Residence — 4 bedroom home in Greenview. A detailed property listing concept page for NESTORA." />
   <title>The Willow Residence — NESTORA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #fbfaf7;
-      --surface: #ffffff;
-      --surface-2: #f4f2ed;
-      --line: #e6e3dc;
-      --ink: #1d1f24;
-      --muted: #666b74;
-      --accent: #1c6b50;
-      --accent-2: #14503c;
-      --accent-soft: rgba(28, 107, 80, 0.09);
-      --shadow-sm: 0 1px 2px rgba(20, 22, 26, 0.05);
-      --shadow-md: 0 14px 38px rgba(20, 22, 26, 0.09);
+      --bg: #080808;
+      --bg2: #0d0d0d;
+      --card: #111111;
+      --card2: #161616;
+      --line: #232323;
+      --line2: #303030;
+      --text: #f7f7f5;
+      --muted: #9c9c9c;
+      --muted2: #6f6f6f;
       --radius: 18px;
       --header-h: 64px;
       --bar-h: 76px;
-      --font-display: "Fraunces", Georgia, serif;
-      --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,8 +31,8 @@
 
     body {
       background: var(--bg);
-      color: var(--ink);
-      font-family: var(--font-body);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       font-size: 15.5px;
       line-height: 1.6;
       -webkit-tap-highlight-color: transparent;
@@ -50,9 +46,9 @@
 
     a { color: inherit; }
 
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+    :focus-visible { outline: 2px solid var(--text); outline-offset: 2px; border-radius: 4px; }
 
-    .skip-link { position: absolute; left: 12px; top: -60px; z-index: 100; background: var(--accent); color: #fff; font-weight: 700; padding: 10px 18px; border-radius: 8px; transition: top 0.2s ease; }
+    .skip-link { position: absolute; left: 12px; top: -60px; z-index: 100; background: var(--text); color: #0a0a0a; font-weight: 700; padding: 10px 18px; border-radius: 8px; transition: top 0.2s ease; }
 
     .skip-link:focus { top: 12px; }
 
@@ -65,24 +61,26 @@
       align-items: center;
       gap: 10px;
       text-transform: uppercase;
-      letter-spacing: 2.5px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent);
+      letter-spacing: 2px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--muted2);
       margin-bottom: 14px;
     }
 
-    .kicker::before { content: ""; width: 24px; height: 1.5px; background: var(--accent); }
+    .kicker::before { content: ""; width: 24px; height: 1.5px; background: var(--muted2); }
 
-    h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height: 1.1; letter-spacing: -0.4px; }
+    h1, h2, h3, h4 { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 800; line-height: 1.05; letter-spacing: -1px; color: var(--text); }
 
-    h1 { font-size: clamp(34px, 9vw, 60px); }
+    h1 { font-size: clamp(36px, 9vw, 84px); font-weight: 900; letter-spacing: -2.5px; }
 
-    h2 { font-size: clamp(28px, 7.5vw, 44px); margin-bottom: 14px; }
+    h2 { font-size: clamp(24px, 6vw, 40px); margin-bottom: 14px; letter-spacing: -1.5px; }
 
-    h3 { font-size: clamp(21px, 5vw, 26px); margin-bottom: 10px; }
+    h3 { font-size: clamp(21px, 5vw, 26px); margin-bottom: 10px; letter-spacing: -1px; }
 
     .lead { color: var(--muted); font-size: clamp(15px, 4vw, 17px); max-width: 56ch; }
+
+    .eyebrow { text-transform: uppercase; letter-spacing: 2px; font-size: 12.5px; font-weight: 700; color: var(--muted2); margin-bottom: 12px; }
 
     .btn {
       display: inline-flex;
@@ -93,24 +91,27 @@
       padding: 15px 30px;
       border: 1px solid transparent;
       border-radius: 999px;
-      font-family: var(--font-body);
-      font-weight: 600;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-weight: 700;
       font-size: 15.5px;
       text-decoration: none;
       cursor: pointer;
       text-align: center;
+      background: #f7f7f5;
+      color: #0a0a0a;
       transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
     }
 
-    .btn-accent { background: var(--accent); color: #fff; box-shadow: 0 10px 26px rgba(28, 107, 80, 0.25); }
+    .btn-accent { background: #f7f7f5; color: #0a0a0a; border-color: transparent; }
     .btn-accent:active { transform: scale(0.97); }
-    .btn-outline { background: var(--surface); color: var(--ink); border-color: var(--line); }
-    .btn-outline:active { border-color: var(--accent); color: var(--accent); }
+    .btn-outline { background: transparent; color: var(--text); border-color: var(--line2); }
+    .btn-outline:active { border-color: var(--text); }
     .btn-block { width: 100%; }
 
     @media (hover: hover) {
-      .btn-accent:hover { background: var(--accent-2); transform: translateY(-1px); }
-      .btn-outline:hover { border-color: var(--ink); }
+      .btn-accent:hover { background: #ffffff; transform: translateY(-1px); }
+      .btn-outline:hover { border-color: var(--text); }
+      .spec:hover, .amenity:hover, .agent-card:hover, .viewing:hover, .similar .card:hover { border-color: var(--line2); transform: translateY(-2px); }
     }
 
     .chip {
@@ -119,58 +120,67 @@
       gap: 6px;
       font-size: 12.5px;
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
       color: var(--muted);
-      background: var(--surface);
+      background: var(--card2);
       border: 1px solid var(--line);
       border-radius: 999px;
       padding: 10px 15px;
       min-height: 42px;
       line-height: 1.2;
+      text-decoration: none;
     }
 
-    .chip.accent { color: var(--accent); background: var(--accent-soft); border-color: rgba(28, 107, 80, 0.25); }
+    .chip.accent { color: var(--text); background: var(--card2); border-color: var(--line2); }
 
     .svg-ic { flex: none; }
 
     /* header (shared) */
-    .header { position: sticky; top: 0; z-index: 60; background: rgba(251, 250, 247, 0.88); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .header { position: sticky; top: 0; z-index: 50; background: rgba(8,8,8,0.85); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
 
     .header-inner { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; white-space: nowrap; min-height: 44px; padding: 4px 0; }
 
-    .logo-mark { width: 30px; height: 30px; flex: none; border-radius: 10px; background: linear-gradient(135deg, #1c6b50, #0f3d2d); display: grid; place-items: center; color: #fff; box-shadow: 0 4px 12px rgba(28, 107, 80, 0.3); }
+    .logo-mark { width: 30px; height: 30px; flex: none; border-radius: 10px; background: var(--card2); border: 1px solid var(--line2); display: grid; place-items: center; color: var(--text); }
 
-    .logo-text { font-family: var(--font-display); font-weight: 600; font-size: clamp(18px, 4.6vw, 22px); color: var(--ink); line-height: 1; }
+    .logo-text { font-family: Inter, sans-serif; font-weight: 900; font-size: clamp(18px, 4.6vw, 22px); color: var(--text); line-height: 1; letter-spacing: -0.5px; }
+
+    .nav-list { display: flex; align-items: center; gap: 18px; }
 
     .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-weight: 600; font-size: 15px; min-height: 44px; }
 
-    .back-link:hover { color: var(--ink); }
+    .back-link:hover { color: var(--text); }
+
+    .nav-desktop { display: none; align-items: center; gap: 22px; }
+    .nav-desktop a.nav-link { color: var(--muted); text-decoration: none; font-weight: 600; font-size: 14.5px; }
+    .nav-desktop a.nav-link:hover { color: var(--text); }
 
     .header-cta { min-height: 44px; padding: 10px 18px; font-size: 14.5px; }
 
-    .burger { width: 46px; height: 46px; display: flex; flex-direction: column; justify-content: center; gap: 5px; padding: 13px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; cursor: pointer; }
+    .burger { width: 46px; height: 46px; display: flex; flex-direction: column; justify-content: center; gap: 5px; padding: 13px; background: transparent; border: 1px solid var(--line2); border-radius: 12px; cursor: pointer; }
 
-    .burger .bar { width: 100%; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
+    .burger .bar { width: 100%; height: 2px; background: var(--text); border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
 
     body.menu-open .burger .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     body.menu-open .burger .bar:nth-child(2) { opacity: 0; }
     body.menu-open .burger .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    .drawer { position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0; z-index: 55; background: rgba(251, 250, 247, 0.98); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); padding: 24px clamp(18px, 5vw, 32px) 32px; transform: translateX(100%); transition: transform 0.3s ease; display: flex; flex-direction: column; overflow-y: auto; }
+    .drawer { position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0; z-index: 55; background: rgba(8,8,8,0.98); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); padding: 24px clamp(18px, 5vw, 32px) 32px; transform: translateX(100%); transition: transform 0.3s ease; display: flex; flex-direction: column; overflow-y: auto; border-top: 1px solid var(--line); }
 
     body.menu-open .drawer { transform: translateX(0); }
 
-    .drawer a.link { color: var(--ink); text-decoration: none; font-family: var(--font-display); font-weight: 600; font-size: clamp(26px, 7vw, 32px); padding: 14px 0; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
+    .drawer a.link { color: var(--text); text-decoration: none; font-family: Inter, sans-serif; font-weight: 800; letter-spacing: -0.5px; font-size: clamp(26px, 7vw, 32px); padding: 14px 0; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
 
-    .drawer a.link::after { content: ""; width: 8px; height: 8px; border-top: 2px solid var(--accent); border-right: 2px solid var(--accent); transform: rotate(45deg); }
+    .drawer a.link::after { content: ""; width: 8px; height: 8px; border-top: 2px solid var(--muted); border-right: 2px solid var(--muted); transform: rotate(45deg); }
 
     .drawer .cta { margin-top: 28px; }
 
     /* gallery */
     .gallery-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
 
-    .g-main { position: relative; border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #eeece6, #e0ddd5); border: 1px solid var(--line); }
+    .g-main { position: relative; border-radius: 20px; overflow: hidden; background: var(--card); border: 1px solid var(--line); }
 
     .g-main img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -178,11 +188,11 @@
 
     .g-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
 
-    .g-thumb { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 14px; border: 2px solid var(--line); cursor: pointer; background: linear-gradient(135deg, #eeece6, #e0ddd5); padding: 0; transition: border-color 0.2s; }
+    .g-thumb { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 14px; border: 2px solid var(--line); cursor: pointer; background: var(--card); padding: 0; transition: border-color 0.2s; }
 
     .g-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-    .g-thumb.on { border-color: var(--accent); }
+    .g-thumb.on { border-color: var(--text); }
 
     /* title block */
     .p-head { display: grid; gap: 10px; }
@@ -191,33 +201,33 @@
 
     .p-head .crumbs a { color: var(--muted); text-decoration: none; }
 
-    .p-head .crumbs a:hover { color: var(--accent); }
+    .p-head .crumbs a:hover { color: var(--text); }
 
-    .p-head .crumbs .sep { color: #c9c5bc; }
+    .p-head .crumbs .sep { color: var(--muted2); }
 
     .p-loc { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 15px; }
 
-    .p-price { font-family: var(--font-display); font-weight: 600; font-size: clamp(34px, 9vw, 52px); letter-spacing: -0.5px; color: var(--accent-2); }
+    .p-price { font-family: Inter, sans-serif; font-weight: 900; font-size: clamp(34px, 9vw, 52px); letter-spacing: -2px; color: var(--text); }
 
     .p-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
 
     /* spec grid */
     .specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: clamp(22px, 5vw, 34px) 0; }
 
-    .spec { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px; display: flex; gap: 10px; align-items: flex-start; box-shadow: var(--shadow-sm); min-width: 0; }
+    .spec { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; display: flex; gap: 10px; align-items: flex-start; min-width: 0; transition: border-color 0.2s ease, transform 0.2s ease; }
 
     .spec > div { min-width: 0; }
 
-    .spec .ico { width: 40px; height: 40px; flex: none; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; }
+    .spec .ico { width: 40px; height: 40px; flex: none; border-radius: 12px; background: var(--card2); border: 1px solid var(--line); color: var(--text); display: grid; place-items: center; }
 
-    .spec b { display: block; font-weight: 600; font-size: 15.5px; line-height: 1.3; overflow-wrap: anywhere; }
+    .spec b { display: block; font-weight: 700; font-size: 15.5px; line-height: 1.3; overflow-wrap: anywhere; color: var(--text); }
 
     .spec span { color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
 
     /* two-col layout for body content on desktop */
     .p-body { display: grid; gap: clamp(24px, 5vw, 40px); }
 
-    .p-panel { display: grid; gap: clamp(22px, 5vw, 32px); }
+    .p-panel { display: grid; gap: clamp(22px, 5vw, 32px); align-content: start; }
 
     .block p { color: var(--muted); }
 
@@ -227,35 +237,37 @@
 
     .amenities { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
-    .amenity { display: flex; gap: 10px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 13px 14px; font-size: 14.5px; font-weight: 500; }
+    .amenity { display: flex; gap: 10px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 13px 14px; font-size: 14.5px; font-weight: 500; color: var(--text); transition: border-color 0.2s ease, transform 0.2s ease; }
 
-    .amenity svg { flex: none; color: var(--accent); }
+    .amenity svg { flex: none; color: var(--text); }
 
-    .placeholder { border: 1px dashed var(--line); border-radius: 18px; background: var(--surface-2); min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 24px; color: var(--muted); }
+    .placeholder { border: 1px solid var(--line); border-radius: 18px; background: var(--bg2); min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 24px; color: var(--muted); }
 
-    .placeholder b { color: var(--ink); font-size: 16px; display: block; font-family: var(--font-display); font-weight: 600; }
+    .placeholder b { color: var(--text); font-size: 16px; display: block; font-family: Inter, sans-serif; font-weight: 800; }
 
     .placeholder p { font-size: 13.5px; max-width: 30ch; }
 
     .floorplan svg { width: 100%; height: auto; display: block; }
 
     /* agent */
-    .agent-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(20px, 4.5vw, 26px); display: grid; gap: 16px; box-shadow: var(--shadow-sm); }
+    .agent-card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: clamp(20px, 4.5vw, 26px); display: grid; gap: 16px; transition: border-color 0.2s ease, transform 0.2s ease; }
 
     .agent-top { display: flex; align-items: center; gap: 14px; }
 
-    .agent-avatar { width: 64px; height: 64px; flex: none; border-radius: 50%; overflow: hidden; border: 2px solid var(--line); background: linear-gradient(135deg, #eeece6, #e0ddd5); }
+    .agent-top h3 { color: var(--text); }
+
+    .agent-avatar { width: 64px; height: 64px; flex: none; border-radius: 50%; overflow: hidden; border: 2px solid var(--line2); background: var(--card2); }
 
     .agent-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-    .agent-role { color: var(--accent); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; }
+    .agent-role { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; }
 
     .agent-card p { color: var(--muted); font-size: 14.5px; }
 
     /* viewing form */
-    .viewing { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(20px, 4.5vw, 28px); box-shadow: var(--shadow-sm); }
+    .viewing { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: clamp(20px, 4.5vw, 28px); transition: border-color 0.2s ease; }
 
-    .heading { font-family: var(--font-display); font-weight: 600; font-size: clamp(22px, 5.5vw, 28px); margin-bottom: 4px; }
+    .heading { font-family: Inter, sans-serif; font-weight: 800; letter-spacing: -1px; font-size: clamp(22px, 5.5vw, 28px); margin-bottom: 4px; color: var(--text); }
 
     .form { display: grid; gap: 14px; margin-top: 16px; }
 
@@ -264,46 +276,60 @@
     .form label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
 
     .form input, .form select, .form textarea {
-      width: 100%; background: var(--bg); border: 1px solid var(--line); border-radius: 12px;
-      padding: 14px 16px; min-height: 52px; color: var(--ink); font-family: var(--font-body); font-size: 15.5px;
+      width: 100%; background: var(--bg2); border: 1px solid var(--line); border-radius: 14px;
+      padding: 14px 16px; min-height: 52px; color: var(--text); font-family: Inter, sans-serif; font-size: 15.5px;
       transition: border-color 0.2s; appearance: none;
     }
 
+    .form input::placeholder, .form textarea::placeholder { color: var(--muted2); }
+
     .form select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23666b74' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%239c9c9c' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: right 16px center; padding-right: 42px;
     }
 
+    .form select:invalid { color: var(--muted2); }
+
     .form textarea { min-height: 110px; resize: vertical; }
 
-    .form select:focus, .form input:focus, .form textarea:focus { outline: none; border-color: var(--accent); }
+    .form select:focus, .form input:focus, .form textarea:focus { outline: none; border-color: var(--text); }
 
-    .form-success { display: none; align-items: center; gap: 10px; background: var(--accent-soft); border: 1px solid rgba(28, 107, 80, 0.35); color: var(--accent); border-radius: 14px; padding: 15px 16px; font-size: 14.5px; font-weight: 500; }
+    .form-success { display: none; align-items: center; gap: 10px; background: var(--card2); border: 1px solid var(--line2); color: var(--text); border-radius: 14px; padding: 15px 16px; font-size: 14.5px; font-weight: 500; }
 
     .form-success.show { display: flex; }
 
     .similar { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 22px; }
 
-    .similar .card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
+    .similar .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; transition: border-color 0.2s ease, transform 0.2s ease; }
 
     .similar .card img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
 
     .similar .card .b { padding: 14px 16px; display: grid; gap: 6px; }
 
-    .similar .card b.prop { font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: -0.3px; }
+    .similar .card b.prop { font-family: Inter, sans-serif; font-weight: 800; font-size: 18px; letter-spacing: -0.5px; color: var(--text); }
 
     .similar .card span { color: var(--muted); font-size: 13px; }
 
-    .similar .card .price { color: var(--accent-2); font-weight: 600; }
+    .similar .card .price { color: var(--text); font-weight: 700; }
 
-    .similar .card a { min-height: 44px; display: inline-flex; align-items: center; color: var(--accent); font-weight: 600; font-size: 14px; text-decoration: none; }
+    .similar .card a { min-height: 44px; display: inline-flex; align-items: center; color: var(--text); font-weight: 600; font-size: 14px; text-decoration: none; }
+
+    /* CTA band */
+    .cta-band { background: var(--bg2); border: 1px solid var(--line); border-radius: 26px; padding: clamp(34px, 8vw, 70px); text-align: center; display: grid; gap: 14px; justify-items: center; }
+    .cta-band h2 { margin-bottom: 0; }
+    .cta-band p { color: var(--muted); max-width: 52ch; }
+    .cta-band .row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 8px; }
+
+    footer { border-top: 1px solid var(--line); padding: 28px 0 40px; text-align: center; color: var(--muted2); font-size: 14px; }
+    footer a { color: var(--muted2); text-decoration: none; margin: 0 8px; }
+    footer a:hover { color: var(--text); }
 
     /* sticky bottom bar (mobile) */
     .cta-bar {
       position: fixed;
       left: 0; right: 0; bottom: 0;
       z-index: 50;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(8,8,8,0.95);
       -webkit-backdrop-filter: blur(14px);
       backdrop-filter: blur(14px);
       border-top: 1px solid var(--line);
@@ -337,6 +363,7 @@
     @media (min-width: 1024px) {
       .burger { display: none; }
       .drawer { display: none; }
+      .nav-desktop { display: flex; }
       .back-link { display: inline-flex; }
       .gallery-grid { grid-template-columns: 1.6fr 1fr; }
       .g-main { aspect-ratio: auto; min-height: 480px; }
@@ -377,6 +404,11 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
           Back to homes
         </a>
+        <nav class="nav-desktop" aria-label="Desktop navigation">
+          <a class="nav-link" href="nestora.html#properties">Work</a>
+          <a class="nav-link" href="#related">FAQ</a>
+          <a class="btn btn-accent header-cta" href="https://wa.me/917398644158?text=Hi%20Rudra%2C%20I%20want%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">Book a call</a>
+        </nav>
       </div>
 
       <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
@@ -387,7 +419,7 @@
     </div>
   </header>
 
-  <div class="drawer" id="drawer">
+  <div class="menu drawer" id="drawer" aria-hidden="true">
     <nav class="drawer-nav" aria-label="Mobile navigation">
       <a class="link" href="nestora.html">All properties</a>
       <a class="link" href="nestora.html#areas">Areas</a>
@@ -410,6 +442,7 @@
             <span class="sep">/</span>
             <span>The Willow Residence</span>
           </div>
+          <span class="eyebrow">NESTORA · Greenview listing</span>
           <h1>The Willow Residence</h1>
           <span class="p-loc">
             <svg class="svg-ic" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
@@ -465,6 +498,7 @@
         <div class="p-body">
           <div class="p-panel">
             <div class="block reveal">
+              <div class="eyebrow">Overview</div>
               <h2>About this home</h2>
               <p>
                 The Willow Residence is a modern four-bedroom home set on a quiet Greenview lane. Wide openings, a central courtyard and a landscaped garden give it a calm, open feel.
@@ -475,6 +509,7 @@
             </div>
 
             <div class="block reveal">
+              <div class="eyebrow">Details</div>
               <h2>Amenities</h2>
               <div class="amenities">
                 <div class="amenity"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Landscaped garden</div>
@@ -487,21 +522,22 @@
             </div>
 
             <div class="block reveal">
+              <div class="eyebrow">Plan</div>
               <h2>Floor plan</h2>
               <div class="placeholder floorplan">
                 <div style="max-width:420px; width:100%;">
                   <svg viewBox="0 0 400 300" role="img" aria-label="Simple placeholder floor plan of a four bedroom home">
-                    <rect x="4" y="4" width="392" height="292" fill="#ffffff" stroke="#d8d4ca" stroke-width="3" rx="10"/>
-                    <rect x="18" y="18" width="160" height="120" fill="#f4f2ed" stroke="#d8d4ca" stroke-width="2"/>
-                    <text x="98" y="85" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#8a8f98">Living</text>
-                    <rect x="190" y="18" width="120" height="120" fill="#f4f2ed" stroke="#d8d4ca" stroke-width="2"/>
-                    <text x="250" y="85" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#8a8f98">Kitchen</text>
-                    <rect x="18" y="150" width="145" height="120" fill="#f4f2ed" stroke="#d8d4ca" stroke-width="2"/>
-                    <text x="90" y="217" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#8a8f98">Bedroom 1</text>
-                    <rect x="175" y="150" width="145" height="120" fill="#f4f2ed" stroke="#d8d4ca" stroke-width="2"/>
-                    <text x="247" y="217" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#8a8f98">Bedroom 2</text>
-                    <rect x="332" y="18" width="54" height="252" fill="#f4f2ed" stroke="#d8d4ca" stroke-width="2"/>
-                    <text x="359" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#8a8f98">Bath</text>
+                    <rect x="4" y="4" width="392" height="292" fill="#111111" stroke="#303030" stroke-width="3" rx="10"/>
+                    <rect x="18" y="18" width="160" height="120" fill="#161616" stroke="#303030" stroke-width="2"/>
+                    <text x="98" y="85" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#9c9c9c">Living</text>
+                    <rect x="190" y="18" width="120" height="120" fill="#161616" stroke="#303030" stroke-width="2"/>
+                    <text x="250" y="85" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#9c9c9c">Kitchen</text>
+                    <rect x="18" y="150" width="145" height="120" fill="#161616" stroke="#303030" stroke-width="2"/>
+                    <text x="90" y="217" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#9c9c9c">Bedroom 1</text>
+                    <rect x="175" y="150" width="145" height="120" fill="#161616" stroke="#303030" stroke-width="2"/>
+                    <text x="247" y="217" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#9c9c9c">Bedroom 2</text>
+                    <rect x="332" y="18" width="54" height="252" fill="#161616" stroke="#303030" stroke-width="2"/>
+                    <text x="359" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#9c9c9c">Bath</text>
                   </svg>
                 </div>
                 <b>Floor plan placeholder</b>
@@ -510,6 +546,7 @@
             </div>
 
             <div class="block reveal">
+              <div class="eyebrow">Area</div>
               <h2>Location</h2>
               <div class="placeholder">
                 <b>Map placeholder</b>
@@ -537,6 +574,7 @@
             </div>
 
             <div class="viewing reveal" id="viewing">
+              <div class="eyebrow">Inquiry</div>
               <div class="heading">Request a Viewing</div>
               <p class="lead">Pick a rough date and time — Arjun will confirm availability.</p>
               <form class="form" id="viewForm" novalidate>
@@ -583,7 +621,9 @@
 
     <section id="related">
       <div class="wrap">
+        <div class="eyebrow reveal">Keep exploring</div>
         <h2 class="reveal">Similar homes</h2>
+        <p class="lead reveal" style="margin-bottom:6px;">More fictional NESTORA listings in nearby areas.</p>
         <div class="similar">
           <a class="card reveal" href="nestora-property.html">
             <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&h=440&q=70" alt="Riverside House exterior" loading="lazy" decoding="async" width="700" height="440" />
@@ -615,7 +655,33 @@
         </div>
       </div>
     </section>
+
+    <section aria-label="Contact">
+      <div class="wrap">
+        <div class="cta-band reveal">
+          <div class="eyebrow">Let's talk</div>
+          <h2>Got a project in mind?</h2>
+          <p>Talk to the NESTORA concept team about this listing, nearby areas, or a similar site for your own portfolio build.</p>
+          <div class="row">
+            <a class="btn btn-accent" href="https://wa.me/917398644158?text=Hi%20Rudra%2C%20I%20have%20a%20project%20in%20mind." target="_blank" rel="noopener noreferrer">WhatsApp us</a>
+            <a class="btn btn-outline" href="#viewing">Send a message</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <div class="wrap">
+      <div>© 2026 NESTORA · Concept site by Rudra</div>
+      <div style="margin-top:10px;">
+        <a href="nestora.html">All properties</a>
+        <a href="nestora.html#areas">Areas</a>
+        <a href="nestora.html#agents">Agents</a>
+        <a href="nestora.html#inquiry">Contact</a>
+      </div>
+    </div>
+  </footer>
 
   <div class="cta-bar" id="ctaBar">
     <a class="btn btn-outline" href="#viewing">Contact Agent</a>

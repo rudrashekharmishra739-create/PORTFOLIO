@@ -7,18 +7,20 @@
   <title>Rudra · Web Developer — Handcrafted Websites That Feel Alive</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0a0b10;
-      --card: #14161f;
-      --line: #232838;
-      --accent: #7c8cff;
-      --accent2: #b06bff;
-      --text: #eef0f8;
-      --muted: #9aa3bd;
-      --radius: 16px;
-      --header-h: 60px;
+      --bg: #080808;
+      --bg2: #0d0d0d;
+      --card: #111111;
+      --card2: #161616;
+      --line: #232323;
+      --line2: #303030;
+      --text: #f7f7f5;
+      --muted: #9c9c9c;
+      --muted2: #6f6f6f;
+      --radius: 18px;
+      --header-h: 64px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,26 +39,13 @@
 
     body.menu-open { overflow: hidden; }
 
-    /* soft glow backdrop */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(600px 350px at 85% -5%, rgba(124, 140, 255, 0.18), transparent 60%),
-        radial-gradient(500px 300px at 10% 5%, rgba(176, 107, 255, 0.12), transparent 60%);
-      pointer-events: none;
-      z-index: 0;
-      animation: aurora 18s ease-in-out infinite alternate;
-    }
-
     .wrap {
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 1200px;
+      max-width: 1160px;
       margin-inline: auto;
-      padding-inline: clamp(16px, 5vw, 32px);
+      padding-inline: clamp(18px, 5vw, 32px);
     }
 
     /* ---- header / nav ---- */
@@ -64,11 +53,13 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      background: rgba(10, 11, 16, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(8, 8, 8, 0.85);
       border-bottom: 1px solid var(--line);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
+    body.scrolled .header { background: rgba(8, 8, 8, 0.95); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45); }
 
     .header-inner {
       height: var(--header-h);
@@ -79,40 +70,36 @@
     }
 
     .logo {
-      font-weight: 800;
-      font-size: clamp(16px, 4.5vw, 19px);
+      font-weight: 900;
+      font-size: clamp(17px, 4.5vw, 20px);
       letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
       display: flex;
       align-items: center;
       gap: 8px;
-      color: var(--text);
-      text-decoration: none;
     }
-
-    .logo-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 12px rgba(124, 140, 255, 0.8);
-      flex: none;
-    }
+    .logo small { font-size: 11px; font-weight: 600; color: var(--muted2); letter-spacing: 1px; text-transform: uppercase; }
 
     .nav { display: none; }
 
-    .nav a, .nav button {
+    .nav-list { display: flex; gap: clamp(18px, 2.6vw, 30px); align-items: center; }
+
+    .nav a {
       color: var(--muted);
       text-decoration: none;
       font-size: 15px;
       font-weight: 600;
-      background: none;
-      border: none;
-      cursor: pointer;
+      transition: color 0.2s;
     }
-
     .nav a:hover { color: var(--text); }
 
-    .nav-list { display: flex; gap: clamp(16px, 3vw, 28px); align-items: center; }
+    .btn--sm {
+      min-height: 44px;
+      padding: 10px 20px;
+      font-size: 14.5px;
+      width: auto;
+    }
 
     /* hamburger */
     .burger {
@@ -129,37 +116,29 @@
       cursor: pointer;
       margin-right: -10px;
     }
-
-    .burger .bar {
-      width: 100%;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: transform 0.25s ease, opacity 0.2s ease;
-    }
-
+    .burger .bar { width: 100%; height: 2px; background: var(--text); border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
     body.menu-open .burger .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     body.menu-open .burger .bar:nth-child(2) { opacity: 0; }
     body.menu-open .burger .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+    /* mobile drawer */
     .menu {
       position: fixed;
       top: var(--header-h);
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(10, 11, 16, 0.97);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(8, 8, 8, 0.98);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       display: flex;
       flex-direction: column;
-      padding: 24px clamp(16px, 5vw, 32px);
+      padding: 24px clamp(18px, 5vw, 32px);
       gap: 6px;
       transform: translateX(100%);
       transition: transform 0.3s ease;
       z-index: 40;
     }
-
     body.menu-open .menu { transform: translateX(0); }
 
     .menu a {
@@ -173,36 +152,33 @@
       align-items: center;
       justify-content: space-between;
     }
-
-    .menu a::after { content: "→"; color: var(--accent); }
-
+    .menu a::after { content: "→"; color: var(--muted); }
     .menu-cta { margin-top: 28px; }
 
     /* ---- typography ---- */
     h1 {
-      font-size: clamp(34px, 10vw, 64px);
-      font-weight: 800;
-      line-height: 1.12;
-      letter-spacing: -1.5px;
+      font-size: clamp(36px, 10vw, 92px);
+      font-weight: 900;
+      line-height: 1.04;
+      letter-spacing: -2.5px;
     }
 
     h2 {
-      font-size: clamp(22px, 6vw, 34px);
-      font-weight: 700;
-      letter-spacing: -0.5px;
+      font-size: clamp(24px, 6vw, 40px);
+      font-weight: 800;
+      letter-spacing: -1px;
       margin-bottom: 12px;
     }
 
-    .gradient {
-      background: linear-gradient(120deg, var(--accent), var(--accent2), var(--accent));
-      background-size: 220% 220%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradshift 7s ease infinite;
+    .eyebrow {
+      color: var(--muted2);
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
-    .sub { color: var(--muted); }
+    .sub { color: var(--muted); font-size: clamp(15px, 4vw, 17px); }
 
     /* ---- buttons ---- */
     .btn {
@@ -211,96 +187,131 @@
       justify-content: center;
       gap: 8px;
       min-height: 52px;
-      padding: 14px 28px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff;
-      border: none;
+      padding: 14px 30px;
+      background: #f7f7f5;
+      color: #0a0a0a;
+      border: 1px solid #f7f7f5;
       border-radius: 999px;
       text-decoration: none;
       font-family: inherit;
       font-weight: 700;
       font-size: 16px;
-      box-shadow: 0 8px 24px rgba(124, 140, 255, 0.35);
-      transition: transform 0.15s ease, box-shadow 0.2s ease;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease;
       cursor: pointer;
       text-align: center;
       width: 100%;
+      position: relative;
+      overflow: hidden;
     }
-
-    .btn:active { transform: scale(0.97); box-shadow: 0 4px 12px rgba(124, 140, 255, 0.3); }
+    .btn:active { transform: scale(0.97); }
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -85%;
+      width: 45%;
+      height: 100%;
+      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.55s ease;
+      pointer-events: none;
+    }
 
     .btn-ghost {
-      background: var(--card);
+      background: transparent;
       color: var(--text);
-      box-shadow: none;
-      border: 1px solid var(--line);
+      border-color: var(--line2);
+    }
+    .btn-ghost:active { border-color: var(--text); }
+
+    @media (hover: hover) {
+      .btn:hover::before { left: 160%; }
+      .btn:hover { box-shadow: 0 14px 34px rgba(255, 255, 255, 0.12); transform: translateY(-2px); }
+      .btn-ghost:hover { border-color: var(--text); background: rgba(255, 255, 255, 0.05); }
     }
 
-    .btn-ghost:active { border-color: var(--accent); }
-
-    /* ---- sections base ---- */
-    section { padding-block: clamp(40px, 10vw, 88px); scroll-margin-top: calc(var(--header-h) + 8px); }
-
-    .section-head { margin-bottom: clamp(20px, 5vw, 36px); }
-
-    .section-head h2 { margin-bottom: 8px; }
-
-    .section-head .sub { font-size: clamp(15px, 4vw, 17px); }
+    /* ---- sections ---- */
+    section { padding-block: clamp(52px, 12vw, 110px); scroll-margin-top: calc(var(--header-h) + 8px); }
+    .section-head { margin-bottom: clamp(24px, 5vw, 40px); max-width: 46ch; }
+    .section-head .eyebrow { display: block; margin-bottom: 10px; }
 
     /* ---- hero ---- */
-    .hero { padding-top: clamp(36px, 9vw, 88px); }
-
+    .hero { padding-top: clamp(44px, 10vw, 110px); }
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
       font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      background: rgba(124, 140, 255, 0.12);
-      border: 1px solid rgba(124, 140, 255, 0.3);
-      padding: 7px 14px;
+      font-weight: 700;
+      color: var(--muted);
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 8px 14px;
       border-radius: 999px;
-      margin-bottom: 22px;
+      margin-bottom: 26px;
       white-space: nowrap;
     }
-
     .badge .pulse {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--accent);
-      animation: pulse 2s infinite;
+      background: #7ee787;
+      animation: pulse 2.2s infinite;
     }
-
     @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(124, 140, 255, 0.55); }
-      50% { box-shadow: 0 0 0 6px rgba(124, 140, 255, 0); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(126, 231, 135, 0.55); }
+      50% { box-shadow: 0 0 0 6px rgba(126, 231, 135, 0); }
     }
 
-    .hero h1 { margin-bottom: 18px; }
-
+    .hero h1 { margin-bottom: 20px; }
     .hero-lead {
       color: var(--muted);
-      font-size: clamp(16px, 4.5vw, 19px);
-      max-width: 34ch;
-      margin-bottom: 28px;
+      font-size: clamp(16px, 4.5vw, 20px);
+      max-width: 44ch;
+      margin-bottom: 26px;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 30px;
+    .hero-actions { display: flex; flex-direction: column; gap: 12px; margin-bottom: 34px; }
+
+    /* shimmering wordmark */
+    .gradient {
+      background: linear-gradient(110deg, #f7f7f5 30%, #b9b9b4 50%, #f7f7f5 70%);
+      background-size: 220% 220%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradshift 7s ease infinite;
     }
+    @keyframes gradshift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* roles typewriter */
+    .roles {
+      margin-top: 6px;
+      font-size: clamp(15px, 4.5vw, 18px);
+      font-weight: 700;
+      min-height: 1.7em;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+    .roles .rw { white-space: nowrap; }
+    .caret {
+      display: inline-block;
+      width: 2px;
+      height: 1.05em;
+      margin-left: 5px;
+      background: var(--text);
+      border-radius: 2px;
+      animation: blink 1.05s steps(1) infinite;
+    }
+    @keyframes blink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
 
     /* ---- skills ---- */
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
     .skill {
       background: var(--card);
       border: 1px solid var(--line);
@@ -308,56 +319,69 @@
       min-height: 44px;
       display: inline-flex;
       align-items: center;
-      border-radius: 14px;
+      border-radius: 999px;
       font-size: 14.5px;
       font-weight: 600;
-      color: #c9d0e2;
+      color: #cfcfca;
+      transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    }
+    @media (hover: hover) {
+      .skill:hover { transform: translateY(-2px); border-color: var(--line2); color: var(--text); }
     }
 
-    /* ---- projects ---- */
-    .projects {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-    }
+    /* ---- work (projects) ---- */
+    .work-list { display: grid; gap: 14px; }
 
     .project {
       background: var(--card);
       border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: clamp(16px, 4vw, 24px);
+      border-radius: var(--radius);
+      padding: clamp(14px, 3vw, 20px);
       display: grid;
       gap: 14px;
       cursor: pointer;
-      transition: border-color 0.2s, transform 0.15s;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
-
-    .project:active { border-color: var(--accent); transform: scale(0.99); }
+    .project:active { border-color: var(--text); transform: scale(0.992); }
+    .project:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
 
     .thumb {
       position: relative;
-      aspect-ratio: 16 / 9;
-      border-radius: 16px;
+      aspect-ratio: 16 / 10;
+      border-radius: 14px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: clamp(34px, 10vw, 48px);
+      font-size: clamp(30px, 8vw, 42px);
       width: 100%;
       transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1);
       will-change: transform;
     }
+    .thumb.t1 { background: linear-gradient(135deg, #1a1a1a, #2c2c2c); }
+    .thumb.t2 { background: linear-gradient(135deg, #15181a, #262d31); }
+    .thumb.t3 { background: linear-gradient(135deg, #181a16, #2a2d26); }
+    .thumb.t4 { background: linear-gradient(135deg, #1a1816, #2e2a26); }
+    .thumb.t5 { background: linear-gradient(135deg, #1a1613, #2e2822); }
+    .thumb.t6 { background: linear-gradient(135deg, #151a18, #26302c); }
+    .thumb.t7 { background: linear-gradient(135deg, #1a1814, #2e2b24); }
+    .thumb.t8 { background: linear-gradient(135deg, #14151a, #262b33); }
 
-    .thumb.t1 { background: linear-gradient(135deg, #2a3a7a, #4a5ec0); }
-    .thumb.t2 { background: linear-gradient(135deg, #7a2a6a, #c04a9e); }
-    .thumb.t3 { background: linear-gradient(135deg, #1f4d3a, #2f9e6f); }
-    .thumb.t4 { background: linear-gradient(135deg, #3a2b18, #c9a35c); }
-    .thumb.t5 { background: linear-gradient(135deg, #5a1f0e, #b2431f); }
-    .thumb.t6 { background: linear-gradient(135deg, #123b2e, #2f5d4a); }
-    .thumb.t7 { background: linear-gradient(135deg, #3a2617, #b5692f); }
-    .thumb.t8 { background: linear-gradient(135deg, #1e1b4b, #4f46e5); }
+    .project h3 { font-size: clamp(18px, 4.5vw, 22px); font-weight: 800; letter-spacing: -0.4px; }
+    .project p { color: var(--muted); font-size: clamp(14px, 3.8vw, 15.5px); }
 
-    .project h3 { font-size: clamp(17px, 4.5vw, 20px); font-weight: 700; }
+    .meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--card2);
+      border: 1px solid var(--line);
+      padding: 6px 12px;
+      border-radius: 999px;
+    }
 
     .project-link {
       display: inline-flex;
@@ -365,25 +389,69 @@
       gap: 8px;
       font-weight: 700;
       font-size: 14.5px;
-      color: var(--accent);
+      color: var(--text);
       text-decoration: none;
       min-height: 44px;
+      width: max-content;
+      border-bottom: 1px solid var(--line2);
+    }
+    .project-link:hover { border-color: var(--text); }
+    .project-link .arr { display: inline-block; transition: transform 0.25s ease; }
+    .project:active .arr { transform: translateX(4px); }
+    .project:hover .arr { transform: translateX(4px); }
+
+    /* ---- services ---- */
+    .services { display: grid; gap: 12px; grid-template-columns: 1fr; }
+    .service {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(18px, 3.5vw, 24px);
+      display: grid;
+      gap: 8px;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    .service strong { font-size: clamp(17px, 4.5vw, 20px); font-weight: 800; letter-spacing: -0.3px; }
+    .service span { color: var(--muted); font-size: 14.5px; line-height: 1.55; }
+    @media (hover: hover) {
+      .service:hover { transform: translateY(-3px); border-color: var(--line2); }
     }
 
-    .project p { color: var(--muted); font-size: clamp(14px, 3.8vw, 15.5px); }
-
-    .meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-
-    .tag {
-      font-size: 11px;
+    /* ---- FAQ ---- */
+    .faq { border-top: 1px solid var(--line); }
+    .faq details { border-bottom: 1px solid var(--line); }
+    .faq summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 4px;
+      font-size: clamp(16px, 4.5vw, 19px);
       font-weight: 700;
-      letter-spacing: 0.3px;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: rgba(124, 140, 255, 0.1);
-      padding: 6px 12px;
-      border-radius: 999px;
+      letter-spacing: -0.2px;
+      min-height: 64px;
+      touch-action: manipulation;
     }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: "+";
+      flex: none;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--line2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--muted);
+      transition: transform 0.25s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .faq details[open] summary::after { transform: rotate(45deg); color: var(--text); border-color: var(--text); }
+    .faq details p { color: var(--muted); padding: 0 4px 22px; max-width: 70ch; font-size: 15px; }
 
     /* ---- contact ---- */
     .contact-grid { display: grid; gap: 24px; }
@@ -393,21 +461,14 @@
       gap: 12px;
       background: var(--card);
       border: 1px solid var(--line);
-      border-radius: 22px;
+      border-radius: var(--radius);
       padding: clamp(18px, 4vw, 28px);
     }
-
-    .field label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
+    .field label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
 
     input, textarea {
       width: 100%;
-      background: var(--bg);
+      background: var(--bg2);
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 15px 16px;
@@ -417,18 +478,11 @@
       font-size: 16px;
       transition: border-color 0.2s;
     }
-
     textarea { min-height: 130px; resize: vertical; }
+    input:focus, textarea:focus { outline: none; border-color: var(--text); }
+    input::placeholder, textarea::placeholder { color: var(--muted2); }
 
-    input:focus, textarea:focus { outline: none; border-color: var(--accent); }
-
-    input::placeholder, textarea::placeholder { color: var(--muted); }
-
-    .contact-info {
-      display: grid;
-      gap: 12px;
-    }
-
+    .contact-info { display: grid; gap: 12px; }
     .info-card {
       display: flex;
       align-items: center;
@@ -442,8 +496,9 @@
       font-size: 15px;
       font-weight: 600;
       min-height: 56px;
+      transition: border-color 0.2s ease;
     }
-
+    @media (hover: hover) { .info-card:hover { border-color: var(--line2); } }
     .info-card .ico {
       width: 40px;
       height: 40px;
@@ -452,72 +507,34 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(124, 140, 255, 0.12);
-      color: var(--accent);
+      background: var(--card2);
+      border: 1px solid var(--line);
+      color: var(--text);
       font-size: 18px;
     }
+    .info-card span:last-child { min-width: 0; overflow-wrap: anywhere; }
 
-    .info-card span:last-child {
-      min-width: 0;
-      overflow-wrap: anywhere;
+    /* ---- big CTA band ---- */
+    .cta-band {
+      text-align: center;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: clamp(34px, 8vw, 70px) clamp(20px, 5vw, 48px);
     }
+    .cta-band h2 { margin-bottom: 10px; }
+    .cta-band p { color: var(--muted); margin-bottom: 26px; }
+    .cta-actions { display: flex; flex-direction: column; gap: 12px; justify-content: center; }
 
     footer {
       text-align: center;
       padding-block: 28px 40px;
-      color: var(--muted);
+      color: var(--muted2);
       font-size: 14px;
       border-top: 1px solid var(--line);
     }
-
-    footer a { color: var(--accent); text-decoration: none; }
-
-    /* ============ tablet (>= 640px) ============ */
-    @media (min-width: 640px) {
-      .hero-actions { flex-direction: row; }
-      .hero-actions .btn { width: auto; }
-      .projects { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    /* ============ desktop (>= 1024px) ============ */
-    @media (min-width: 1024px) {
-      .burger { display: none; }
-
-      .nav { display: flex; }
-
-      .menu { display: none; }
-
-      .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
-
-      .hero-media { display: block; }
-
-      .projects { grid-template-columns: repeat(3, 1fr); }
-
-      .contact-grid { grid-template-columns: 1.2fr 1fr; align-items: start; }
-    }
-
-    /* hero media visual — hidden on mobile, shown on desktop */
-    .hero-media { display: none; }
-
-    .hero-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 28px;
-      display: grid;
-      gap: 16px;
-    }
-
-    .hero-card .thumb { aspect-ratio: 1 / 1; font-size: 64px; }
-
-    .hero-card .row {
-      display: flex;
-      justify-content: space-between;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .hero-card .row b { color: var(--text); }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
 
     /* ---- reveal on scroll ---- */
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1); will-change: opacity, transform; }
@@ -531,119 +548,7 @@
 
     .skills .reveal:not(.in) { transition-delay: calc(var(--i, 0) * 0.04s); }
     .rv:not(.in) { transition-delay: calc(var(--i, 0) * 0.05s); }
-
-    /* roles typewriter */
-    .roles {
-      margin-top: 14px;
-      font-size: clamp(16px, 4.5vw, 19px);
-      font-weight: 700;
-      min-height: 1.7em;
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .roles .rw { white-space: nowrap; }
-    .caret {
-      display: inline-block;
-      width: 2px;
-      height: 1.05em;
-      margin-left: 4px;
-      background: var(--accent);
-      border-radius: 2px;
-      animation: blink 1.05s steps(1) infinite;
-    }
-    @keyframes blink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
-
-    /* drifting aurora + shimmering gradient */
-    @keyframes aurora {
-      0% { transform: translate3d(0, 0, 0) scale(1); }
-      100% { transform: translate3d(-2.5%, 2%, 0) scale(1.06); }
-    }
-    @keyframes gradshift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    /* button shine sweep */
-    .btn { position: relative; overflow: hidden; }
-    .btn::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -85%;
-      width: 45%;
-      height: 100%;
-      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-      transform: skewX(-20deg);
-      transition: left 0.55s ease;
-      pointer-events: none;
-    }
-
-    /* desktops only: lifts + sweep */
-    @media (hover: hover) {
-      .btn:hover::before { left: 160%; }
-      .btn:hover { box-shadow: 0 14px 34px rgba(124, 140, 255, 0.42); }
-
-      .project { transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease; }
-      .project:hover {
-        transform: translateY(-5px);
-        border-color: rgba(124, 140, 255, 0.55);
-        box-shadow: 0 22px 46px rgba(124, 140, 255, 0.16);
-      }
-
-      .skill { transition: opacity 0.5s ease, transform 0.25s ease, border-color 0.25s ease, color 0.25s ease; }
-      .skill:hover { transform: translateY(-2px); border-color: rgba(124, 140, 255, 0.45); color: var(--text); }
-    }
-
-    /* hero card float (desktop) */
-    @keyframes bob {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    .hero-card { animation: bob 6s ease-in-out infinite; }
-
-    /* contact success panel */
-    .contact-ok {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 30px 26px;
-      text-align: center;
-    }
-    .contact-ok .big { font-size: 34px; }
-    .contact-ok h3 { font-size: clamp(20px, 5vw, 24px); margin: 10px 0 6px; }
-    .contact-ok p { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
-    .contact-ok .btn { width: auto; }
-    .deliver { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
-    .deliver .btn { width: 100%; justify-content: center; display: flex; }
-
-    /* ---- mobile tap hardening ---- */
-    .project, .project-link, .btn, .burger, .dr-link, .menu-cta, .info-card { touch-action: manipulation; }
-
-    /* thumb zoom + inner glow (desktop) */
-    .thumb::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(120% 120% at 50% 40%, rgba(124, 140, 255, 0.22), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.45s ease;
-      pointer-events: none;
-    }
-    .project-link .arr { display: inline-block; transition: transform 0.25s ease; }
-    .project:active .arr { transform: translateX(4px); }
-    .project:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-
-    @media (hover: hover) {
-      .project:hover .thumb::after { opacity: 1; }
-      .project:hover .thumb { transform: scale(1.045); }
-      .project-link:hover .arr { transform: translateX(4px); }
-    }
-
-    /* navbar background on scroll */
-    .header { transition: background-color 0.3s ease, box-shadow 0.3s ease; }
-    body.scrolled .header { background: rgba(10, 11, 16, 0.94); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); }
+    .service.reveal:not(.in) { transition-delay: calc(var(--i, 0) * 0.05s); }
 
     /* cursor glow (fine-pointer devices only) */
     .cursor-glow {
@@ -654,7 +559,7 @@
       height: 320px;
       margin: -160px 0 0 -160px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(124, 140, 255, 0.09), rgba(124, 140, 255, 0.03) 45%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02) 45%, transparent 70%);
       pointer-events: none;
       z-index: 5;
       mix-blend-mode: screen;
@@ -663,13 +568,6 @@
       will-change: transform;
     }
     body.glow-on .cursor-glow { opacity: 1; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .cursor-glow { display: none; }
-      .thumb { transition: none; }
-      .thumb::after { display: none; }
-      .project-link .arr { transition: none; }
-    }
 
     /* ---- local-file notice (WhatsApp / content:// on Android) ---- */
     .host-notice {
@@ -680,7 +578,7 @@
       width: min(calc(100% - 32px), 520px);
       z-index: 70;
       background: var(--card);
-      border: 1px solid rgba(124, 140, 255, 0.45);
+      border: 1px solid var(--line2);
       border-radius: 16px;
       box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5);
       padding: 10px 10px 10px 16px;
@@ -710,19 +608,74 @@
       cursor: pointer;
       touch-action: manipulation;
     }
-    .host-notice button:hover, .host-notice button:active { color: var(--accent); border-color: rgba(124, 140, 255, 0.5); }
+    .host-notice button:hover, .host-notice button:active { color: var(--text); border-color: var(--line2); }
+
+    /* ---- mobile tap hardening ---- */
+    .project, .project-link, .btn, .burger, .dr-link, .menu-cta, .info-card, .faq summary { touch-action: manipulation; }
+
+    .project, .btn, .skill { transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cursor-glow { display: none; }
+      .thumb { transition: none; }
+      .project-link .arr { transition: none; }
+      .reveal { transition: none; }
+    }
+
+    /* ============ tablet (>= 640px) ============ */
+    @media (min-width: 640px) {
+      .hero-actions, .cta-actions { flex-direction: row; }
+      .hero-actions .btn, .cta-actions .btn { width: auto; }
+      .services { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ============ desktop (>= 1024px) ============ */
+    @media (min-width: 1024px) {
+      .burger { display: none; }
+      .nav { display: flex; }
+
+      .menu { display: none; }
+
+      .project { grid-template-columns: 300px 1fr; align-items: center; }
+      .project .thumb { aspect-ratio: 16 / 10; }
+      .project-body { display: grid; gap: 12px; }
+      .project-body h3, .project-body p, .project-body .meta, .project-body .project-link { margin: 0; }
+
+      .services { grid-template-columns: repeat(4, 1fr); }
+      .service { min-height: 180px; align-content: start; }
+
+      .contact-grid { grid-template-columns: 1.25fr 1fr; align-items: start; }
+      .cta-actions { flex-direction: row; }
+    }
+
+    /* contact success panel */
+    .contact-ok {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px 26px;
+      text-align: center;
+    }
+    .contact-ok .big { font-size: 34px; }
+    .contact-ok h3 { font-size: clamp(20px, 5vw, 24px); margin: 10px 0 6px; }
+    .contact-ok p { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
+    .contact-ok .btn { width: auto; }
+    .deliver { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .deliver .btn { width: 100%; justify-content: center; display: flex; }
   </style>
 </head>
 <body>
   <header class="header">
     <div class="wrap header-inner">
-      <a class="logo" href="#top"><span class="logo-dot"></span>Rudra</a>
+      <a class="logo" href="#top">Rudra<small>Web Studio</small></a>
 
       <nav class="nav" aria-label="Main navigation">
         <div class="nav-list">
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
+          <a href="#work">Work</a>
+          <a href="#services">Services</a>
+          <a href="#faq">FAQ</a>
           <a href="#contact">Contact</a>
+          <a class="btn btn--sm" href="#contact">Book a call</a>
         </div>
       </nav>
 
@@ -736,10 +689,11 @@
 
   <!-- mobile drawer menu -->
   <div class="menu drawer" id="drawer" aria-hidden="true">
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
-    <a class="btn menu-cta" href="#contact">Hire me</a>
+    <a class="btn menu-cta" href="#contact">Book a call</a>
   </div>
 
   <!-- hosting notice: only shows when opened as a local file (e.g. WhatsApp on Android) -->
@@ -752,30 +706,42 @@
     <!-- hero -->
     <section class="hero">
       <div class="hero-copy">
-        <span class="badge reveal"><span class="pulse"></span>Available for work</span>
-        <h1 class="reveal">Hi, I'm <span class="gradient">Rudra.</span><br />I build for the web.</h1>
-        <p class="hero-lead reveal">Web developer crafting clean, mobile-first digital experiences that work everywhere.</p>
+        <span class="badge reveal"><span class="pulse"></span>Available for new projects</span>
+        <h1 class="reveal">I run the digital side of your business.</h1>
+        <p class="hero-lead reveal">I'm Rudra — a web developer and UI engineer building fast, mobile-first websites, web stores and web apps for founders and small businesses, start to finish.</p>
         <p class="roles reveal">I do <span class="rw gradient" id="rw">Web Development</span><span class="caret" aria-hidden="true"></span></p>
         <div class="hero-actions reveal">
-          <a class="btn" href="#projects">View my work</a>
-          <a class="btn btn-ghost" href="#contact">Contact me</a>
+          <a class="btn" href="#work">View my work</a>
+          <a class="btn btn-ghost" href="https://wa.me/917398644158?text=Hi%20Rudra%2C%20I%20found%20your%20portfolio%20and%20want%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">WhatsApp me</a>
         </div>
       </div>
+    </section>
 
-      <div class="hero-media reveal">
-        <div class="hero-card">
-          <div class="thumb t1">🧑‍💻</div>
-          <div class="row"><span>Open to work</span><b>Yes</b></div>
-          <div class="row"><span>Location</span><b>Remote</b></div>
-        </div>
+    <!-- services -->
+    <section id="services">
+      <div class="section-head reveal">
+        <span class="eyebrow">Services</span>
+        <h2>What I can do</h2>
+        <p class="sub">The web, handled end to end.</p>
+      </div>
+      <div class="services">
+        <div class="service reveal" style="--i:0"><strong>Websites</strong><span>Custom websites with clear structure, UX/UI and a solid search basis.</span></div>
+        <div class="service reveal" style="--i:1"><strong>Web stores</strong><span>Commerce experiences that make products easy to discover and buy.</span></div>
+        <div class="service reveal" style="--i:2"><strong>Web apps</strong><span>Products where different people need different views of the same data.</span></div>
+        <div class="service reveal" style="--i:3"><strong>MVPs</strong><span>The first working version of a product, built to learn from real users.</span></div>
+        <div class="service reveal" style="--i:4"><strong>Redesigns</strong><span>Refresh an existing website while keeping what already works.</span></div>
+        <div class="service reveal" style="--i:5"><strong>Design systems</strong><span>Consistent, reusable UI so it looks like one team built it.</span></div>
+        <div class="service reveal" style="--i:6"><strong>Mobile-first</strong><span>Every layout tuned for phones, tablets and desktops.</span></div>
+        <div class="service reveal" style="--i:7"><strong>Performance &amp; SEO</strong><span>Fast loads and clean semantics for Google and AI search.</span></div>
       </div>
     </section>
 
     <!-- skills -->
     <section id="skills">
       <div class="section-head reveal">
-        <h2>Skills</h2>
-        <p class="sub">The tools and technologies I work with daily.</p>
+        <span class="eyebrow">Stack</span>
+        <h2>Tools I use</h2>
+        <p class="sub">The technologies I work with daily.</p>
       </div>
       <div class="skills">
         <span class="skill reveal" style="--i:0">HTML</span>
@@ -794,11 +760,12 @@
       </div>
     </section>
 
-    <!-- projects -->
-    <section id="projects">
+    <!-- work -->
+    <section id="work">
       <div class="section-head reveal">
-        <h2>Projects</h2>
-        <p class="sub">A few things I've built recently.</p>
+        <span class="eyebrow">Work</span>
+        <h2>Selected projects</h2>
+        <p class="sub">Concept builds done end to end — design, code, mobile-first.</p>
       </div>
       <!--
         PROJECT LINK MAP — everything below is hosted TOGETHER with this portfolio.
@@ -814,90 +781,146 @@
         Only when opened as a local file from WhatsApp (content://) do relative links break —
         the notice + click guard below prevents that broken navigation.
       -->
-      <div class="projects">
+      <div class="work-list">
         <div class="reveal rv" style="--i:0">
           <article class="project">
             <div class="thumb t4">💈</div>
-            <h3>NOIR &amp; CO. — Premium Salon &amp; Grooming Lounge Concept</h3>
-            <p>A premium, dark-editorial salon site: services, stylists, before/after transformations, gallery, pricing and appointment booking.</p>
-            <div class="meta"><span class="tag">Concept</span><span class="tag">Mobile-first</span><span class="tag">2026</span></div>
-            <a class="project-link" href="noir.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            <div class="project-body">
+              <div class="meta"><span class="tag">Salon</span><span class="tag">Booking</span><span class="tag">2026</span></div>
+              <h3>NOIR &amp; CO. — Premium Salon</h3>
+              <p>A dark-editorial salon site: services, stylists, transformations, gallery and appointment booking.</p>
+              <a class="project-link" href="noir.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            </div>
           </article>
         </div>
         <div class="reveal rv" style="--i:1">
           <article class="project">
             <div class="thumb t3">🏛</div>
-            <h3>FORM / SPACE — Architecture &amp; Interior Design Studio Concept</h3>
-            <p>A premium, editorial architecture studio site: featured projects, services, design philosophy, journal, inquiry lead-gen and a full project detail page.</p>
-            <div class="meta"><span class="tag">Concept</span><span class="tag">Mobile-first</span><span class="tag">2026</span></div>
-            <a class="project-link" href="form-space.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            <div class="project-body">
+              <div class="meta"><span class="tag">Architecture</span><span class="tag">Studio</span><span class="tag">2026</span></div>
+              <h3>FORM / SPACE — Architecture Studio</h3>
+              <p>Editorial studio site: featured projects, services, philosophy, journal and inquiry lead-gen.</p>
+              <a class="project-link" href="form-space.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            </div>
           </article>
         </div>
         <div class="reveal rv" style="--i:2">
           <article class="project">
             <div class="thumb t1">🏠</div>
-            <h3>NESTORA — Real Estate Agency Concept</h3>
-            <p>A premium, mobile-first real estate site: property search, featured listings, agent profiles, inquiry lead-gen and a detailed property page.</p>
-            <div class="meta"><span class="tag">Concept</span><span class="tag">Mobile-first</span><span class="tag">2026</span></div>
-            <a class="project-link" href="nestora.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            <div class="project-body">
+              <div class="meta"><span class="tag">Real estate</span><span class="tag">Search</span><span class="tag">2026</span></div>
+              <h3>NESTORA — Real Estate Agency</h3>
+              <p>Mobile-first real estate site: property search, featured listings, agents and inquiry lead-gen.</p>
+              <a class="project-link" href="nestora.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            </div>
           </article>
         </div>
         <div class="reveal rv" style="--i:3">
           <article class="project">
             <div class="thumb t2">🏋️</div>
-            <h3>FORGE ATHLETICS — Gym &amp; Studio Concept</h3>
-            <p>A premium, mobile-first fitness studio website: branding, programs, memberships, class schedule and lead generation.</p>
-            <div class="meta"><span class="tag">Concept</span><span class="tag">Mobile-first</span><span class="tag">2026</span></div>
-            <a class="project-link" href="forge-athletics.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            <div class="project-body">
+              <div class="meta"><span class="tag">Fitness</span><span class="tag">Membership</span><span class="tag">2026</span></div>
+              <h3>FORGE ATHLETICS — Gym</h3>
+              <p>Fitness studio site: branding, programs, memberships, class schedule and lead generation.</p>
+              <a class="project-link" href="forge-athletics.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            </div>
           </article>
         </div>
         <div class="reveal rv" style="--i:4">
           <article class="project">
             <div class="thumb t5">🍽️</div>
-            <h3>SOLENE — Modern Fine Dining Concept</h3>
-            <p>A refined, cream-and-terracotta restaurant site: tasting menus, chef's approach, reservations, bar program and seasonal journal.</p>
-            <div class="meta"><span class="tag">Concept</span><span class="tag">Mobile-first</span><span class="tag">2026</span></div>
-            <a class="project-link" href="solene.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            <div class="project-body">
+              <div class="meta"><span class="tag">Restaurant</span><span class="tag">Reservations</span><span class="tag">2026</span></div>
+              <h3>SOLENE — Fine Dining</h3>
+              <p>A refined dining site: tasting menus, chef's approach, reservations and seasonal journal.</p>
+              <a class="project-link" href="solene.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            </div>
           </article>
         </div>
         <div class="reveal rv" style="--i:5">
           <article class="project">
             <div class="thumb t6">🌿</div>
-            <h3>TERRA — Boutique Hotel &amp; Retreat Concept</h3>
-            <p>A stone-and-eucalyptus boutique hotel site: suites, experiences, wellness calendar, gallery and direct stay booking.</p>
-            <div class="meta"><span class="tag">Concept</span><span class="tag">Mobile-first</span><span class="tag">2026</span></div>
-            <a class="project-link" href="terra.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            <div class="project-body">
+              <div class="meta"><span class="tag">Hotel</span><span class="tag">Booking</span><span class="tag">2026</span></div>
+              <h3>TERRA — Boutique Hotel</h3>
+              <p>A boutique hotel site: suites, experiences, wellness calendar and direct stay booking.</p>
+              <a class="project-link" href="terra.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            </div>
           </article>
         </div>
         <div class="reveal rv" style="--i:6">
           <article class="project">
             <div class="thumb t7">☕</div>
-            <h3>KILN — Specialty Coffee Roastery Concept</h3>
-            <p>A kraft-and-copper roastery site: single-origin coffees, brewing guides, wholesale, location info and newsletter signup.</p>
-            <div class="meta"><span class="tag">Concept</span><span class="tag">Mobile-first</span><span class="tag">2026</span></div>
-            <a class="project-link" href="kiln.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            <div class="project-body">
+              <div class="meta"><span class="tag">Roastery</span><span class="tag">E-commerce</span><span class="tag">2026</span></div>
+              <h3>KILN — Coffee Roastery</h3>
+              <p>Specialty coffee site: single-origin coffees, brewing guides, wholesale and newsletter signup.</p>
+              <a class="project-link" href="kiln.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            </div>
           </article>
         </div>
         <div class="reveal rv" style="--i:7">
           <article class="project">
             <div class="thumb t8">💳</div>
-            <h3>KITE — Modern Banking Concept</h3>
-            <p>A bright, product-focused banking landing page: smart categories, two-tap invoicing, runway insights, pricing and signup demo.</p>
-            <div class="meta"><span class="tag">Concept</span><span class="tag">Mobile-first</span><span class="tag">2026</span></div>
-            <a class="project-link" href="kite.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            <div class="project-body">
+              <div class="meta"><span class="tag">Fintech</span><span class="tag">Landing</span><span class="tag">2026</span></div>
+              <h3>KITE — Modern Banking</h3>
+              <p>Product-focused banking landing page: smart categories, invoicing, runway insights and pricing.</p>
+              <a class="project-link" href="kite.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+            </div>
           </article>
         </div>
+      </div>
+    </section>
+
+    <!-- faq -->
+    <section id="faq">
+      <div class="section-head reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions, answered</h2>
+        <p class="sub">The things people usually ask before we start.</p>
+      </div>
+      <div class="faq reveal">
+        <details>
+          <summary>What do I need before I build a website or app?</summary>
+          <p>Just a clear idea of what you want to achieve. Copy, images and branding can come later — structure, content and goals are enough to begin.</p>
+        </details>
+        <details>
+          <summary>Can you turn my idea into an MVP?</summary>
+          <p>Yes. The aim is the first working version of your product, built to test demand and learn from real users before investing more.</p>
+        </details>
+        <details>
+          <summary>Can you redesign an existing website or app?</summary>
+          <p>Yes. We keep what works — content, URLs, accounts — and rebuild the experience so it loads faster and works better on phones.</p>
+        </details>
+        <details>
+          <summary>How long does it take to build a website or app?</summary>
+          <p>A marketing site typically takes 1–3 weeks, a web store 3–6 weeks, and an MVP or web app depends on scope. You get a timeline before work starts.</p>
+        </details>
+        <details>
+          <summary>Who owns the code, design and accounts?</summary>
+          <p>You do. Everything is handed over when the project finishes, and you get the code and the guides to run it yourself.</p>
+        </details>
+        <details>
+          <summary>How do you make a website easier to find on Google and AI search?</summary>
+          <p>Clean semantics, fast performance, structured data and real content. The same fundamentals that help Google also help AI search.</p>
+        </details>
+        <details>
+          <summary>What happens after launch?</summary>
+          <p>You get a short support window, and optional monthly care — updates, backups and improvements — if you want to keep it maintained.</p>
+        </details>
       </div>
     </section>
 
     <!-- contact -->
     <section id="contact">
       <div class="section-head reveal">
+        <span class="eyebrow">Contact</span>
         <h2>Get in touch</h2>
         <p class="sub">Have a project in mind? Send me a message.</p>
       </div>
       <div class="contact-grid">
-        <div class="contact-form-wrap">
+        <div class="contact-form-wrap reveal">
           <form class="contact-form" id="contactForm" novalidate>
             <div class="field">
               <label for="name">Name</label>
@@ -939,8 +962,19 @@
       </div>
     </section>
 
+    <!-- big CTA -->
+    <section class="cta-band">
+      <span class="eyebrow reveal">Let's talk</span>
+      <h2 class="reveal">Got a project in mind?</h2>
+      <p class="reveal">Tell me what you need. I usually reply the same day.</p>
+      <div class="cta-actions reveal">
+        <a class="btn" href="https://wa.me/917398644158?text=Hi%20Rudra%2C%20I%20have%20a%20project%20in%20mind." target="_blank" rel="noopener noreferrer">WhatsApp us</a>
+        <a class="btn btn-ghost" href="#contact">Send a message</a>
+      </div>
+    </section>
+
     <footer>
-      <p>© 2026 Rudra · Made mobile-first</p>
+      <p>© 2026 Rudra · Made mobile-first · <a href="mailto:rudrashekhharmishraa@gmail.com">rudrashekhharmishraa@gmail.com</a></p>
     </footer>
   </div>
 
