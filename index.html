@@ -300,6 +300,18 @@
       margin-bottom: 6px;
     }
 
+    /* ---- GridScan hero background ---- */
+    #gridScan {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    #gridScan canvas { display: block; width: 100%; height: 100%; }
+    .hero { position: relative; }
+    .hero-grid, #techWord { position: relative; z-index: 1; }
+
     /* ---- hero visual: floating phones ---- */
     .hero { overflow: clip; }
     .hero-grid { display: grid; gap: 4px; }
@@ -818,6 +830,7 @@
   <div class="wrap" id="top">
     <!-- hero -->
     <section class="hero">
+      <div id="gridScan" aria-hidden="true"></div>
       <div class="tech-text reveal" id="techWord" role="img" aria-label="Rudra">
         <canvas class="tech-text-canvas"></canvas>
       </div>
@@ -1141,6 +1154,7 @@
 
   <script src="tech-text.js"></script>
   <script src="click-spark.js"></script>
+  <script src="grid-scan.js"></script>
   <script>
     (function () {
       var burger = document.getElementById('burger');
@@ -1385,6 +1399,36 @@
           sparkRadius: 15,
           sparkCount: 8,
           duration: 400
+        });
+      })();
+
+      // GridScan hero background — same settings as the snippet (mono theme)
+      (function () {
+        var gs = document.getElementById('gridScan');
+        if (!gs || typeof window.initGridScan !== 'function') return;
+        window.initGridScan(gs, {
+          sensitivity: 0.55,
+          lineThickness: 1,
+          linesColor: '#3a3a38',
+          gridScale: 0.1,
+          lineStyle: 'solid',
+          lineJitter: 0.1,
+          scanColor: '#f7f7f5',
+          scanOpacity: 0.4,
+          scanDirection: 'pingpong',
+          scanGlow: 0.5,
+          scanSoftness: 2,
+          scanPhaseTaper: 0.9,
+          scanDuration: 2.0,
+          scanDelay: 2.0,
+          enablePost: true,
+          bloomIntensity: 0.6,
+          bloomThreshold: 0,
+          bloomSmoothing: 0,
+          chromaticAberration: 0.002,
+          noiseIntensity: 0.01,
+          scanOnClick: false,
+          snapBackDelay: 250
         });
       })();
 
