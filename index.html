@@ -38,8 +38,6 @@
       min-height: 100vh;
     }
 
-    body.menu-open { overflow: hidden; }
-
     .wrap {
       position: relative;
       z-index: 1;
@@ -81,88 +79,6 @@
       gap: 8px;
     }
     .logo small { font-size: 11px; font-weight: 600; color: var(--muted2); letter-spacing: 1px; text-transform: uppercase; }
-
-    .nav { display: none; }
-
-    .nav-list { display: flex; gap: clamp(18px, 2.6vw, 30px); align-items: center; }
-
-    .nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 600;
-      transition: color 0.2s;
-    }
-    .nav a:hover { color: var(--text); }
-
-    .btn--sm {
-      min-height: 44px;
-      padding: 10px 20px;
-      font-size: 14.5px;
-      width: auto;
-    }
-
-    /* hamburger */
-    .burger {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      width: 48px;
-      height: 48px;
-      padding: 12px;
-      background: none;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      margin-right: -10px;
-    }
-    .burger .bar { width: 100%; height: 2px; background: var(--text); border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
-    body.menu-open .burger .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    body.menu-open .burger .bar:nth-child(2) { opacity: 0; }
-    body.menu-open .burger .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* mobile drawer */
-    .menu {
-      position: fixed;
-      top: var(--header-h);
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(8, 8, 8, 0.98);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      display: flex;
-      flex-direction: column;
-      padding: 24px clamp(18px, 5vw, 32px);
-      gap: 6px;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      z-index: 40;
-    }
-    body.menu-open .menu { transform: translateX(0); }
-
-    .menu a {
-      color: var(--text);
-      text-decoration: none;
-      font-size: clamp(22px, 6vw, 28px);
-      font-weight: 700;
-      padding: 16px 0;
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .menu a::after { content: "→"; color: var(--muted); }
-    .menu-cta { margin-top: 28px; }
-
-    /* ---- typography ---- */
-    h1 {
-      font-size: clamp(36px, 10vw, 92px);
-      font-weight: 900;
-      line-height: 1.04;
-      letter-spacing: -2.5px;
-    }
 
     h2 {
       font-size: clamp(24px, 6vw, 40px);
@@ -264,7 +180,7 @@
       50% { box-shadow: 0 0 0 6px rgba(126, 231, 135, 0); }
     }
 
-    .hero h1 { margin-bottom: 20px; }
+    .hero h1 { margin-bottom: 20px; font-size: clamp(22px, 5vw, 46px); }
     .hero-lead {
       color: var(--muted);
       font-size: clamp(16px, 4.5vw, 20px);
@@ -427,16 +343,36 @@
       border-radius: var(--radius);
       padding: clamp(22px, 4.5vw, 30px);
       display: grid;
-      gap: 16px;
+      gap: 14px;
+      position: relative;
       transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    .price-card.popular { border-color: var(--line2); background: var(--card2); }
+    .price-card.popular::before {
+      content: 'MOST POPULAR';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #f7f7f5;
+      color: #0a0a0a;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
     }
     @media (hover: hover) { .price-card:hover { transform: translateY(-3px); border-color: var(--line2); } }
     .price-card h3 { font-size: clamp(20px, 5vw, 24px); font-weight: 800; }
     .price-card .price { font-size: clamp(28px, 7vw, 40px); font-weight: 900; letter-spacing: -1px; }
+    .price-card .sub { color: var(--muted); font-size: 14px; line-height: 1.5; }
     .price-card ul { list-style: none; display: grid; gap: 8px; }
     .price-card li { color: var(--muted); font-size: 14.5px; padding-left: 20px; position: relative; }
     .price-card li::before { content: '—'; position: absolute; left: 0; color: var(--muted2); }
-    @media (min-width: 768px) { .pricing { grid-template-columns: repeat(2, 1fr); } }
+    .price-card li.bonus { color: #22c55e; font-weight: 700; }
+    .price-card li.bonus::before { color: #22c55e; content: '🎁'; left: 0; }
+    @media (min-width: 900px) { .pricing { grid-template-columns: repeat(3, 1fr); } }
     .skill {
       background: var(--card);
       border: 1px solid var(--line);
@@ -740,7 +676,7 @@
     .host-notice button:hover, .host-notice button:active { color: var(--text); border-color: var(--line2); }
 
     /* ---- mobile tap hardening ---- */
-    .project, .project-link, .btn, .burger, .dr-link, .menu-cta, .info-card, .faq summary { touch-action: manipulation; }
+    .project, .project-link, .btn, ..info-card, .faq summary { touch-action: manipulation; }
 
     .project, .btn, .skill { transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
 
@@ -762,12 +698,7 @@
 
     /* ============ desktop (>= 1024px) ============ */
     @media (min-width: 1024px) {
-      .burger { display: none; }
-      .nav { display: flex; }
-
-      .menu { display: none; }
-
-      .project { grid-template-columns: 300px 1fr; align-items: center; }
+      .project { grid-template-columns: 300px 1fr; align-items: center; }{ grid-template-columns: 300px 1fr; align-items: center; }
       .project .thumb { aspect-ratio: 16 / 10; }
       .project-body { display: grid; gap: 12px; }
       .project-body h3, .project-body p, .project-body .meta, .project-body .project-link { margin: 0; }
@@ -811,37 +742,6 @@
 <body>
   <canvas id="sparkCanvas" aria-hidden="true"></canvas>
   <div id="pillNav" class="pill-nav-container" aria-label="Site navigation"></div>
-  <header class="header">
-    <div class="wrap header-inner">
-      <a class="logo" href="#top">Rudra<small>Web Studio</small></a>
-
-      <nav class="nav" aria-label="Main navigation">
-        <div class="nav-list">
-          <a href="#work">Work</a>
-          <a href="#services">Services</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contact">Contact</a>
-          <a class="btn btn--sm" href="#contact">Book a call</a>
-        </div>
-      </nav>
-
-      <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="drawer">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-    </div>
-  </header>
-
-  <!-- mobile drawer menu -->
-  <div class="menu drawer" id="drawer" aria-hidden="true">
-    <a href="#work">Work</a>
-    <a href="#services">Services</a>
-    <a href="#faq">FAQ</a>
-    <a href="#contact">Contact</a>
-    <a class="btn menu-cta" href="#contact">Book a call</a>
-  </div>
-
   <!-- hosting notice: only shows when opened as a local file (e.g. WhatsApp on Android) -->
   <div class="host-notice" id="hostNotice" role="status" aria-live="polite" hidden>
     <span>📱 You're viewing this as a local file — project links only open once the portfolio is hosted online.</span>
@@ -931,27 +831,46 @@
       <div class="pricing">
         <div class="price-card reveal" style="--i:0">
           <h3>Starter</h3>
-          <div class="price">$150 – $300</div>
+          <div class="price">₹9,999</div>
+          <p class="sub">Perfect for small local businesses needing a quick, modern web presence.</p>
           <ul>
-            <li>High-converting 1-page landing page</li>
+            <li>High-converting 1-page modern landing page</li>
             <li>Mobile-first, sub-1s load times</li>
-            <li>Contact form wired to WhatsApp &amp; email</li>
-            <li>Basic SEO + Google Business setup</li>
-            <li>1 week delivery</li>
+            <li>Contact form wired directly to WhatsApp &amp; Email</li>
+            <li>Basic Google SEO &amp; Google Maps setup</li>
+            <li>1-week delivery</li>
+            <li class="bonus">1 Week FREE Maintenance &amp; Support</li>
           </ul>
-          <a class="btn" href="#contact">Get started</a>
+          <a class="btn" href="#contact">Get Started</a>
         </div>
-        <div class="price-card reveal" style="--i:1">
-          <h3>Custom</h3>
-          <div class="price">$500+</div>
+        <div class="price-card popular reveal" style="--i:1">
+          <h3>Pro Studio</h3>
+          <div class="price">₹24,999</div>
+          <p class="sub">Complete multi-page website with custom visual effects to grow your brand.</p>
           <ul>
-            <li>Multi-page custom site</li>
-            <li>Advanced interactive animations</li>
-            <li>Custom UI/UX design</li>
-            <li>Booking / e-commerce / CMS</li>
-            <li>Ongoing support available</li>
+            <li>Up to 5 custom-designed pages</li>
+            <li>Smooth GSAP animations &amp; scroll effects</li>
+            <li>Mobile &amp; tablet perfectly optimized</li>
+            <li>Easy CMS (update text &amp; photos without coding)</li>
+            <li>Advanced SEO &amp; Google Business setup</li>
+            <li>2-week delivery</li>
+            <li class="bonus">6 Weeks FREE Maintenance &amp; Support</li>
           </ul>
-          <a class="btn btn-ghost" href="#contact">Talk scope</a>
+          <a class="btn" href="#contact">Book This Plan</a>
+        </div>
+        <div class="price-card reveal" style="--i:2">
+          <h3>Enterprise</h3>
+          <div class="price">₹49,999+</div>
+          <p class="sub">For brands wanting top-tier 3D web experiences or online stores.</p>
+          <ul>
+            <li>Full multi-page website or E-commerce store</li>
+            <li>Advanced 3D canvas / Three.js / complex GSAP effects</li>
+            <li>Custom UI/UX design crafted from scratch</li>
+            <li>Online booking system or Payment Gateway integration</li>
+            <li>3 to 4 week delivery</li>
+            <li class="bonus">10 Weeks FREE Maintenance &amp; Support</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Talk Scope / Custom Quote</a>
         </div>
       </div>
     </section>
@@ -1212,28 +1131,6 @@
   <script src="tech-text.js"></script>
   <script>
     (function () {
-      var burger = document.getElementById('burger');
-      var drawer = document.getElementById('drawer');
-
-      function setState(open) {
-        document.body.classList.toggle('menu-open', open);
-        document.body.classList.toggle('overflow-hidden', open);
-        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
-      }
-
-      burger.addEventListener('click', function () {
-        setState(!document.body.classList.contains('menu-open'));
-      });
-
-      drawer.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', function () { setState(false); });
-      });
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') setState(false);
-      });
-
       // reveal on scroll
       var revealEls = document.querySelectorAll('.reveal');
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1304,7 +1201,7 @@
         cf.style.display = '';
       });
 
-      // whole project card opens the project link
+      
       document.querySelectorAll('.project').forEach(function (p) {
         var a = p.querySelector('.project-link');
         if (!a) return;
