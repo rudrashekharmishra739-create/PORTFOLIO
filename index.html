@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="pill-nav.css" />
   <style>
     :root {
       --bg: #080808;
@@ -419,8 +420,23 @@
     }
     @keyframes blink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
 
-    /* ---- skills ---- */
-    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pricing { display: grid; gap: 14px; grid-template-columns: 1fr; }
+    .price-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(22px, 4.5vw, 30px);
+      display: grid;
+      gap: 16px;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    @media (hover: hover) { .price-card:hover { transform: translateY(-3px); border-color: var(--line2); } }
+    .price-card h3 { font-size: clamp(20px, 5vw, 24px); font-weight: 800; }
+    .price-card .price { font-size: clamp(28px, 7vw, 40px); font-weight: 900; letter-spacing: -1px; }
+    .price-card ul { list-style: none; display: grid; gap: 8px; }
+    .price-card li { color: var(--muted); font-size: 14.5px; padding-left: 20px; position: relative; }
+    .price-card li::before { content: '—'; position: absolute; left: 0; color: var(--muted2); }
+    @media (min-width: 768px) { .pricing { grid-template-columns: repeat(2, 1fr); } }
     .skill {
       background: var(--card);
       border: 1px solid var(--line);
@@ -794,6 +810,7 @@
 </head>
 <body>
   <canvas id="sparkCanvas" aria-hidden="true"></canvas>
+  <div id="pillNav" class="pill-nav-container" aria-label="Site navigation"></div>
   <header class="header">
     <div class="wrap header-inner">
       <a class="logo" href="#top">Rudra<small>Web Studio</small></a>
@@ -841,11 +858,11 @@
       <div class="hero-grid">
       <div class="hero-copy">
         <span class="badge reveal"><span class="pulse"></span>Available for new projects</span>
-        <h1 class="reveal">I run the digital side of your business.</h1>
-        <p class="hero-lead reveal">I'm Rudra — a web developer and UI engineer building fast, mobile-first websites, web stores and web apps for founders and small businesses, start to finish.</p>
+        <h1 class="reveal">I build modern, ultra-fast websites that bring more customers to your business.</h1>
+        <p class="hero-lead reveal">Specializing in high-end design, smooth animations, and mobile-friendly websites — built for founders, restaurants, gyms and local shops.</p>
         <p class="roles reveal">I do <span class="rw gradient" id="rw">Web Development</span><span class="caret" aria-hidden="true"></span></p>
         <div class="hero-actions reveal">
-          <a class="btn" href="#work">View my work</a>
+          <a class="btn" href="#contact">Get a Free Website Audit</a>
           <a class="btn btn-ghost" href="https://wa.me/917398644158?text=Hi%20Rudra%2C%20I%20found%20your%20portfolio%20and%20want%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">WhatsApp me</a>
         </div>
       </div>
@@ -904,8 +921,40 @@
       </div>
     </section>
 
-    <!-- skills -->
-    <section id="skills">
+    <!-- pricing -->
+    <section id="pricing">
+      <div class="section-head reveal">
+        <span class="eyebrow">Services &amp; Pricing</span>
+        <h2>Clear packages, fixed scope</h2>
+        <p class="sub">Two packages that cover 90% of what small businesses need.</p>
+      </div>
+      <div class="pricing">
+        <div class="price-card reveal" style="--i:0">
+          <h3>Starter</h3>
+          <div class="price">$150 – $300</div>
+          <ul>
+            <li>High-converting 1-page landing page</li>
+            <li>Mobile-first, sub-1s load times</li>
+            <li>Contact form wired to WhatsApp &amp; email</li>
+            <li>Basic SEO + Google Business setup</li>
+            <li>1 week delivery</li>
+          </ul>
+          <a class="btn" href="#contact">Get started</a>
+        </div>
+        <div class="price-card reveal" style="--i:1">
+          <h3>Custom</h3>
+          <div class="price">$500+</div>
+          <ul>
+            <li>Multi-page custom site</li>
+            <li>Advanced interactive animations</li>
+            <li>Custom UI/UX design</li>
+            <li>Booking / e-commerce / CMS</li>
+            <li>Ongoing support available</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Talk scope</a>
+        </div>
+      </div>
+    </section>
       <div class="section-head reveal">
         <span class="eyebrow">Stack</span>
         <h2>Tools I use</h2>
@@ -943,7 +992,7 @@
       <div class="section-head reveal">
         <span class="eyebrow">Work</span>
         <h2>Selected projects</h2>
-        <p class="sub">Concept builds done end to end — design, code, mobile-first.</p>
+        <p class="sub">Real sites built end to end — design, code, mobile-first.</p>
       </div>
       <!--
         PROJECT LINK MAP — everything below is hosted TOGETHER with this portfolio.
@@ -966,8 +1015,8 @@
             <div class="project-body">
               <div class="meta"><span class="tag">Salon</span><span class="tag">Booking</span><span class="tag">2026</span></div>
               <h3>NOIR &amp; CO. — Premium Salon</h3>
-              <p>A dark-editorial salon site: services, stylists, transformations, gallery and appointment booking.</p>
-              <a class="project-link" href="noir.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+              <p>A dark-editorial salon site with services, stylists, transformations, gallery and appointment booking — built to bring in new clients.</p>
+              <a class="project-link" href="noir.html" target="_blank" rel="noopener noreferrer">View Live Site <span class="arr" aria-hidden="true">→</span></a>
             </div>
           </article>
         </div>
@@ -977,8 +1026,8 @@
             <div class="project-body">
               <div class="meta"><span class="tag">Architecture</span><span class="tag">Studio</span><span class="tag">2026</span></div>
               <h3>FORM / SPACE — Architecture Studio</h3>
-              <p>Editorial studio site: featured projects, services, philosophy, journal and inquiry lead-gen.</p>
-              <a class="project-link" href="form-space.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+              <p>An editorial studio site with featured projects, services, philosophy, journal and inquiry lead-gen — built to win new commissions.</p>
+              <a class="project-link" href="form-space.html" target="_blank" rel="noopener noreferrer">View Live Site <span class="arr" aria-hidden="true">→</span></a>
             </div>
           </article>
         </div>
@@ -988,8 +1037,8 @@
             <div class="project-body">
               <div class="meta"><span class="tag">Real estate</span><span class="tag">Search</span><span class="tag">2026</span></div>
               <h3>NESTORA — Real Estate Agency</h3>
-              <p>Mobile-first real estate site: property search, featured listings, agents and inquiry lead-gen.</p>
-              <a class="project-link" href="nestora.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+              <p>A mobile-first real estate site with property search, listings, agents and inquiry lead-gen — built to convert browsers into buyers.</p>
+              <a class="project-link" href="nestora.html" target="_blank" rel="noopener noreferrer">View Live Site <span class="arr" aria-hidden="true">→</span></a>
             </div>
           </article>
         </div>
@@ -999,8 +1048,8 @@
             <div class="project-body">
               <div class="meta"><span class="tag">Fitness</span><span class="tag">Membership</span><span class="tag">2026</span></div>
               <h3>FORGE ATHLETICS — Gym</h3>
-              <p>Fitness studio site: branding, programs, memberships, class schedule and lead generation.</p>
-              <a class="project-link" href="forge-athletics.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+              <p>A fitness studio site with programs, memberships, class schedule and lead generation — built to sell memberships.</p>
+              <a class="project-link" href="forge-athletics.html" target="_blank" rel="noopener noreferrer">View Live Site <span class="arr" aria-hidden="true">→</span></a>
             </div>
           </article>
         </div>
@@ -1010,8 +1059,8 @@
             <div class="project-body">
               <div class="meta"><span class="tag">Restaurant</span><span class="tag">Reservations</span><span class="tag">2026</span></div>
               <h3>SOLENE — Fine Dining</h3>
-              <p>A refined dining site: tasting menus, chef's approach, reservations and seasonal journal.</p>
-              <a class="project-link" href="solene.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+              <p>A refined dining site with tasting menus, chef's approach, reservations and seasonal journal — built to fill tables.</p>
+              <a class="project-link" href="solene.html" target="_blank" rel="noopener noreferrer">View Live Site <span class="arr" aria-hidden="true">→</span></a>
             </div>
           </article>
         </div>
@@ -1021,8 +1070,8 @@
             <div class="project-body">
               <div class="meta"><span class="tag">Hotel</span><span class="tag">Booking</span><span class="tag">2026</span></div>
               <h3>TERRA — Boutique Hotel</h3>
-              <p>A boutique hotel site: suites, experiences, wellness calendar and direct stay booking.</p>
-              <a class="project-link" href="terra.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+              <p>A boutique hotel site with suites, experiences, wellness calendar and direct stay booking — built to increase direct bookings.</p>
+              <a class="project-link" href="terra.html" target="_blank" rel="noopener noreferrer">View Live Site <span class="arr" aria-hidden="true">→</span></a>
             </div>
           </article>
         </div>
@@ -1032,8 +1081,8 @@
             <div class="project-body">
               <div class="meta"><span class="tag">Roastery</span><span class="tag">E-commerce</span><span class="tag">2026</span></div>
               <h3>KILN — Coffee Roastery</h3>
-              <p>Specialty coffee site: single-origin coffees, brewing guides, wholesale and newsletter signup.</p>
-              <a class="project-link" href="kiln.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+              <p>A specialty coffee site with single-origin coffees, brewing guides, wholesale and newsletter signup — built to sell beans online.</p>
+              <a class="project-link" href="kiln.html" target="_blank" rel="noopener noreferrer">View Live Site <span class="arr" aria-hidden="true">→</span></a>
             </div>
           </article>
         </div>
@@ -1043,8 +1092,8 @@
             <div class="project-body">
               <div class="meta"><span class="tag">Fintech</span><span class="tag">Landing</span><span class="tag">2026</span></div>
               <h3>KITE — Modern Banking</h3>
-              <p>Product-focused banking landing page: smart categories, invoicing, runway insights and pricing.</p>
-              <a class="project-link" href="kite.html" target="_blank" rel="noopener noreferrer">View concept project <span class="arr" aria-hidden="true">→</span></a>
+              <p>A product-focused banking landing page with smart categories, invoicing, runway insights and pricing — built to convert signups.</p>
+              <a class="project-link" href="kite.html" target="_blank" rel="noopener noreferrer">View Live Site <span class="arr" aria-hidden="true">→</span></a>
             </div>
           </article>
         </div>
@@ -1156,10 +1205,11 @@
     </footer>
   </div>
 
-  <script src="tech-text.js"></script>
+  <script src="pill-nav.js"></script>
   <script src="click-spark.js"></script>
   <script src="grid-scan.js"></script>
   <script src="scroll-stack.js"></script>
+  <script src="tech-text.js"></script>
   <script>
     (function () {
       var burger = document.getElementById('burger');
@@ -1451,6 +1501,27 @@
           baseScale: 0.85,
           rotationAmount: 0,
           blurAmount: 0
+        });
+      })();
+
+      // PillNav sticky pill navbar — same settings as the snippet (mono theme)
+      (function () {
+        var pn = document.getElementById('pillNav');
+        if (!pn || typeof window.initPillNav !== 'function') return;
+        window.initPillNav(pn, {
+          items: [
+            { label: 'Work', href: '#work' },
+            { label: 'Services', href: '#services' },
+            { label: 'Skills', href: '#skills' },
+            { label: 'FAQ', href: '#faq' },
+            { label: 'Contact', href: '#contact' }
+          ],
+          activeHref: '#work',
+          baseColor: '#f7f7f5',
+          pillColor: '#080808',
+          hoveredPillTextColor: '#080808',
+          pillTextColor: '#f7f7f5',
+          initialLoadAnimation: true
         });
       })();
 
