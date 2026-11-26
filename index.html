@@ -1223,7 +1223,7 @@
       <h2 class="reveal">Got a project in mind?</h2>
       <p class="reveal">Tell me what you need. I usually reply the same day.</p>
       <div class="cta-actions reveal">
-        <a class="btn" href="https://wa.me/917398644158?text=Hi%20Rudra%2C%20I%20have%20a%20project%20in%20mind." target="_blank" rel="noopener noreferrer">WhatsApp us</a>
+        <a class="btn" href="https://wa.me/917398644158?text=Hi%20Rudra%2C%20I%20have%20a%20project%20in%20mind." target="_blank" rel="noopener noreferrer">WhatsApp me</a>
         <a class="btn btn-ghost" href="#contact">Send a message</a>
       </div>
     </section>
@@ -1244,6 +1244,7 @@
       btn.addEventListener('click', function () {
         var v = parseInt(document.getElementById('visitors').value, 10) || 0;
         var b = parseInt(document.getElementById('bill').value, 10) || 0;
+        if (v <= 0 || b <= 0) { document.getElementById('calcResult').style.display = 'none'; return; }
         var lost = Math.round(v * b * 0.07);
         document.getElementById('calcAmt').textContent = '₹' + lost.toLocaleString('en-IN');
         document.getElementById('calcResult').style.display = '';
