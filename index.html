@@ -783,6 +783,8 @@
     .contact-ok .btn { width: auto; }
     .deliver { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
     .deliver .btn { width: 100%; justify-content: center; display: flex; }
+    /* letter-reactive hero headline */
+    .hero h1 .letter { display: inline-block; will-change: transform; transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
   </style>
 </head>
 <body>
@@ -803,7 +805,7 @@
       <div class="hero-grid">
       <div class="hero-copy">
         <span class="badge reveal"><span class="pulse"></span>Available for new projects</span>
-        <h1 class="reveal">I build modern, ultra-fast websites that bring more customers to your business.</h1>
+        <h1 class="reveal" id="heroTitle">I build modern, ultra-fast websites that bring more customers to your business.</h1>
         <p class="hero-lead reveal">Specializing in high-end design, smooth animations, and mobile-friendly websites — built for founders, restaurants, gyms and local shops.</p>
         <p class="roles reveal">I build websites that get you <span class="rw gradient" id="rw">bookings</span><span class="caret" aria-hidden="true"></span></p>
         <div class="hero-actions reveal">
@@ -1296,6 +1298,41 @@
       }
       window.addEventListener('scroll', update, { passive: true });
       update();
+    })();
+  </script>
+  <script>
+    (function () {
+      var el = document.getElementById('heroTitle');
+      if (!el) return;
+      var text = el.textContent;
+      el.innerHTML = text.split('').map(function (c) {
+        return c === ' ' ? ' ' : '<span class="letter">' + c + '</span>';
+      }).join('');
+
+      var hero = document.querySelector('.hero');
+      if (!hero) return;
+      hero.addEventListener('mousemove', function (e) {
+        el.querySelectorAll('.letter').forEach(function (letter) {
+          var r = letter.getBoundingClientRect();
+          var dx = r.left + r.width / 2 - e.clientX;
+          var dy = r.top + r.height / 2 - e.clientY;
+          var dist = Math.hypot(dx, dy);
+          if (dist < 120) {
+            var force = (120 - dist) / 120;
+            letter.style.transition = 'transform 0.3s ease-out';
+            letter.style.transform = 'translate(' + (dx * force * 0.5) + 'px,' + (dy * force * 0.5) + 'px) rotate(' + (dx * force * 0.1) + 'deg) scale(' + (1 + force * 0.3) + ')';
+          } else {
+            letter.style.transition = 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            letter.style.transform = 'translate(0,0) rotate(0deg) scale(1)';
+          }
+        });
+      });
+      hero.addEventListener('mouseleave', function () {
+        el.querySelectorAll('.letter').forEach(function (letter) {
+          letter.style.transition = 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)';
+          letter.style.transform = 'translate(0,0) rotate(0deg) scale(1)';
+        });
+      });
     })();
   </script>
   <script src="pill-nav.js"></script>
