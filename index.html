@@ -54,6 +54,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="pill-nav.css" />
   <style>
     :root {
@@ -877,8 +878,8 @@
           <p style="color:var(--muted);font-size:15.5px;line-height:1.6;">I work with founders, restaurants, gyms and local shops, and I'm based in Lucknow — so I can meet you in person and fix things fast.</p>
           <p style="color:var(--muted);font-size:15.5px;line-height:1.6;">Every site I ship is built to load in under a second, look great on phones, and turn visitors into bookings.</p>
         </div>
-        <svg id="signature" viewBox="0 0 400 80" style="width:260px;margin-top:16px;" fill="none" stroke="#f7f7f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10,60 C20,20 40,20 50,45 C60,70 75,30 90,40 C105,50 115,25 130,35 C145,45 155,20 170,30 C185,40 195,15 210,25 C225,35 235,10 250,20 C265,30 275,5 290,15 C305,25 315,0 330,10 C345,20 355,-5 370,5 C385,15 390,0 395,10" />
+        <svg id="signature" viewBox="0 0 300 80" style="width:260px;margin-top:16px;" fill="none">
+          <text x="10" y="62" font-family="'Dancing Script', cursive" font-size="60" font-weight="700" fill="none" stroke="#f7f7f5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1000" stroke-dashoffset="1000">Rudra</text>
         </svg>
       </div>
     </section>
@@ -1423,13 +1424,12 @@
       // 5. Self-drawing signature
       var sig = document.getElementById('signature');
       if (sig) {
-        var path = sig.querySelector('path');
-        if (path) {
-          var len = path.getTotalLength();
-          gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
-          gsap.to(path, {
-            strokeDashoffset: 0,
-            duration: 2,
+        var txt = sig.querySelector('text');
+        if (txt) {
+          gsap.set(txt, { attr: { 'stroke-dashoffset': 1000 } });
+          gsap.to(txt, {
+            attr: { 'stroke-dashoffset': 0 },
+            duration: 2.2,
             ease: 'power2.out',
             scrollTrigger: { trigger: sig, start: 'top 80%' }
           });
