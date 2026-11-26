@@ -1446,29 +1446,6 @@
         }
       }
 
-      // 6. Text scramble on section headings
-      document.querySelectorAll('section h2').forEach(function (h) {
-        var original = h.textContent;
-        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#@!$%&';
-        ScrollTrigger.create({
-          trigger: h,
-          start: 'top 85%',
-          once: true,
-          onEnter: function () {
-            var it = 0;
-            var interval = setInterval(function () {
-              h.textContent = original.split('').map(function (c, i) {
-                if (c === ' ') return ' ';
-                if (i < it) return original[i];
-                return chars[Math.floor(Math.random() * chars.length)];
-              }).join('');
-              it += 0.6;
-              if (it >= original.length) { h.textContent = original; clearInterval(interval); }
-            }, 40);
-          }
-        });
-      });
-
       // 7. Flashlight secret strip
       var secret = document.getElementById('secret');
       if (secret) {
